@@ -1,5 +1,74 @@
 # Changelog
 
+## v1.8.0-b1
+
+### Streaming (yt-dlp)
+- Full yt-dlp integration: paste URLs to play video or audio from YouTube, SoundCloud, and hundreds of sites
+- Quality switcher on the control bar — select resolution on the fly without restarting playback
+- Cookies from browser support (Chrome, Firefox, Brave) for age-gated/private content
+- Safari cookie sandbox warning — recommends Chrome or Firefox
+- Deno detection and install guidance for YouTube signature solving
+- Geo-bypass, rate limiting, and SponsorBlock options
+- Stream subtitle download with language priority picker and format conversion
+- Raw yt-dlp options text field in Advanced settings for power users
+- Audio-only site detection — hides "Play Video" button for sites like SoundCloud
+- Stream thumbnail display in player for audio-only content
+- PATH setup for Homebrew tools (deno, yt-dlp) in both subprocesses and mpv's ytdl_hook
+- Streaming settings apply live without restart
+
+### Player
+- Loading/buffering spinner shown during seeks, cache pauses, and file loads
+- Fullscreen top bar with hover trigger zone for title and controls
+- Subtitle margin adjustment when controls are visible
+- Window resize-to-video aspect ratio option
+- Open in fullscreen option
+- Remember window size between launches
+- Title bar style setting (normal, transparent, hidden)
+
+### Mini Player & Music Mode
+- New mini player mode with compact controls
+- Album art display for audio files
+- Music mode with dedicated layout
+
+### Playlist
+- Detachable playlist panel (floating NSPanel)
+- Show playlist on launch option
+- Enhanced playlist management
+
+### Media Library
+- New media library sidebar view
+
+### Stats Overlay
+- Real-time video stats overlay (resolution, codec, FPS, bitrate, cache)
+
+### Shader Gallery
+- Browse and apply video shaders from a curated gallery
+
+### Onboarding
+- First-launch persona selection with 6 community presets (Anime, Cinema, Home Theater, Performance, Streaming, Music)
+
+### Settings
+- Full settings search with fuzzy matching across all tabs and options
+- New tabs: Streaming, Mini Player, Input
+- Merged Hotkeys and Gestures into unified Input tab
+- Screenshot settings (format, quality, directory, template, clipboard copy)
+- Scaling filter controls (upscale, downscale, chroma) with anti-ringing
+- Subtitle styling: font family picker, border style, blur, shadow, margin controls
+- ASS subtitle override, blend subtitles, fix timing, MKV preroll options
+- Preferred subtitle language picker (matching movie settings pattern)
+- Community and user preset management improvements
+- Raw mpv options conflict detection
+
+### Subtitle Search
+- OpenSubtitles integration improvements
+
+### Under the Hood
+- Fixed `reset-on-next-file` to use specific option list instead of `all` (prevents ytdl-format reset)
+- Deduplication of ytdl-raw-options to prevent log spam from syncSettings
+- yt-dlp error message cleanup with actionable hints
+- Improved thumbnail generation reliability
+- File settings store enhancements
+
 ## v1.5.0-b2
 
 ### Seamless Fullscreen
