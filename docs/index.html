@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corvus Player — Advanced Media Player for macOS</title>
+    <meta name="description" content="A powerful, customizable media player for macOS built on mpv. Hardware-accelerated playback, GLSL shaders, music mode, streaming, and 28 languages.">
+    <link rel="canonical" href="https://corvusdevs.github.io/Corvus-Player/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://corvusdevs.github.io/Corvus-Player/">
+    <meta property="og:title" content="Corvus Player — Advanced Media Player for macOS">
+    <meta property="og:description" content="A powerful, customizable media player for macOS. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.">
+    <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
+    <meta property="og:image:width" content="1400">
+    <meta property="og:image:height" content="896">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Corvus Player — Advanced Media Player for macOS">
+    <meta name="twitter:description" content="A powerful, customizable media player for macOS built on mpv.">
+    <meta name="twitter:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="media player, video player, macos, mpv, corvus, glsl shaders, music mode, streaming, yt-dlp, hardware decoding, hdr">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Corvus Player",
+        "description": "A powerful, customizable media player for macOS built on mpv. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.",
+        "operatingSystem": "macOS 14.0+",
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Video Player",
+        "screenshot": "https://corvusdevs.github.io/Corvus-Player/images/hero.jpg",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "CorvusDevs", "url": "https://corvusdevs.github.io" }
+    }
+    </script>
+    <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --surface: #111114;
+            --surface-2: #19191e;
+            --border: #252530;
+            --text: #e8e8ed;
+            --text-secondary: #7c7c84;
+            --accent: #dc3545;
+            --accent-light: #ff6b7a;
+            --accent-dim: rgba(220, 53, 69, 0.1);
+            --accent-glow: rgba(220, 53, 69, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        .nav-brand {
+            font-size: 18px; font-weight: 700;
+            color: var(--text); text-decoration: none;
+            letter-spacing: -0.3px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .nav-brand img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+        .nav-brand span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+
+        .hero {
+            text-align: center;
+            padding: 140px 24px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(220, 53, 69, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            width: 120px; height: 120px;
+            border-radius: 28px;
+            margin-bottom: 28px;
+            position: relative;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 60px 20px rgba(220, 53, 69, 0.2), 0 0 120px 50px rgba(220, 53, 69, 0.08);
+        }
+
+        .hero h1 {
+            font-size: 64px; font-weight: 800;
+            letter-spacing: -3px; line-height: 1.05;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 19px; color: var(--text-secondary);
+            max-width: 560px; margin: 0 auto 40px;
+            font-weight: 400; line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px;
+            background: var(--accent); color: #fff;
+            font-size: 16px; font-weight: 600;
+            border-radius: 14px; text-decoration: none;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+        }
+
+        .hero-cta svg { width: 20px; height: 20px; }
+        .hero-free { display: block; margin-top: 14px; font-size: 14px; color: var(--text-secondary); }
+
+        .hero-showcase {
+            max-width: 1100px;
+            margin: 72px auto 0;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .hero-showcase img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-showcase::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: 50%;
+            transform: translateX(-50%);
+            width: 80%; height: 160px;
+            background: radial-gradient(ellipse, rgba(220, 53, 69, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-label {
+            font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--accent); text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 44px; font-weight: 700;
+            text-align: center; letter-spacing: -1.5px;
+            margin-bottom: 56px; line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #dc3545 0%, #ff6b7a 40%, #fff 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .features {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 100px 24px 100px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card:hover { border-color: rgba(220, 53, 69, 0.3); }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--accent-dim);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 0 20px rgba(220, 53, 69, 0.15);
+        }
+
+        .feature-icon svg { width: 24px; height: 24px; }
+
+        .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .why {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .why-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+        .why-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .req {
+            text-align: center;
+            padding: 0 24px 60px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand .logo { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        .footer-brand .logo span { color: var(--accent); }
+        .footer-brand p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+        .footer-col h4 {
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-secondary); margin-bottom: 14px;
+        }
+
+        .footer-col a {
+            display: block; font-size: 14px;
+            color: var(--text); text-decoration: none;
+            margin-bottom: 10px; transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            margin-top: 40px; padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .footer-bottom p { font-size: 12px; color: var(--text-secondary); }
+
+        .footer-socials { display: flex; gap: 16px; }
+        .footer-socials a { color: var(--text-secondary); transition: color 0.2s; }
+        .footer-socials a:hover { color: var(--text); }
+        .footer-socials svg { width: 18px; height: 18px; }
+
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .features-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 40px; letter-spacing: -2px; }
+            .hero .subtitle { font-size: 16px; }
+            .hero { padding-top: 120px; }
+            .section-title { font-size: 30px; }
+            .features-grid, .why-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom { flex-direction: column; gap: 12px; }
+            nav { padding: 14px 16px; }
+            .nav-links { gap: 16px; }
+            .hero-showcase { margin-top: 48px; }
+            .hero-showcase img { border-radius: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://corvusdevs.github.io" class="nav-brand">
+            <img src="icon.png" alt="Corvus Player">
+            Corvus <span>Player</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#why">Why Corvus</a></li>
+            <li><a href="mailto:corvusdevs@outlook.com">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <img src="icon.png" alt="Corvus Player" class="hero-icon">
+        <h1>Corvus<br>Player</h1>
+        <p class="subtitle">A powerful, customizable media player for macOS. Built on mpv with hardware-accelerated playback, GLSL shaders, music mode, and streaming support.</p>
+        <a href="https://apps.apple.com/app/id0000000000" class="hero-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download for macOS
+        </a>
+        <span class="hero-free">macOS 14.0+ &middot; Apple Silicon &amp; Intel</span>
+
+        <div class="hero-showcase fade-in">
+            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1400" height="896" decoding="async">
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-label fade-in">Features</div>
+        <h2 class="section-title gradient-text fade-in">Everything you need in a media player</h2>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <h3>Universal Playback</h3>
+                <p>Play virtually any format: MKV, MP4, AVI, FLAC, and hundreds more. Hardware-accelerated decoding via VideoToolbox keeps your Mac cool.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
+                </div>
+                <h3>GLSL Shaders</h3>
+                <p>Built-in shader gallery with Anime4K upscaling, adaptive sharpening, and CAS. Browse, toggle, and combine shaders with one click.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <h3>Music Mode</h3>
+                <p>Dedicated music experience with album art, audio visualizer, gapless playback, ReplayGain, and a compact mini player that floats above your work.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+                </div>
+                <h3>Streaming</h3>
+                <p>Play URLs from YouTube, Twitch, and thousands of sites via yt-dlp. Quality selection, SponsorBlock, and subtitle fetching built in.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>HDR &amp; EDR</h3>
+                <p>Extended Dynamic Range output for HDR content on supported displays. Accurate tone mapping presets for SDR screens.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h3>Deeply Customizable</h3>
+                <p>8 themes, 200+ settings with searchable preferences, community presets for anime, cinema, and more. Make it yours.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Subtitles</h3>
+                <p>Full ASS/SSA styling, OpenSubtitles integration, secondary subtitle tracks, and precise timing controls. Every subtitle format supported.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </div>
+                <h3>Playlists &amp; Library</h3>
+                <p>Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>28 Languages</h3>
+                <p>Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why" id="why">
+        <div class="section-label fade-in">Why Corvus</div>
+        <h2 class="section-title gradient-text fade-in">Built for power users</h2>
+
+        <div class="why-grid">
+            <div class="why-card fade-in">
+                <h3>mpv Under the Hood</h3>
+                <p>The same battle-tested engine trusted by millions. Every mpv option is accessible, and raw config passthrough lets you fine-tune anything.</p>
+            </div>
+            <div class="why-card fade-in">
+                <h3>Native macOS Experience</h3>
+                <p>Built with SwiftUI and AppKit. Liquid Glass on macOS Tahoe, native keyboard shortcuts, Quick Look extensions, and Dock menu integration.</p>
+            </div>
+            <div class="why-card fade-in">
+                <h3>Privacy First</h3>
+                <p>No accounts, no telemetry, no tracking. Your media stays on your Mac. Credentials are stored in the system Keychain.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="req fade-in">
+        Requires macOS 14.0 Sonoma or later &middot; Apple Silicon &amp; Intel
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Corvus <span>Player</span></div>
+                <p>A powerful media player for macOS, built by CorvusDevs.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#why">Why Corvus</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="mailto:corvusdevs@outlook.com">Contact</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/issues">Report a Bug</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CorvusDevs. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="https://github.com/CorvusDevs" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
