@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Corvus Player Updates</title>
+        <link>https://corvusdevs.github.io/Corvus-Player/</link>
+        <description>Corvus Player update feed</description>
+        <language>en</language>
+        <!-- Add items here when releasing new versions. Example:
+        <item>
+            <title>Version 2.1.0</title>
+            <description><![CDATA[
+                <ul>
+                    <li>New feature description</li>
+                    <li>Bug fix description</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 01 May 2026 12:00:00 +0000</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.1.0/Corvus-Player-2.1.0.zip"
+                sparkle:version="210"
+                sparkle:shortVersionString="2.1.0"
+                length="0"
+                type="application/octet-stream"
+                sparkle:edSignature="SIGNATURE_HERE"
+            />
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+        </item>
+        -->
+        <item>
+            <title>Version 2.0.0</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Initial release</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 01 May 2026 20:09:29 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.zip"
+                sparkle:version="2.0.0"
+                sparkle:shortVersionString="2.0.0"
+                length="39684665"
+                type="application/octet-stream"
+                sparkle:edSignature="eVyguOVXehGcXyFNvbHyeXmKKiOku55yxNWLQdAf20FgTQ32Hn0Y1h7/amI3GFszU6pEOmjZfXptbOnMXPbrDw=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,21 @@
+name = "corvus-license"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# KV namespace for storing validated licenses
+[[kv_namespaces]]
+binding = "LICENSES"
+id = "REDACTED_KV_ID"
+
+# Cloudflare Email Workers — send transactional emails from your domain
+[[send_email]]
+name = "EMAIL"
+
+# Environment variables (set via `wrangler secret put <NAME>`)
+# PADDLE_WEBHOOK_SECRET  — from Paddle Dashboard > Developer Tools > Notifications
+# PADDLE_API_KEY         — from Paddle Dashboard > Developer Tools > Authentication
+
+[vars]
+FROM_EMAIL = "Corvus Player <noreply@shopa.pro>"
+CORS_ORIGIN = "https://corvusdevs.github.io"
