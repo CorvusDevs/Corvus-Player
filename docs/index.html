@@ -11,8 +11,8 @@
     <meta property="og:title" content="Corvus Player — Advanced Media Player for macOS">
     <meta property="og:description" content="A powerful, customizable media player for macOS. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.">
     <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
-    <meta property="og:image:width" content="1274">
-    <meta property="og:image:height" content="788">
+    <meta property="og:image:width" content="1621">
+    <meta property="og:image:height" content="970">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Corvus Player — Advanced Media Player for macOS">
     <meta name="twitter:description" content="A powerful, customizable media player for macOS built on mpv.">
@@ -94,27 +94,12 @@
         .hero {
             text-align: center;
             padding: 140px 24px 0;
-            position: relative;
-            overflow: visible;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px; left: 50%;
-            transform: translateX(-50%);
-            width: 1000px; height: 1000px;
-            background: radial-gradient(circle, rgba(45, 127, 249, 0.08) 0%, transparent 50%);
-            pointer-events: none;
         }
 
         .hero-icon {
             width: 120px; height: 120px;
             border-radius: 28px;
             margin-bottom: 28px;
-            position: relative;
-            border: 2px solid var(--border);
-            box-shadow: 0 0 60px 20px rgba(45, 127, 249, 0.2), 0 0 120px 50px rgba(45, 127, 249, 0.08);
         }
 
         .hero h1 {
@@ -153,53 +138,12 @@
         .hero-showcase {
             max-width: 1000px;
             margin: 72px auto 0;
-            position: relative;
-            perspective: 1200px;
         }
 
         .hero-showcase img {
             width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow:
-                0 4px 16px rgba(0, 0, 0, 0.3),
-                0 24px 60px rgba(0, 0, 0, 0.4),
-                0 48px 100px rgba(0, 0, 0, 0.2),
-                0 0 0 0.5px rgba(255, 255, 255, 0.08);
-            transform: perspective(1200px) rotateX(2deg);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .hero-showcase:hover img {
-            transform: perspective(1200px) rotateX(0deg) translateY(-4px);
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.3),
-                0 32px 80px rgba(0, 0, 0, 0.4),
-                0 56px 120px rgba(0, 0, 0, 0.15),
-                0 0 0 0.5px rgba(255, 255, 255, 0.1),
-                0 0 80px rgba(45, 127, 249, 0.08);
-        }
-
-        .hero-showcase::before {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%; height: 60%;
-            background: radial-gradient(ellipse, rgba(45, 127, 249, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-            filter: blur(40px);
-        }
-
-        .hero-showcase::after {
-            content: '';
-            position: absolute;
-            bottom: -40px; left: 50%;
-            transform: translateX(-50%);
-            width: 60%; height: 80px;
-            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
-            pointer-events: none;
-            filter: blur(20px);
         }
 
         .section-label {
@@ -311,7 +255,8 @@
         .footer-col a {
             display: block; font-size: 14px;
             color: var(--text); text-decoration: none;
-            margin-bottom: 10px; transition: color 0.2s;
+            margin-bottom: 10px;
+            transition: color 0.2s;
         }
 
         .footer-col a:hover { color: var(--accent); }
@@ -425,9 +370,7 @@
             border: 1px solid var(--border);
         }
 
-        .pricing-btn.free:hover {
-            background: var(--border);
-        }
+        .pricing-btn.free:hover { background: var(--border); }
 
         .pricing-btn.pro {
             background: var(--accent);
@@ -576,8 +519,7 @@
             nav { padding: 14px 16px; }
             .nav-links { gap: 16px; }
             .hero-showcase { margin-top: 48px; }
-            .hero-showcase img { border-radius: 10px; transform: none; }
-            .hero-showcase:hover img { transform: none; }
+            .hero-showcase img { border-radius: 10px; }
         }
     </style>
 </head>
@@ -606,8 +548,8 @@
         </a>
         <span class="hero-free">Free forever &middot; macOS 14.0+ &middot; Apple Silicon &amp; Intel</span>
 
-        <div class="hero-showcase fade-in">
-            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1274" height="788" decoding="async">
+        <div class="hero-showcase">
+            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="970" decoding="async">
         </div>
     </section>
 
@@ -679,6 +621,27 @@
                 <h3>28 Languages</h3>
                 <p>Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
             </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                </div>
+                <h3>Picture-in-Picture</h3>
+                <p>Floating mini player stays on top while you work. Resize freely, control playback, and snap it to any corner of your screen.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h3>Raw mpv Access</h3>
+                <p>Full mpv.conf passthrough for power users. Set any mpv option directly — no artificial limits on what you can configure.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3>Audio Visualizer</h3>
+                <p>Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
+            </div>
         </div>
     </section>
 
@@ -725,10 +688,10 @@
                     <li class="disabled">Media library</li>
                     <li class="disabled">Presets &amp; bookmarks</li>
                 </ul>
-                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/latest" class="pricing-btn free">Download Free</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="pricing-btn free">Download Free</a>
             </div>
 
-            <div class="pricing-card pro fade-in">
+            <div class="pricing-card pro">
                 <div class="pricing-badge">Recommended</div>
                 <h3>Pro</h3>
                 <div class="price">$6.99</div>
@@ -765,7 +728,7 @@
                 <span>A copy has also been sent to <strong id="buyer-email">your email</strong>.</span>
             </div>
             <div class="actions">
-                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/latest" class="primary">Download Corvus Player</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="primary">Download Corvus Player</a>
                 <button class="secondary" onclick="closeSuccess()">Close</button>
             </div>
         </div>
