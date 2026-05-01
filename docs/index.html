@@ -12,7 +12,7 @@
     <meta property="og:description" content="A powerful, customizable media player for macOS. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.">
     <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
     <meta property="og:image:width" content="1400">
-    <meta property="og:image:height" content="896">
+    <meta property="og:image:height" content="895">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Corvus Player — Advanced Media Player for macOS">
     <meta name="twitter:description" content="A powerful, customizable media player for macOS built on mpv.">
@@ -44,10 +44,10 @@
             --border: #252530;
             --text: #e8e8ed;
             --text-secondary: #7c7c84;
-            --accent: #dc3545;
-            --accent-light: #ff6b7a;
-            --accent-dim: rgba(220, 53, 69, 0.1);
-            --accent-glow: rgba(220, 53, 69, 0.06);
+            --accent: #2d7ff9;
+            --accent-light: #5a9dff;
+            --accent-dim: rgba(45, 127, 249, 0.1);
+            --accent-glow: rgba(45, 127, 249, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -101,7 +101,7 @@
             top: -200px; left: 50%;
             transform: translateX(-50%);
             width: 1000px; height: 1000px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.08) 0%, transparent 50%);
+            background: radial-gradient(circle, rgba(45, 127, 249, 0.08) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -111,7 +111,7 @@
             margin-bottom: 28px;
             position: relative;
             border: 2px solid var(--border);
-            box-shadow: 0 0 60px 20px rgba(220, 53, 69, 0.2), 0 0 120px 50px rgba(220, 53, 69, 0.08);
+            box-shadow: 0 0 60px 20px rgba(45, 127, 249, 0.2), 0 0 120px 50px rgba(45, 127, 249, 0.08);
         }
 
         .hero h1 {
@@ -141,7 +141,7 @@
         .hero-cta:hover {
             filter: brightness(1.15);
             transform: translateY(-1px);
-            box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+            box-shadow: 0 8px 32px rgba(45, 127, 249, 0.3);
         }
 
         .hero-cta svg { width: 20px; height: 20px; }
@@ -156,6 +156,7 @@
 
         .hero-showcase img {
             width: 100%;
+            height: auto;
             border-radius: 16px;
             box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
@@ -166,7 +167,7 @@
             bottom: -80px; left: 50%;
             transform: translateX(-50%);
             width: 80%; height: 160px;
-            background: radial-gradient(ellipse, rgba(220, 53, 69, 0.06) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(45, 127, 249, 0.06) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -184,7 +185,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #dc3545 0%, #ff6b7a 40%, #fff 100%);
+            background: linear-gradient(135deg, #2d7ff9 0%, #5a9dff 40%, #fff 100%);
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
 
@@ -208,7 +209,7 @@
             transition: border-color 0.3s, transform 0.3s;
         }
 
-        .feature-card:hover { border-color: rgba(220, 53, 69, 0.3); }
+        .feature-card:hover { border-color: rgba(45, 127, 249, 0.3); }
 
         .feature-icon {
             width: 48px; height: 48px;
@@ -216,7 +217,7 @@
             background: var(--accent-dim);
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 16px;
-            box-shadow: 0 0 20px rgba(220, 53, 69, 0.15);
+            box-shadow: 0 0 20px rgba(45, 127, 249, 0.15);
         }
 
         .feature-icon svg { width: 24px; height: 24px; }
@@ -348,7 +349,7 @@
         <span class="hero-free">macOS 14.0+ &middot; Apple Silicon &amp; Intel</span>
 
         <div class="hero-showcase fade-in">
-            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1400" height="896" decoding="async">
+            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1400" height="895" decoding="async">
         </div>
     </section>
 
@@ -359,63 +360,63 @@
         <div class="features-grid">
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
                 <h3>Universal Playback</h3>
                 <p>Play virtually any format: MKV, MP4, AVI, FLAC, and hundreds more. Hardware-accelerated decoding via VideoToolbox keeps your Mac cool.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
                 </div>
                 <h3>GLSL Shaders</h3>
                 <p>Built-in shader gallery with Anime4K upscaling, adaptive sharpening, and CAS. Browse, toggle, and combine shaders with one click.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
                 <h3>Music Mode</h3>
                 <p>Dedicated music experience with album art, audio visualizer, gapless playback, ReplayGain, and a compact mini player that floats above your work.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
                 </div>
                 <h3>Streaming</h3>
                 <p>Play URLs from YouTube, Twitch, and thousands of sites via yt-dlp. Quality selection, SponsorBlock, and subtitle fetching built in.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 </div>
                 <h3>HDR &amp; EDR</h3>
                 <p>Extended Dynamic Range output for HDR content on supported displays. Accurate tone mapping presets for SDR screens.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                 </div>
                 <h3>Deeply Customizable</h3>
                 <p>8 themes, 200+ settings with searchable preferences, community presets for anime, cinema, and more. Make it yours.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <h3>Subtitles</h3>
                 <p>Full ASS/SSA styling, OpenSubtitles integration, secondary subtitle tracks, and precise timing controls. Every subtitle format supported.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                 </div>
                 <h3>Playlists &amp; Library</h3>
                 <p>Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </div>
                 <h3>28 Languages</h3>
                 <p>Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
