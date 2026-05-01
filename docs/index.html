@@ -11,8 +11,8 @@
     <meta property="og:title" content="Corvus Player — Advanced Media Player for macOS">
     <meta property="og:description" content="A powerful, customizable media player for macOS. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.">
     <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
-    <meta property="og:image:width" content="1400">
-    <meta property="og:image:height" content="895">
+    <meta property="og:image:width" content="1344">
+    <meta property="og:image:height" content="840">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Corvus Player — Advanced Media Player for macOS">
     <meta name="twitter:description" content="A powerful, customizable media player for macOS built on mpv.">
@@ -148,7 +148,7 @@
         .hero-free { display: block; margin-top: 14px; font-size: 14px; color: var(--text-secondary); }
 
         .hero-showcase {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 72px auto 0;
             position: relative;
             perspective: 1200px;
@@ -157,18 +157,46 @@
         .hero-showcase img {
             width: 100%;
             height: auto;
-            border-radius: 16px;
-            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 24px 60px rgba(0, 0, 0, 0.4),
+                0 48px 100px rgba(0, 0, 0, 0.2),
+                0 0 0 0.5px rgba(255, 255, 255, 0.08);
+            transform: perspective(1200px) rotateX(2deg);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-showcase:hover img {
+            transform: perspective(1200px) rotateX(0deg) translateY(-4px);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.3),
+                0 32px 80px rgba(0, 0, 0, 0.4),
+                0 56px 120px rgba(0, 0, 0, 0.15),
+                0 0 0 0.5px rgba(255, 255, 255, 0.1),
+                0 0 80px rgba(45, 127, 249, 0.08);
+        }
+
+        .hero-showcase::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; height: 60%;
+            background: radial-gradient(ellipse, rgba(45, 127, 249, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(40px);
         }
 
         .hero-showcase::after {
             content: '';
             position: absolute;
-            bottom: -80px; left: 50%;
+            bottom: -40px; left: 50%;
             transform: translateX(-50%);
-            width: 80%; height: 160px;
-            background: radial-gradient(ellipse, rgba(45, 127, 249, 0.06) 0%, transparent 70%);
+            width: 60%; height: 80px;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
             pointer-events: none;
+            filter: blur(20px);
         }
 
         .section-label {
@@ -320,7 +348,8 @@
             nav { padding: 14px 16px; }
             .nav-links { gap: 16px; }
             .hero-showcase { margin-top: 48px; }
-            .hero-showcase img { border-radius: 12px; }
+            .hero-showcase img { border-radius: 10px; transform: none; }
+            .hero-showcase:hover img { transform: none; }
         }
     </style>
 </head>
@@ -349,7 +378,7 @@
         <span class="hero-free">macOS 14.0+ &middot; Apple Silicon &amp; Intel</span>
 
         <div class="hero-showcase fade-in">
-            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1400" height="895" decoding="async">
+            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1344" height="840" decoding="async">
         </div>
     </section>
 
