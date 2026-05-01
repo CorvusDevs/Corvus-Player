@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corvus Player — Advanced Media Player for macOS</title>
+    <meta name="description" content="A powerful, customizable media player for macOS built on mpv. Hardware-accelerated playback, GLSL shaders, music mode, streaming, and 28 languages.">
+    <link rel="canonical" href="https://corvusdevs.github.io/Corvus-Player/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://corvusdevs.github.io/Corvus-Player/">
+    <meta property="og:title" content="Corvus Player — Advanced Media Player for macOS">
+    <meta property="og:description" content="A powerful, customizable media player for macOS. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.">
+    <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
+    <meta property="og:image:width" content="1274">
+    <meta property="og:image:height" content="788">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Corvus Player — Advanced Media Player for macOS">
+    <meta name="twitter:description" content="A powerful, customizable media player for macOS built on mpv.">
+    <meta name="twitter:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="media player, video player, macos, mpv, corvus, glsl shaders, music mode, streaming, yt-dlp, hardware decoding, hdr">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Corvus Player",
+        "description": "A powerful, customizable media player for macOS built on mpv. Hardware-accelerated playback, GLSL shaders, music mode, and streaming support.",
+        "operatingSystem": "macOS 14.0+",
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Video Player",
+        "screenshot": "https://corvusdevs.github.io/Corvus-Player/images/hero.jpg",
+        "offers": [
+            { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+            { "@type": "Offer", "price": "6.99", "priceCurrency": "USD", "name": "Pro" }
+        ],
+        "author": { "@type": "Organization", "name": "CorvusDevs", "url": "https://corvusdevs.github.io" }
+    }
+    </script>
+    <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --surface: #111114;
+            --surface-2: #19191e;
+            --border: #252530;
+            --text: #e8e8ed;
+            --text-secondary: #7c7c84;
+            --accent: #2d7ff9;
+            --accent-light: #5a9dff;
+            --accent-dim: rgba(45, 127, 249, 0.1);
+            --accent-glow: rgba(45, 127, 249, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        .nav-brand {
+            font-size: 18px; font-weight: 700;
+            color: var(--text); text-decoration: none;
+            letter-spacing: -0.3px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .nav-brand img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+        .nav-brand span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+
+        .hero {
+            text-align: center;
+            padding: 140px 24px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(45, 127, 249, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            width: 120px; height: 120px;
+            border-radius: 28px;
+            margin-bottom: 28px;
+            position: relative;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 60px 20px rgba(45, 127, 249, 0.2), 0 0 120px 50px rgba(45, 127, 249, 0.08);
+        }
+
+        .hero h1 {
+            font-size: 64px; font-weight: 800;
+            letter-spacing: -3px; line-height: 1.05;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 19px; color: var(--text-secondary);
+            max-width: 560px; margin: 0 auto 40px;
+            font-weight: 400; line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px;
+            background: var(--accent); color: #fff;
+            font-size: 16px; font-weight: 600;
+            border-radius: 14px; text-decoration: none;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 32px rgba(45, 127, 249, 0.3);
+        }
+
+        .hero-cta svg { width: 20px; height: 20px; }
+        .hero-free { display: block; margin-top: 14px; font-size: 14px; color: var(--text-secondary); }
+
+        .hero-showcase {
+            max-width: 1000px;
+            margin: 72px auto 0;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .hero-showcase img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 24px 60px rgba(0, 0, 0, 0.4),
+                0 48px 100px rgba(0, 0, 0, 0.2),
+                0 0 0 0.5px rgba(255, 255, 255, 0.08);
+            transform: perspective(1200px) rotateX(2deg);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-showcase:hover img {
+            transform: perspective(1200px) rotateX(0deg) translateY(-4px);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.3),
+                0 32px 80px rgba(0, 0, 0, 0.4),
+                0 56px 120px rgba(0, 0, 0, 0.15),
+                0 0 0 0.5px rgba(255, 255, 255, 0.1),
+                0 0 80px rgba(45, 127, 249, 0.08);
+        }
+
+        .hero-showcase::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; height: 60%;
+            background: radial-gradient(ellipse, rgba(45, 127, 249, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(40px);
+        }
+
+        .hero-showcase::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: 50%;
+            transform: translateX(-50%);
+            width: 60%; height: 80px;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(20px);
+        }
+
+        .section-label {
+            font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--accent); text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 44px; font-weight: 700;
+            text-align: center; letter-spacing: -1.5px;
+            margin-bottom: 56px; line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #2d7ff9 0%, #5a9dff 40%, #fff 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .features {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 100px 24px 100px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card:hover { border-color: rgba(45, 127, 249, 0.3); }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--accent-dim);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 0 20px rgba(45, 127, 249, 0.15);
+        }
+
+        .feature-icon svg { width: 24px; height: 24px; }
+
+        .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .why {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .why-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+        .why-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .req {
+            text-align: center;
+            padding: 0 24px 60px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand .logo { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        .footer-brand .logo span { color: var(--accent); }
+        .footer-brand p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+        .footer-col h4 {
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-secondary); margin-bottom: 14px;
+        }
+
+        .footer-col a {
+            display: block; font-size: 14px;
+            color: var(--text); text-decoration: none;
+            margin-bottom: 10px; transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            margin-top: 40px; padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .footer-bottom p { font-size: 12px; color: var(--text-secondary); }
+
+        .footer-socials { display: flex; gap: 16px; }
+        .footer-socials a { color: var(--text-secondary); transition: color 0.2s; }
+        .footer-socials a:hover { color: var(--text); }
+        .footer-socials svg { width: 18px; height: 18px; }
+
+        /* Pricing Section */
+        .pricing {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.pro {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px rgba(45, 127, 249, 0.12), 0 0 0 1px rgba(45, 127, 249, 0.3);
+            position: relative;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .pricing-card .price { font-size: 40px; font-weight: 800; margin: 12px 0 4px; letter-spacing: -1px; }
+        .pricing-card .price-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+        .pricing-features {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 28px;
+        }
+
+        .pricing-features li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pricing-features li.disabled::before {
+            content: '—';
+            color: var(--text-secondary);
+            opacity: 0.4;
+        }
+
+        .pricing-features li.disabled { opacity: 0.5; }
+
+        .pricing-btn {
+            display: block;
+            text-align: center;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .pricing-btn.free {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .pricing-btn.free:hover {
+            background: var(--border);
+        }
+
+        .pricing-btn.pro {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .pricing-btn.pro:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 8px 32px rgba(45, 127, 249, 0.3);
+        }
+
+        /* Success Overlay */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-overlay.visible { display: flex; }
+
+        .success-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-card .icon { font-size: 56px; margin-bottom: 20px; }
+        .success-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        .success-card .sub { color: var(--text-secondary); font-size: 15px; margin-bottom: 28px; }
+
+        .license-key-box {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .license-key-box label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .license-key-box code {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-light);
+            font-family: 'SF Mono', Menlo, monospace;
+            word-break: break-all;
+            user-select: all;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover { background: var(--border); color: var(--text); }
+
+        .email-notice {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .email-notice svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        .success-card .actions { display: flex; gap: 12px; justify-content: center; }
+
+        .success-card .actions a, .success-card .actions button {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .success-card .actions .primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .success-card .actions .secondary {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .features-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 40px; letter-spacing: -2px; }
+            .hero .subtitle { font-size: 16px; }
+            .hero { padding-top: 120px; }
+            .section-title { font-size: 30px; }
+            .features-grid, .why-grid, .pricing-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+            .success-card { padding: 32px 24px; }
+            .footer-bottom { flex-direction: column; gap: 12px; }
+            nav { padding: 14px 16px; }
+            .nav-links { gap: 16px; }
+            .hero-showcase { margin-top: 48px; }
+            .hero-showcase img { border-radius: 10px; transform: none; }
+            .hero-showcase:hover img { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://corvusdevs.github.io" class="nav-brand">
+            <img src="icon.png" alt="Corvus Player">
+            Corvus <span>Player</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#why">Why Corvus</a></li>
+            <li><a href="mailto:corvusdevs@outlook.com">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <img src="icon.png" alt="Corvus Player" class="hero-icon">
+        <h1>Corvus<br>Player</h1>
+        <p class="subtitle">A powerful, customizable media player for macOS. Built on mpv with hardware-accelerated playback, GLSL shaders, music mode, and streaming support.</p>
+        <a href="#pricing" class="hero-cta" id="hero-download">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Free
+        </a>
+        <span class="hero-free">Free forever &middot; macOS 14.0+ &middot; Apple Silicon &amp; Intel</span>
+
+        <div class="hero-showcase fade-in">
+            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1274" height="788" decoding="async">
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-label fade-in">Features</div>
+        <h2 class="section-title gradient-text fade-in">Everything you need in a media player</h2>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <h3>Universal Playback</h3>
+                <p>Play virtually any format: MKV, MP4, AVI, FLAC, and hundreds more. Hardware-accelerated decoding via VideoToolbox keeps your Mac cool.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
+                </div>
+                <h3>GLSL Shaders</h3>
+                <p>Built-in shader gallery with Anime4K upscaling, adaptive sharpening, and CAS. Browse, toggle, and combine shaders with one click.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <h3>Music Mode</h3>
+                <p>Dedicated music experience with album art, audio visualizer, gapless playback, ReplayGain, and a compact mini player that floats above your work.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+                </div>
+                <h3>Streaming</h3>
+                <p>Play URLs from YouTube, Twitch, and thousands of sites via yt-dlp. Quality selection, SponsorBlock, and subtitle fetching built in.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>HDR &amp; EDR</h3>
+                <p>Extended Dynamic Range output for HDR content on supported displays. Accurate tone mapping presets for SDR screens.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h3>Deeply Customizable</h3>
+                <p>8 themes, 200+ settings with searchable preferences, community presets for anime, cinema, and more. Make it yours.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Subtitles</h3>
+                <p>Full ASS/SSA styling, OpenSubtitles integration, secondary subtitle tracks, and precise timing controls. Every subtitle format supported.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </div>
+                <h3>Playlists &amp; Library</h3>
+                <p>Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>28 Languages</h3>
+                <p>Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why" id="why">
+        <div class="section-label fade-in">Why Corvus</div>
+        <h2 class="section-title gradient-text fade-in">Built for power users</h2>
+
+        <div class="why-grid">
+            <div class="why-card fade-in">
+                <h3>mpv Under the Hood</h3>
+                <p>The same battle-tested engine trusted by millions. Every mpv option is accessible, and raw config passthrough lets you fine-tune anything.</p>
+            </div>
+            <div class="why-card fade-in">
+                <h3>Native macOS Experience</h3>
+                <p>Built with SwiftUI and AppKit. Liquid Glass on macOS Tahoe, native keyboard shortcuts, Quick Look extensions, and Dock menu integration.</p>
+            </div>
+            <div class="why-card fade-in">
+                <h3>Privacy First</h3>
+                <p>No accounts, no telemetry, no tracking. Your media stays on your Mac. Credentials are stored in the system Keychain.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="section-label fade-in">Pricing</div>
+        <h2 class="section-title gradient-text fade-in">Free forever. Pro when you're ready.</h2>
+
+        <div class="pricing-grid">
+            <div class="pricing-card fade-in">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <div class="price-sub">Free forever</div>
+                <ul class="pricing-features">
+                    <li>All format playback &amp; hardware decoding</li>
+                    <li>Full keyboard &amp; gesture customization</li>
+                    <li>Playlists, chapters, history</li>
+                    <li>Music mode &amp; mini player</li>
+                    <li>Subtitle search &amp; full styling</li>
+                    <li>URL streaming, SponsorBlock, quality picker</li>
+                    <li>GLSL shaders, settings search, stats overlay</li>
+                    <li>10-band EQ, normalization, ReplayGain</li>
+                    <li>28 languages, 3 themes</li>
+                    <li class="disabled">Audio visualizer</li>
+                    <li class="disabled">Media library</li>
+                    <li class="disabled">Presets &amp; bookmarks</li>
+                </ul>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/latest" class="pricing-btn free">Download Free</a>
+            </div>
+
+            <div class="pricing-card pro fade-in">
+                <div class="pricing-badge">Recommended</div>
+                <h3>Pro</h3>
+                <div class="price">$6.99</div>
+                <div class="price-sub">One-time purchase &middot; No subscription</div>
+                <ul class="pricing-features">
+                    <li>Everything in Free, plus:</li>
+                    <li>Audio visualizer (3 styles)</li>
+                    <li>Music mode themes (6 backgrounds)</li>
+                    <li>5 custom app themes (Midnight, Nord, Sepia…)</li>
+                    <li>Advanced tone mapping presets (Film, Vivid…)</li>
+                    <li>Community &amp; custom presets</li>
+                    <li>Timestamped bookmarks with thumbnails</li>
+                    <li>Media library with folder scanning</li>
+                    <li>14-day free trial — no credit card</li>
+                </ul>
+                <button class="pricing-btn pro" id="buy-pro" onclick="openCheckout()">Buy Corvus Pro</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Overlay (shown after purchase) -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-card">
+            <div class="icon">🎉</div>
+            <h2>Welcome to Corvus Pro!</h2>
+            <p class="sub">Your license key is ready. Copy it and paste it in the app.</p>
+            <div class="license-key-box">
+                <label>License Key</label>
+                <code id="license-key-display">—</code>
+                <button class="copy-btn" onclick="copyLicenseKey()">Copy</button>
+            </div>
+            <div class="email-notice">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>A copy has also been sent to <strong id="buyer-email">your email</strong>.</span>
+            </div>
+            <div class="actions">
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/latest" class="primary">Download Corvus Player</a>
+                <button class="secondary" onclick="closeSuccess()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="req fade-in">
+        Requires macOS 14.0 Sonoma or later &middot; Apple Silicon &amp; Intel
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Corvus <span>Player</span></div>
+                <p>A powerful media player for macOS, built by CorvusDevs.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#why">Why Corvus</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="mailto:corvusdevs@outlook.com">Contact</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/issues">Report a Bug</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025–2026 CorvusDevs. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="https://github.com/CorvusDevs" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Paddle.js (Billing / v2) -->
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+        // ── Config ──────────────────────────────────────────────
+        const PADDLE_CLIENT_TOKEN = 'live_56066aaf7cbe507b874f560dbcd';  // Paddle > Developer Tools > Authentication > Client-side token
+        const PADDLE_PRICE_ID     = 'pri_01kqj50nwyn9qb5s0cjbvt8rry';  // Paddle > Catalog > Prices
+        const PADDLE_ENVIRONMENT  = 'production';                 // 'sandbox' for testing, 'production' for live
+
+        // ── Initialize Paddle ───────────────────────────────────
+        Paddle.Environment.set(PADDLE_ENVIRONMENT);
+        Paddle.Initialize({
+            token: PADDLE_CLIENT_TOKEN,
+            eventCallback: function(event) {
+                if (event.name === 'checkout.completed') {
+                    handleCheckoutCompleted(event.data);
+                }
+            }
+        });
+
+        // ── Checkout ────────────────────────────────────────────
+        function openCheckout() {
+            Paddle.Checkout.open({
+                items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
+            });
+        }
+
+        // ── Post-Purchase ───────────────────────────────────────
+        function handleCheckoutCompleted(data) {
+            const txnId = data.transaction_id;
+            const email = data.customer?.email || '';
+
+            document.getElementById('license-key-display').textContent = txnId;
+            if (email) {
+                document.getElementById('buyer-email').textContent = email;
+            }
+            document.getElementById('success-overlay').classList.add('visible');
+        }
+
+        function copyLicenseKey() {
+            const key = document.getElementById('license-key-display').textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+            });
+        }
+
+        function closeSuccess() {
+            document.getElementById('success-overlay').classList.remove('visible');
+        }
+
+        // ── Scroll Animations ───────────────────────────────────
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

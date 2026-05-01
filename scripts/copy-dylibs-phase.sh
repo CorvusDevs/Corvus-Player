@@ -6,7 +6,7 @@ mkdir -p "${FRAMEWORKS_DIR}"
 if [ -d "${DEPS_LIB}" ]; then
     for dylib in "${DEPS_LIB}"/*; do
         cp -f "${dylib}" "${FRAMEWORKS_DIR}/"
-        codesign --force --sign - "${FRAMEWORKS_DIR}/$(basename "${dylib}")"
+        codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY:--}" --options runtime "${FRAMEWORKS_DIR}/$(basename "${dylib}")"
     done
     echo "Copied $(ls "${DEPS_LIB}" | wc -l | tr -d ' ') dylibs to ${FRAMEWORKS_DIR}"
 else

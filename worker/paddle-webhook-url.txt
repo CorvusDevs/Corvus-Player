@@ -1,0 +1,7 @@
+Paddle Webhook URL:
+https://corvus-license.soyelale.workers.dev/webhook
+
+Event to subscribe: transaction.completed
+
+After creating the webhook, Paddle will show a "Webhook Secret Key" (starts with pdl_ntfset_...).
+Share it with me and I'll set it as a secret on the worker.
