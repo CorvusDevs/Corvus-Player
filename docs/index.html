@@ -6,6 +6,32 @@
     <title>Corvus Player — The Most Powerful Media Player for macOS</title>
     <meta name="description" content="The most powerful and customizable media player for macOS. Built on mpv with GPU-accelerated playback, real-time GLSL shaders, streaming, music mode, and 200+ settings. Free forever.">
     <link rel="canonical" href="https://corvusdevs.github.io/Corvus-Player/">
+    <link rel="alternate" hreflang="en" href="https://corvusdevs.github.io/Corvus-Player/">
+    <link rel="alternate" hreflang="ar" href="https://corvusdevs.github.io/Corvus-Player/?lang=ar">
+    <link rel="alternate" hreflang="cs" href="https://corvusdevs.github.io/Corvus-Player/?lang=cs">
+    <link rel="alternate" hreflang="da" href="https://corvusdevs.github.io/Corvus-Player/?lang=da">
+    <link rel="alternate" hreflang="de" href="https://corvusdevs.github.io/Corvus-Player/?lang=de">
+    <link rel="alternate" hreflang="el" href="https://corvusdevs.github.io/Corvus-Player/?lang=el">
+    <link rel="alternate" hreflang="es" href="https://corvusdevs.github.io/Corvus-Player/?lang=es">
+    <link rel="alternate" hreflang="fi" href="https://corvusdevs.github.io/Corvus-Player/?lang=fi">
+    <link rel="alternate" hreflang="fr" href="https://corvusdevs.github.io/Corvus-Player/?lang=fr">
+    <link rel="alternate" hreflang="he" href="https://corvusdevs.github.io/Corvus-Player/?lang=he">
+    <link rel="alternate" hreflang="hi" href="https://corvusdevs.github.io/Corvus-Player/?lang=hi">
+    <link rel="alternate" hreflang="hu" href="https://corvusdevs.github.io/Corvus-Player/?lang=hu">
+    <link rel="alternate" hreflang="id" href="https://corvusdevs.github.io/Corvus-Player/?lang=id">
+    <link rel="alternate" hreflang="it" href="https://corvusdevs.github.io/Corvus-Player/?lang=it">
+    <link rel="alternate" hreflang="ja" href="https://corvusdevs.github.io/Corvus-Player/?lang=ja">
+    <link rel="alternate" hreflang="ko" href="https://corvusdevs.github.io/Corvus-Player/?lang=ko">
+    <link rel="alternate" hreflang="ms" href="https://corvusdevs.github.io/Corvus-Player/?lang=ms">
+    <link rel="alternate" hreflang="nl" href="https://corvusdevs.github.io/Corvus-Player/?lang=nl">
+    <link rel="alternate" hreflang="pl" href="https://corvusdevs.github.io/Corvus-Player/?lang=pl">
+    <link rel="alternate" hreflang="ru" href="https://corvusdevs.github.io/Corvus-Player/?lang=ru">
+    <link rel="alternate" hreflang="sv" href="https://corvusdevs.github.io/Corvus-Player/?lang=sv">
+    <link rel="alternate" hreflang="th" href="https://corvusdevs.github.io/Corvus-Player/?lang=th">
+    <link rel="alternate" hreflang="tr" href="https://corvusdevs.github.io/Corvus-Player/?lang=tr">
+    <link rel="alternate" hreflang="uk" href="https://corvusdevs.github.io/Corvus-Player/?lang=uk">
+    <link rel="alternate" hreflang="vi" href="https://corvusdevs.github.io/Corvus-Player/?lang=vi">
+    <link rel="alternate" hreflang="x-default" href="https://corvusdevs.github.io/Corvus-Player/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://corvusdevs.github.io/Corvus-Player/">
     <meta property="og:title" content="Corvus Player — The Most Powerful Media Player for macOS">
@@ -13,10 +39,13 @@
     <meta property="og:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
     <meta property="og:image:width" content="1621">
     <meta property="og:image:height" content="970">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="CorvusDevs">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Corvus Player — The Most Powerful Media Player for macOS">
     <meta name="twitter:description" content="The most powerful and customizable media player ever made for macOS. Free forever.">
     <meta name="twitter:image" content="https://corvusdevs.github.io/Corvus-Player/images/hero.jpg">
+    <meta name="twitter:image:alt" content="Corvus Player hero screenshot showing the media player interface">
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="media player, video player, macos, mpv, corvus, glsl shaders, music mode, streaming, yt-dlp, hardware decoding, hdr">
     <script type="application/ld+json">
@@ -84,7 +113,7 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        .nav-brand img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+        .nav-brand img { width: 64px; height: 64px; border-radius: 16px; display: block; }
         .nav-brand span { color: var(--accent); }
 
         .nav-links { display: flex; gap: 28px; list-style: none; }
@@ -506,6 +535,29 @@
             .features-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
+        /* Language Picker */
+        .lang-wrap { position: relative; margin-left: 16px; flex-shrink: 0; }
+        .lang-btn {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+            padding: 6px 28px 6px 12px; color: var(--text); font-size: 13px; cursor: pointer;
+            white-space: nowrap;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%237c7c84' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 10px center;
+        }
+        .lang-menu {
+            display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 300;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+            padding: 6px 0; min-width: 160px; max-height: 400px; overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        .lang-menu.open { display: block; }
+        .lang-menu button {
+            display: block; width: 100%; padding: 8px 16px; background: none; border: none;
+            color: var(--text); font-size: 13px; cursor: pointer; text-align: left; white-space: nowrap;
+        }
+        .lang-menu button:hover { background: rgba(255,255,255,0.08); }
+        .lang-menu button.active { color: var(--accent); }
+
         @media (max-width: 600px) {
             .hero h1 { font-size: 40px; letter-spacing: -2px; }
             .hero .subtitle { font-size: 16px; }
@@ -529,22 +581,52 @@
             Corvus <span>Devs</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#why">Why Corvus</a></li>
-            <li><a href="mailto:corvusdevs@outlook.com">Contact</a></li>
+            <li><a href="#features" data-i18n="nav_features">Features</a></li>
+            <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+            <li><a href="#why" data-i18n="nav_why">Why Corvus</a></li>
+            <li><a href="mailto:corvusdevs@outlook.com" data-i18n="nav_contact">Contact</a></li>
         </ul>
+        <div class="lang-wrap" id="langWrap">
+            <button class="lang-btn" id="langBtn">English</button>
+            <div class="lang-menu" id="langMenu">
+                <button data-lang="en">English</button>
+                <button data-lang="ar">العربية</button>
+                <button data-lang="cs">Čeština</button>
+                <button data-lang="da">Dansk</button>
+                <button data-lang="de">Deutsch</button>
+                <button data-lang="el">Ελληνικά</button>
+                <button data-lang="es">Español</button>
+                <button data-lang="fi">Suomi</button>
+                <button data-lang="fr">Français</button>
+                <button data-lang="he">עברית</button>
+                <button data-lang="hi">हिन्दी</button>
+                <button data-lang="hu">Magyar</button>
+                <button data-lang="id">Indonesia</button>
+                <button data-lang="it">Italiano</button>
+                <button data-lang="ja">日本語</button>
+                <button data-lang="ko">한국어</button>
+                <button data-lang="ms">Melayu</button>
+                <button data-lang="nl">Nederlands</button>
+                <button data-lang="pl">Polski</button>
+                <button data-lang="ru">Русский</button>
+                <button data-lang="sv">Svenska</button>
+                <button data-lang="th">ไทย</button>
+                <button data-lang="tr">Türkçe</button>
+                <button data-lang="uk">Українська</button>
+                <button data-lang="vi">Tiếng Việt</button>
+            </div>
+        </div>
     </nav>
 
     <section class="hero">
         <img src="icon.png" alt="Corvus Player" class="hero-icon">
         <h1>Corvus Player</h1>
-        <p class="subtitle">The most powerful and customizable media player ever made for macOS. Built on mpv with GPU-accelerated playback, real-time shaders, streaming from any site, and over 200 settings to make it truly yours.</p>
+        <p class="subtitle" data-i18n="hero_sub">The most powerful and customizable media player ever made for macOS. Built on mpv with GPU-accelerated playback, real-time shaders, streaming from any site, and over 200 settings to make it truly yours.</p>
         <a href="#pricing" class="hero-cta" id="hero-download">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Free
+            <span data-i18n="hero_cta">Download Free</span>
         </a>
-        <span class="hero-free">Free forever &middot; No ads, no tracking &middot; macOS 14.0+ &middot; Apple Silicon</span>
+        <span class="hero-free" data-i18n="hero_free">Free forever &middot; No ads, no tracking</span> <span class="hero-free">&middot; macOS 14.0+ &middot; Apple Silicon</span>
 
         <div class="hero-showcase">
             <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
@@ -552,160 +634,160 @@
     </section>
 
     <section class="features" id="features">
-        <div class="section-label fade-in">Features</div>
-        <h2 class="section-title gradient-text fade-in">More features than any other player on macOS</h2>
+        <div class="section-label fade-in" data-i18n="sec_features">Features</div>
+        <h2 class="section-title gradient-text fade-in" data-i18n="sec_features_title">More features than any other player on macOS</h2>
 
         <div class="features-grid">
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
-                <h3>Plays Everything</h3>
-                <p>Every format, every codec, no exceptions. MKV, MP4, AVI, FLAC, and hundreds more — all hardware-accelerated via VideoToolbox. Files that choke other players just work.</p>
+                <h3 data-i18n="f1_t">Plays Everything</h3>
+                <p data-i18n="f1_d">Every format, every codec, no exceptions. MKV, MP4, AVI, FLAC, and hundreds more — all hardware-accelerated via VideoToolbox. Files that choke other players just work.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
                 </div>
-                <h3>Real-Time GLSL Shaders</h3>
-                <p>The only macOS player with a built-in shader gallery. Anime4K upscaling, adaptive sharpening, CAS — browse, stack, and toggle shaders in real time.</p>
+                <h3 data-i18n="f2_t">Real-Time GLSL Shaders</h3>
+                <p data-i18n="f2_d">The only macOS player with a built-in shader gallery. Anime4K upscaling, adaptive sharpening, CAS — browse, stack, and toggle shaders in real time.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
-                <h3>Music Mode</h3>
-                <p>Not just a video player. Dedicated music experience with album art, audio visualizer, gapless playback, ReplayGain, and a compact mini player that floats above everything.</p>
+                <h3 data-i18n="f3_t">Music Mode</h3>
+                <p data-i18n="f3_d">Not just a video player. Dedicated music experience with album art, audio visualizer, gapless playback, ReplayGain, and a compact mini player that floats above everything.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
                 </div>
-                <h3>Stream Anything</h3>
-                <p>Paste any URL — YouTube, Twitch, and thousands more. Quality selection, SponsorBlock, cookie auth, and subtitle fetching. No browser needed.</p>
+                <h3 data-i18n="f4_t">Stream Anything</h3>
+                <p data-i18n="f4_d">Paste any URL — YouTube, Twitch, and thousands more. Quality selection, SponsorBlock, cookie auth, and subtitle fetching. No browser needed.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 </div>
-                <h3>HDR &amp; EDR</h3>
-                <p>Extended Dynamic Range output for HDR content on supported displays. Accurate tone mapping presets for SDR screens.</p>
+                <h3 data-i18n="f5_t">HDR &amp; EDR</h3>
+                <p data-i18n="f5_d">Extended Dynamic Range output for HDR content on supported displays. Accurate tone mapping presets for SDR screens.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                 </div>
-                <h3>Obsessively Customizable</h3>
-                <p>200+ settings, 8 themes, searchable preferences, and community presets for anime, cinema, home theater, and more. No other player on macOS comes close.</p>
+                <h3 data-i18n="f6_t">Obsessively Customizable</h3>
+                <p data-i18n="f6_d">200+ settings, 8 themes, searchable preferences, and community presets for anime, cinema, home theater, and more. No other player on macOS comes close.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
-                <h3>Best-in-Class Subtitles</h3>
-                <p>Full ASS/SSA styling, OpenSubtitles search, dual subtitle tracks, and frame-precise timing. Every format supported, perfectly rendered.</p>
+                <h3 data-i18n="f7_t">Best-in-Class Subtitles</h3>
+                <p data-i18n="f7_d">Full ASS/SSA styling, OpenSubtitles search, dual subtitle tracks, and frame-precise timing. Every format supported, perfectly rendered.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                 </div>
-                <h3>Playlists &amp; Library</h3>
-                <p>Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
+                <h3 data-i18n="f8_t">Playlists &amp; Library</h3>
+                <p data-i18n="f8_d">Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </div>
-                <h3>28 Languages</h3>
-                <p>Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
+                <h3 data-i18n="f9_t">28 Languages</h3>
+                <p data-i18n="f9_d">Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
                 </div>
-                <h3>Picture-in-Picture</h3>
-                <p>Floating mini player stays on top while you work. Resize freely, control playback, and snap it to any corner of your screen.</p>
+                <h3 data-i18n="f10_t">Picture-in-Picture</h3>
+                <p data-i18n="f10_d">Floating mini player stays on top while you work. Resize freely, control playback, and snap it to any corner of your screen.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
-                <h3>Unlimited Power</h3>
-                <p>Full mpv.conf passthrough — set any of mpv's hundreds of options directly. Zero artificial limits. If mpv can do it, Corvus can do it.</p>
+                <h3 data-i18n="f11_t">Unlimited Power</h3>
+                <p data-i18n="f11_d">Full mpv.conf passthrough — set any of mpv's hundreds of options directly. Zero artificial limits. If mpv can do it, Corvus can do it.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                 </div>
-                <h3>Audio Visualizer</h3>
-                <p>Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
+                <h3 data-i18n="f12_t">Audio Visualizer</h3>
+                <p data-i18n="f12_d">Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
             </div>
         </div>
     </section>
 
     <section class="why" id="why">
-        <div class="section-label fade-in">Why Corvus</div>
-        <h2 class="section-title gradient-text fade-in">Why nothing else compares</h2>
+        <div class="section-label fade-in" data-i18n="sec_why">Why Corvus</div>
+        <h2 class="section-title gradient-text fade-in" data-i18n="sec_why_title">Why nothing else compares</h2>
 
         <div class="why-grid">
             <div class="why-card fade-in">
-                <h3>mpv Under the Hood</h3>
-                <p>Powered by the same engine trusted by millions worldwide. But unlike raw mpv, Corvus wraps it in a beautiful native interface without sacrificing a single option.</p>
+                <h3 data-i18n="w1_t">mpv Under the Hood</h3>
+                <p data-i18n="w1_d">Powered by the same engine trusted by millions worldwide. But unlike raw mpv, Corvus wraps it in a beautiful native interface without sacrificing a single option.</p>
             </div>
             <div class="why-card fade-in">
-                <h3>Truly Native macOS</h3>
-                <p>Built from the ground up with SwiftUI and AppKit — not a cross-platform port. Liquid Glass on macOS Tahoe, Quick Look extensions, Dock menus, and system integration that feels like it came from Apple.</p>
+                <h3 data-i18n="w2_t">Truly Native macOS</h3>
+                <p data-i18n="w2_d">Built from the ground up with SwiftUI and AppKit — not a cross-platform port. Liquid Glass on macOS Tahoe, Quick Look extensions, Dock menus, and system integration that feels like it came from Apple.</p>
             </div>
             <div class="why-card fade-in">
-                <h3>Zero Compromise Privacy</h3>
-                <p>No accounts. No telemetry. No tracking. No cloud. Your media never leaves your Mac. Credentials live in the system Keychain. We don't even have a server to spy on you.</p>
+                <h3 data-i18n="w3_t">Zero Compromise Privacy</h3>
+                <p data-i18n="w3_d">No accounts. No telemetry. No tracking. No cloud. Your media never leaves your Mac. Credentials live in the system Keychain. We don't even have a server to spy on you.</p>
             </div>
         </div>
     </section>
 
     <section class="pricing" id="pricing">
-        <div class="section-label fade-in">Pricing</div>
-        <h2 class="section-title gradient-text fade-in">Ridiculously generous free tier. Pro when you want more.</h2>
+        <div class="section-label fade-in" data-i18n="sec_pricing">Pricing</div>
+        <h2 class="section-title gradient-text fade-in" data-i18n="sec_pricing_title">Ridiculously generous free tier. Pro when you want more.</h2>
 
         <div class="pricing-grid">
             <div class="pricing-card fade-in">
-                <h3>Free</h3>
+                <h3 data-i18n="pf_name">Free</h3>
                 <div class="price">$0</div>
-                <div class="price-sub">Free forever</div>
+                <div class="price-sub" data-i18n="pf_sub">Free forever</div>
                 <ul class="pricing-features">
-                    <li>All format playback &amp; hardware decoding</li>
-                    <li>Full keyboard &amp; gesture customization</li>
-                    <li>Playlists, chapters, history</li>
-                    <li>Music mode &amp; mini player</li>
-                    <li>Subtitle search &amp; full styling</li>
-                    <li>URL streaming, SponsorBlock, quality picker</li>
-                    <li>GLSL shaders, settings search, stats overlay</li>
-                    <li>10-band EQ, normalization, ReplayGain</li>
-                    <li>28 languages, 3 themes</li>
-                    <li class="disabled">Audio visualizer</li>
-                    <li class="disabled">Media library</li>
-                    <li class="disabled">Presets &amp; bookmarks</li>
+                    <li data-i18n="pf1">All format playback &amp; hardware decoding</li>
+                    <li data-i18n="pf2">Full keyboard &amp; gesture customization</li>
+                    <li data-i18n="pf3">Playlists, chapters, history</li>
+                    <li data-i18n="pf4">Music mode &amp; mini player</li>
+                    <li data-i18n="pf5">Subtitle search &amp; full styling</li>
+                    <li data-i18n="pf6">URL streaming, SponsorBlock, quality picker</li>
+                    <li data-i18n="pf7">GLSL shaders, settings search, stats overlay</li>
+                    <li data-i18n="pf8">10-band EQ, normalization, ReplayGain</li>
+                    <li data-i18n="pf9">28 languages, 3 themes</li>
+                    <li class="disabled" data-i18n="pf10">Audio visualizer</li>
+                    <li class="disabled" data-i18n="pf11">Media library</li>
+                    <li class="disabled" data-i18n="pf12">Presets &amp; bookmarks</li>
                 </ul>
-                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="pricing-btn free">Download Free</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="pricing-btn free" data-i18n="pf_btn">Download Free</a>
             </div>
 
             <div class="pricing-card pro">
-                <div class="pricing-badge">Recommended</div>
-                <h3>Pro</h3>
+                <div class="pricing-badge" data-i18n="pp_badge">Recommended</div>
+                <h3 data-i18n="pp_name">Pro</h3>
                 <div class="price">$6.99</div>
-                <div class="price-sub">One-time purchase &middot; No subscription</div>
+                <div class="price-sub" data-i18n="pp_sub">One-time purchase &middot; No subscription</div>
                 <ul class="pricing-features">
-                    <li>Everything in Free, plus:</li>
-                    <li>Audio visualizer (3 styles)</li>
-                    <li>Music mode themes (6 backgrounds)</li>
-                    <li>5 custom app themes (Midnight, Nord, Sepia…)</li>
-                    <li>Advanced tone mapping presets (Film, Vivid…)</li>
-                    <li>Community &amp; custom presets</li>
-                    <li>Timestamped bookmarks with thumbnails</li>
-                    <li>Media library with folder scanning</li>
-                    <li>14-day free trial — no credit card</li>
+                    <li data-i18n="pp1">Everything in Free, plus:</li>
+                    <li data-i18n="pp2">Audio visualizer (3 styles)</li>
+                    <li data-i18n="pp3">Music mode themes (6 backgrounds)</li>
+                    <li data-i18n="pp4">5 custom app themes (Midnight, Nord, Sepia…)</li>
+                    <li data-i18n="pp5">Advanced tone mapping presets (Film, Vivid…)</li>
+                    <li data-i18n="pp6">Community &amp; custom presets</li>
+                    <li data-i18n="pp7">Timestamped bookmarks with thumbnails</li>
+                    <li data-i18n="pp8">Media library with folder scanning</li>
+                    <li data-i18n="pp9">14-day free trial — no credit card</li>
                 </ul>
-                <button class="pricing-btn pro" id="buy-pro" onclick="openCheckout()">Buy Corvus Pro</button>
+                <button class="pricing-btn pro" id="buy-pro" onclick="openCheckout()" data-i18n="pp_btn">Buy Corvus Pro</button>
             </div>
         </div>
     </section>
@@ -714,25 +796,25 @@
     <div class="success-overlay" id="success-overlay">
         <div class="success-card">
             <div class="icon">🎉</div>
-            <h2>Welcome to Corvus Pro!</h2>
-            <p class="sub">Your license key is ready. Copy it and paste it in the app.</p>
+            <h2 data-i18n="s_title">Welcome to Corvus Pro!</h2>
+            <p class="sub" data-i18n="s_sub">Your license key is ready. Copy it and paste it in the app.</p>
             <div class="license-key-box">
-                <label>License Key</label>
+                <label data-i18n="s_label">License Key</label>
                 <code id="license-key-display">—</code>
-                <button class="copy-btn" onclick="copyLicenseKey()">Copy</button>
+                <button class="copy-btn" onclick="copyLicenseKey()" data-i18n="s_copy">Copy</button>
             </div>
             <div class="email-notice">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span>A copy has also been sent to <strong id="buyer-email">your email</strong>.</span>
+                <span data-i18n="s_email">A copy has also been sent to your email.</span>
             </div>
             <div class="actions">
-                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="primary">Download Corvus Player</a>
-                <button class="secondary" onclick="closeSuccess()">Close</button>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.0/Corvus-Player-2.0.0.dmg" class="primary" data-i18n="s_dl">Download Corvus Player</a>
+                <button class="secondary" onclick="closeSuccess()" data-i18n="s_close">Close</button>
             </div>
         </div>
     </div>
 
-    <div class="req fade-in">
+    <div class="req fade-in" data-i18n="req">
         Requires macOS 14.0 Sonoma or later &middot; Apple Silicon &amp; Intel
     </div>
 
@@ -740,21 +822,21 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="logo">Corvus <span>Player</span></div>
-                <p>The most powerful media player for macOS.</p>
+                <p data-i18n="ft_tagline">The most powerful media player for macOS.</p>
             </div>
             <div class="footer-col">
-                <h4>Product</h4>
-                <a href="#features">Features</a>
-                <a href="#why">Why Corvus</a>
+                <h4 data-i18n="ft_product">Product</h4>
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#why" data-i18n="nav_why">Why Corvus</a>
             </div>
             <div class="footer-col">
-                <h4>Support</h4>
-                <a href="mailto:corvusdevs@outlook.com">Contact</a>
-                <a href="https://github.com/CorvusDevs/Corvus-Player/issues">Report a Bug</a>
+                <h4 data-i18n="ft_support">Support</h4>
+                <a href="mailto:corvusdevs@outlook.com" data-i18n="ft_contact">Contact</a>
+                <a href="https://github.com/CorvusDevs/Corvus-Player/issues" data-i18n="ft_bug">Report a Bug</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025–2026 CorvusDevs. All rights reserved.</p>
+            <p data-i18n="ft_rights">&copy; 2025–2026 CorvusDevs. All rights reserved.</p>
             <div class="footer-socials">
                 <a href="https://github.com/CorvusDevs" aria-label="GitHub">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -826,5 +908,6 @@
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "36ef79985b2045c4b271333fe4e427ab"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
