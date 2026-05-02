@@ -1,0 +1,34 @@
+# App source code (private — not published to GitHub)
+Corvus Player/
+Corvus Player.xcodeproj/
+PreviewExtension/
+ThumbnailExtension/
+ChapterListView.swift
+corvus-cli.sh
+xcode-task.txt
+
+# Dev-only scripts
+scripts/add-*.py
+scripts/translate-strings.py
+scripts/fix-python-dylib.txt
+scripts/xcode-setup-instructions.txt
+
+# Build artifacts
+build/
+deps/
+*.xcodeproj.backup/
+*.pbxproj.bak.*
+*.pbxproj.pre-*
+
+# Worker dev files
+worker/node_modules/
+worker/.wrangler/
+worker/package-lock.json
+worker/package.json
+worker/test-key.txt
+
+# Misc
+claude-desktop-instructions.txt
+features.txt
+iina-feature-inventory.txt
+scripts/dmg-background.png
