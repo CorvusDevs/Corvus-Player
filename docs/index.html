@@ -937,8 +937,13 @@
 
     const langLabels = {"ar":"العربية","cs":"Čeština","da":"Dansk","de":"Deutsch","el":"Ελληνικά","en":"English","es":"Español","fi":"Suomi","fr":"Français","he":"עברית","hi":"हिन्दी","hu":"Magyar","id":"Indonesia","it":"Italiano","ja":"日本語","ko":"한국어","ms":"Melayu","nl":"Nederlands","pl":"Polski","ru":"Русский","sv":"Svenska","th":"ไทย","tr":"Türkçe","uk":"Українська","vi":"Tiếng Việt"};
 
+    const enStrings = {};
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        enStrings[el.getAttribute("data-i18n")] = el.textContent;
+    });
+
     function setLanguage(lang) {
-        const s = T[lang] || {};
+        const s = lang === "en" ? enStrings : (T[lang] || {});
         document.querySelectorAll("[data-i18n]").forEach(el => {
             const k = el.getAttribute("data-i18n");
             if (s[k]) el.textContent = s[k];
