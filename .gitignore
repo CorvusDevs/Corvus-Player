@@ -27,6 +27,11 @@ worker/package-lock.json
 worker/package.json
 worker/test-key.txt
 
+# Internal dev scripts & notes
+scripts/test-webhook.sh
+worker/email-dns-setup.txt
+worker/paddle-webhook-url.txt
+
 # Misc
 claude-desktop-instructions.txt
 features.txt
