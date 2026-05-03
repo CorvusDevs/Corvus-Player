@@ -4,6 +4,7 @@
 .gitignore
 .push-allowed
 CHANGELOG.md
+README.md
 THIRD_PARTY_LICENSES.txt
 docs/**
 scripts/release.sh
