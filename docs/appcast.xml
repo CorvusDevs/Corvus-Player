@@ -9,12 +9,11 @@
             <title>Version 2.0.1</title>
             <description><![CDATA[
                 <ul>
-                    <li>Rewrote OpenGL render pipeline — steady 24fps on 4K HEVC Dolby Vision</li>
-                    <li>Dual-mode seeking: instant keyframe for slider, frame-accurate for keyboard</li>
-                    <li>Seek times reduced from 4+ seconds to under 50ms on 4K HEVC</li>
-                    <li>Audio stats filter only active in music mode</li>
-                    <li>Disabled MKV subtitle preroll by default</li>
-                    <li>Loading spinner delayed 1s to eliminate flash</li>
+                    <li>Smooth, consistent playback on 4K HEVC and Dolby Vision content</li>
+                    <li>Near-instant seeking with the slider and scroll wheel</li>
+                    <li>Frame-accurate seeking with keyboard shortcuts and bookmarks</li>
+                    <li>Reduced background processing during video playback</li>
+                    <li>Improved handling of files with many subtitle tracks</li>
                 </ul>
             ]]></description>
             <pubDate>Wed, 06 May 2026 15:17:54 -0300</pubDate>

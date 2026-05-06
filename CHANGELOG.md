@@ -3,23 +3,18 @@
 ## v2.0.1
 
 ### Performance
-- Rewrote OpenGL render pipeline to match IINA architecture — steady 24fps on 4K HEVC Dolby Vision content (was 5–8fps)
-- Set `isAsynchronous = false` on CAOpenGLLayer (only enabled during live resize)
-- Removed CVDisplayLink frame timer — eliminated triple timing mechanism conflict
-- Added `NSRecursiveLock` display lock and `CATransaction.flush()` for proper frame presentation
-- Enabled multi-threaded GL engine (`kCGLCEMPEngine`)
-- Audio stats filter (`@astats`) now only active in music mode — no longer runs during video playback
-- Disabled MKV subtitle preroll by default — major overhead with files containing many subtitle tracks
-- Reduced mpv log level from `warn` to `error` — eliminated Dolby Vision RPU warning flood that blocked the event loop
+- Rewrote the video render pipeline for smooth, consistent playback on 4K HEVC and Dolby Vision content
+- Reduced unnecessary background processing during video playback
+- Improved handling of files with many subtitle tracks
 
 ### Seeking
-- Dual-mode seeking: keyframe for slider/scroll (instant), frame-accurate for keyboard/bookmarks (precise)
-- Seek coalescing for rapid slider scrubbing — batches rapid seeks into single dispatches
-- Auto-pause during scrub — pauses playback during fast slider dragging, resumes when stopped
-- Seek times reduced from 4+ seconds to under 50ms on 4K HEVC content
+- Slider and scroll seeking is now instant — jumps to the nearest keyframe with no decode delay
+- Keyboard and bookmark seeking remains frame-accurate for precise navigation
+- Smoother scrubbing experience with intelligent seek batching
+- Seek times reduced from several seconds to near-instant on 4K content
 
 ### UI
-- Loading spinner delayed 1 second before showing — eliminates flash on fast loads
+- Loading indicator no longer flashes briefly on fast file loads
 
 ## v1.8.0-b1
 
