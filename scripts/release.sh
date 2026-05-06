@@ -157,19 +157,65 @@ ditto -c -k --sequesterRsrc --keepParent "$APP_NAME.app" "$ZIP_NAME"
 ZIP_SIZE=$(stat -f%z "$ZIP_PATH")
 echo "    ZIP: $ZIP_NAME ($ZIP_SIZE bytes)"
 
-# Step 5: Create DMG
+# Step 5: Create DMG with volume icon
 echo ">>> Creating DMG..."
 DMG_STAGING="$ARCHIVE_DIR/dmg-staging"
 mkdir -p "$DMG_STAGING"
 cp -R "$APP_PATH" "$DMG_STAGING/"
 ln -s /Applications "$DMG_STAGING/Applications"
 
+# Extract app icon for DMG volume icon
+ICON_ICNS="$APP_PATH/Contents/Resources/AppIcon.icns"
+if [[ ! -f "$ICON_ICNS" ]]; then
+    # Fallback: generate .icns from asset catalog PNGs
+    ICONSET_DIR="$ARCHIVE_DIR/AppIcon.iconset"
+    mkdir -p "$ICONSET_DIR"
+    ICON_SRC="$PROJECT_DIR/Corvus Player/Assets.xcassets/AppIcon.appiconset"
+    cp "$ICON_SRC/icon_16x16.png" "$ICONSET_DIR/icon_16x16.png"
+    cp "$ICON_SRC/icon_32x32.png" "$ICONSET_DIR/icon_16x16@2x.png"
+    cp "$ICON_SRC/icon_32x32.png" "$ICONSET_DIR/icon_32x32.png"
+    cp "$ICON_SRC/icon_64x64.png" "$ICONSET_DIR/icon_32x32@2x.png"
+    cp "$ICON_SRC/icon_128x128.png" "$ICONSET_DIR/icon_128x128.png"
+    cp "$ICON_SRC/icon_256x256.png" "$ICONSET_DIR/icon_128x128@2x.png"
+    cp "$ICON_SRC/icon_256x256.png" "$ICONSET_DIR/icon_256x256.png"
+    cp "$ICON_SRC/icon_512x512.png" "$ICONSET_DIR/icon_256x256@2x.png"
+    cp "$ICON_SRC/icon_512x512.png" "$ICONSET_DIR/icon_512x512.png"
+    cp "$ICON_SRC/icon_1024x1024.png" "$ICONSET_DIR/icon_512x512@2x.png"
+    ICON_ICNS="$ARCHIVE_DIR/AppIcon.icns"
+    iconutil -c icns "$ICONSET_DIR" -o "$ICON_ICNS"
+    echo "    Generated AppIcon.icns from asset catalog"
+fi
+
+# Set volume icon in staging folder
+cp "$ICON_ICNS" "$DMG_STAGING/.VolumeIcon.icns"
+SetFile -a C "$DMG_STAGING" 2>/dev/null || true
+
+# Create read-write DMG first, then convert to compressed
+DMG_RW="$ARCHIVE_DIR/dmg-rw.dmg"
 hdiutil create \
     -volname "$APP_NAME" \
     -srcfolder "$DMG_STAGING" \
-    -ov -format UDZO \
-    "$DMG_PATH" \
+    -ov -format UDRW \
+    "$DMG_RW" \
     > /dev/null
+
+# Mount, set icon flag on volume root, unmount
+MOUNT_POINT=$(hdiutil attach "$DMG_RW" -nobrowse -noverify | grep "/Volumes/" | awk -F'\t' '{print $NF}')
+if [[ -n "$MOUNT_POINT" ]]; then
+    SetFile -a C "$MOUNT_POINT" 2>/dev/null || true
+    hdiutil detach "$MOUNT_POINT" -quiet
+fi
+
+# Convert to compressed
+hdiutil convert "$DMG_RW" -format UDZO -o "$DMG_PATH" -ov > /dev/null
+rm -f "$DMG_RW"
+
+# Set DMG file icon
+sips -i "$ICON_ICNS" > /dev/null 2>&1 || true
+DeRez -only icns "$ICON_ICNS" > "$ARCHIVE_DIR/icon.rsrc" 2>/dev/null && \
+    Rez -append "$ARCHIVE_DIR/icon.rsrc" -o "$DMG_PATH" 2>/dev/null && \
+    SetFile -a C "$DMG_PATH" 2>/dev/null || \
+    echo "    Note: Could not set DMG file icon (cosmetic only)"
 
 DMG_SIZE=$(stat -f%z "$DMG_PATH")
 echo "    DMG: $DMG_NAME ($DMG_SIZE bytes)"

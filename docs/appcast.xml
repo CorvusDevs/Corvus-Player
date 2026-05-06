@@ -5,27 +5,29 @@
         <link>https://corvusdevs.github.io/Corvus-Player/</link>
         <description>Corvus Player update feed</description>
         <language>en</language>
-        <!-- Add items here when releasing new versions. Example:
         <item>
-            <title>Version 2.1.0</title>
+            <title>Version 2.0.1</title>
             <description><![CDATA[
                 <ul>
-                    <li>New feature description</li>
-                    <li>Bug fix description</li>
+                    <li>Rewrote OpenGL render pipeline — steady 24fps on 4K HEVC Dolby Vision</li>
+                    <li>Dual-mode seeking: instant keyframe for slider, frame-accurate for keyboard</li>
+                    <li>Seek times reduced from 4+ seconds to under 50ms on 4K HEVC</li>
+                    <li>Audio stats filter only active in music mode</li>
+                    <li>Disabled MKV subtitle preroll by default</li>
+                    <li>Loading spinner delayed 1s to eliminate flash</li>
                 </ul>
             ]]></description>
-            <pubDate>Thu, 01 May 2026 12:00:00 +0000</pubDate>
+            <pubDate>Wed, 06 May 2026 15:17:54 -0300</pubDate>
             <enclosure
-                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.1.0/Corvus-Player-2.1.0.zip"
-                sparkle:version="210"
-                sparkle:shortVersionString="2.1.0"
-                length="0"
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.1/Corvus-Player-2.0.1.zip"
+                sparkle:version="2.0.1"
+                sparkle:shortVersionString="2.0.1"
+                length="39686885"
                 type="application/octet-stream"
-                sparkle:edSignature="SIGNATURE_HERE"
+                sparkle:edSignature="gzeeMcnRGS8mqY5qX2g5fY5NLEG7ks4oJmy3L2tVPze3DQSROajV/WV8/LGle+rF+vLvwh9vPw7deZ4bYR5CDw=="
             />
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
-        -->
         <item>
             <title>Version 2.0.0</title>
             <description><![CDATA[
