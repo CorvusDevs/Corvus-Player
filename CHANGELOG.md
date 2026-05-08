@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.2
+
+### Bug Fix
+- Fixed launch crash on v2.0.1 caused by missing code signing entitlements after notarization
+
 ## v2.0.1
 
 ### Performance

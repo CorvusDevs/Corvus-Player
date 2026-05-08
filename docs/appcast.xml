@@ -6,6 +6,24 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.0.2</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Fixed launch crash caused by missing code signing entitlements</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 08 May 2026 04:10:00 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.2/Corvus-Player-2.0.2.zip"
+                sparkle:version="2.0.2"
+                sparkle:shortVersionString="2.0.2"
+                length="39686935"
+                type="application/octet-stream"
+                sparkle:edSignature="zRe4V4GPXLSTakkD+6HXdcexjFBLmkMBr7m+jBJWR8Hp1FBdFRcFToS7IFdlkNsnm4IDxBjG4WPIisjrZeB3BQ=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.0.1</title>
             <description><![CDATA[
                 <ul>
