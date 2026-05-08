@@ -14,14 +14,14 @@
                     <li>Improved default window sizing for welcome screen</li>
                 </ul>
             ]]></description>
-            <pubDate>Fri, 08 May 2026 05:50:58 -0300</pubDate>
+            <pubDate>Fri, 08 May 2026 07:20:38 -0300</pubDate>
             <enclosure
                 url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.2/Corvus-Player-2.0.2.zip"
                 sparkle:version="2.0.2"
                 sparkle:shortVersionString="2.0.2"
-                length="39686499"
+                length="39686576"
                 type="application/octet-stream"
-                sparkle:edSignature="AwLdSqOnGPtd2IM/5h36kjRAcVKGYM8huLyCBoHCqYzkUSROfC9aEZr/5405h1Ny1Ug4GPBWVghMbo30n/azDg=="
+                sparkle:edSignature="ZoVo1pzT9VzayXDurpQuLDARio+A24z1K86femoYELAkQ+vi0/ja+PdqA5owlHpyHO/L0vgar1eo1xF+Dy2XCQ=="
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
