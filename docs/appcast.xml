@@ -10,16 +10,18 @@
             <description><![CDATA[
                 <ul>
                     <li>Fixed launch crash caused by missing code signing entitlements</li>
+                    <li>Fixed window not returning to default size after stopping playback</li>
+                    <li>Improved default window sizing for welcome screen</li>
                 </ul>
             ]]></description>
-            <pubDate>Fri, 08 May 2026 04:10:00 -0300</pubDate>
+            <pubDate>Fri, 08 May 2026 05:50:58 -0300</pubDate>
             <enclosure
                 url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.2/Corvus-Player-2.0.2.zip"
                 sparkle:version="2.0.2"
                 sparkle:shortVersionString="2.0.2"
-                length="39686935"
+                length="39686499"
                 type="application/octet-stream"
-                sparkle:edSignature="zRe4V4GPXLSTakkD+6HXdcexjFBLmkMBr7m+jBJWR8Hp1FBdFRcFToS7IFdlkNsnm4IDxBjG4WPIisjrZeB3BQ=="
+                sparkle:edSignature="AwLdSqOnGPtd2IM/5h36kjRAcVKGYM8huLyCBoHCqYzkUSROfC9aEZr/5405h1Ny1Ug4GPBWVghMbo30n/azDg=="
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
