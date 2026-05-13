@@ -6,6 +6,25 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.0.3</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Cursor now hides automatically with the controls in fullscreen</li>
+                    <li>Fixed playback no longer auto-advancing into unrelated files after a single-file open</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 13 May 2026 12:19:05 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.3/Corvus-Player-2.0.3.zip"
+                sparkle:version="2.0.3"
+                sparkle:shortVersionString="2.0.3"
+                length="39817952"
+                type="application/octet-stream"
+                sparkle:edSignature="Yg5zchln7icrXVlZx3ZAG3CMrI6DUSfILUCdYBxknkvKs7obQq9gLqd14rx6Hr7NTZzKW+PjkSqpHZS0hbNlDw=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.0.2</title>
             <description><![CDATA[
                 <ul>
