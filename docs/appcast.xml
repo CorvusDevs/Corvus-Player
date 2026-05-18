@@ -84,5 +84,26 @@
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.0.4</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Fixed app hanging indefinitely when opening audio files (especially with embedded album art) from Finder</li>
+                    <li>Improved overall responsiveness during file load and music-mode transitions</li>
+                    <li>Smoother fullscreen transitions — no more black frame on exit</li>
+                    <li>Larger Play/Pause button hit area in the controls bar</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 17 May 2026 22:52:05 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.4/Corvus-Player-2.0.4.zip"
+                sparkle:version="2.0.4"
+                sparkle:shortVersionString="2.0.4"
+                length="39803711"
+                type="application/octet-stream"
+                sparkle:edSignature="0HOuNQcrU8AYtMxTqX1ouZbSl26BWjxEqo4cY6q59jQhMHMHpNz/9njl7V6TMaQFHla8IBfyRNkcwRF5NyhtDg=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
