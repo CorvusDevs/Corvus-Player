@@ -97,7 +97,7 @@
             <pubDate>Sun, 17 May 2026 22:52:05 -0300</pubDate>
             <enclosure
                 url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.4/Corvus-Player-2.0.4.zip"
-                sparkle:version="2.0.4"
+                sparkle:version="4"
                 sparkle:shortVersionString="2.0.4"
                 length="39803711"
                 type="application/octet-stream"
