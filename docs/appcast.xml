@@ -125,5 +125,26 @@
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.0.6</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Re-ships the multi-file Open With fix that should have been in 2.0.5 — opening a whole folder or selection from Finder now correctly loads everything as a single playlist instead of spawning a window per file</li>
+                    <li>Quick Look extensions now cover every audio and video format Corvus Player can play: WAV, WMA, OGG, Opus, DSF, DFF and more</li>
+                    <li>Embedded album-art thumbnails now work for Opus, OGG and FLAC files (Vorbis Comment METADATA_BLOCK_PICTURE), in addition to MP3 and M4A</li>
+                    <li>Folder-cover thumbnail fallback (cover.jpg / folder.jpg / album.jpg / front.jpg) for audio files without embedded artwork</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 24 May 2026 19:28:09 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.6/Corvus-Player-2.0.6.zip"
+                sparkle:version="6"
+                sparkle:shortVersionString="2.0.6"
+                length="53305314"
+                type="application/octet-stream"
+                sparkle:edSignature="axTvwD7fYT+RNvg0aZ8/HjUWtTGHqtXyYNRs6l5s+hb14dIXl49T6eosXzmT1qw8BnLzRWM6JUYPzsgvLd8zBA=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
