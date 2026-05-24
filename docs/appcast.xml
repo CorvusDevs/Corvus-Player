@@ -105,5 +105,25 @@
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.0.5</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Opening multiple files (or a folder) from Finder now loads them all as a playlist in one window instead of opening separate windows</li>
+                    <li>Quick Look extensions (Preview and Thumbnail) now show the Corvus icon and readable names in System Settings</li>
+                    <li>Thumbnail generation now falls back to a folder-level cover image (cover.jpg / folder.jpg / album.jpg / front.jpg) when an MKV / WebM / FLAC / WMV file has no embedded artwork</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 24 May 2026 12:44:48 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.0.5/Corvus-Player-2.0.5.zip"
+                sparkle:version="5"
+                sparkle:shortVersionString="2.0.5"
+                length="53299770"
+                type="application/octet-stream"
+                sparkle:edSignature="1HSjUpbYDtiuZ4UyJ7LKiNikMp6/Sj/XWAem5K7oKxreZp2JdpuQTpAnQ6TTPJfNanE+IR1Q/VKrZ2ieNsMECQ=="
+            />
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
