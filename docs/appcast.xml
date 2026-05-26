@@ -171,5 +171,23 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.1.1</title>
+            <description><![CDATA[
+                <ul>
+                    <li>Fixed the player window briefly flickering on and off when opening several files at once from Finder</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 26 May 2026 00:19:37 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.1.1/Corvus-Player-2.1.1.zip"
+                sparkle:version="9"
+                sparkle:shortVersionString="2.1.1"
+                length="53436349"
+                type="application/octet-stream"
+                sparkle:edSignature="dqBStflMsfbQnlaRAJ3QIHL7PDgEGx+2iMUAq0teV7Acha1FO3B8+UKmFuuoyTHxj4a2X1eVSPxuJqtc3d0vDQ=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
