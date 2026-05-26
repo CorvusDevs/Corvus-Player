@@ -146,5 +146,30 @@
             />
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.1.0</title>
+            <description><![CDATA[
+                <h3>Album art and video previews in Finder, for every supported file</h3>
+                <ul>
+                    <li>New: songs and videos you save now get real album art (audio) or a representative video frame (video) as their Finder icon, automatically. Works for every format Corvus Player supports, including the ones macOS normally shows as a generic music note or film strip (opus, ogg, mkv, webm).</li>
+                    <li>New: a background helper updates Finder thumbnails the moment you save a new file, even when Corvus Player is fully closed. Toggle it in Settings &rsaquo; Advanced &rsaquo; Permissions.</li>
+                    <li>New: first-launch walkthrough explains the macOS switches Corvus Player can use, in plain English. Reachable any time from Settings &rsaquo; Advanced &rsaquo; Permissions.</li>
+                    <li>New: File &rsaquo; Generate Finder Thumbnails&hellip; lets you bulk-process any folder on demand.</li>
+                    <li>Improved: Recent files grid now shows the actual album cover for music tracks and a proper video frame for video, with consistent tile alignment.</li>
+                    <li>Improved: opening multiple files at once via Open With no longer briefly flashes a second window before the playlist loads.</li>
+                    <li>Improved: Settings search now finds the new Permissions section, and the search field finally drops focus when you click outside it.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 25 May 2026 22:29:45 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.1.0/Corvus-Player-2.1.0.zip"
+                sparkle:version="8"
+                sparkle:shortVersionString="2.1.0"
+                length="53433392"
+                type="application/octet-stream"
+                sparkle:edSignature="3C7Qp5Z/wVp5hb9PiB72NAdWpz0/9r2Sf1Tc8xG3bckaGj5l91WydcpEm1O5BcDJl0Y8M/EGO8QOjED9oDpwBA=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
