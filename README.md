@@ -17,20 +17,21 @@ Built on mpv with a native SwiftUI interface. GPU-accelerated playback, real-tim
 
 ## Features
 
-- **Plays Everything** — All major video and audio formats with hardware-accelerated decoding
-- **Real-Time GLSL Shaders** — Apply and customize shaders during playback with a built-in shader gallery
-- **Stream Anything** — Full yt-dlp integration for YouTube, Twitch, SoundCloud, and hundreds of sites
-- **HDR & EDR** — Advanced tone mapping and high dynamic range support on compatible displays
-- **200+ Settings** — Obsessively customizable playback, video, audio, subtitle, and interface options
-- **Best-in-Class Subtitles** — Auto-load, online search via OpenSubtitles, SDH support, full ASS/SSA styling
-- **Music Mode** — Dedicated UI with album art display, audio visualizer, and gapless playback
-- **Playlists & Library** — Save and load playlists, browse your media library with folder navigation
-- **Picture-in-Picture** — Compact mini player that stays on top
-- **Seekbar Thumbnails** — Hover over the seekbar to preview frames with cached thumbnails
-- **Chapter Navigation** — Full support for video chapters with quick navigation
-- **Smart Shortcuts** — Customizable keyboard shortcuts for every action
-- **mpv Under the Hood** — Built on libmpv for battle-tested, high-performance media playback
-- **Truly Native macOS** — SwiftUI interface with proper macOS integration, not an Electron wrapper
+- **Plays Everything.** All major video and audio formats with hardware-accelerated decoding
+- **Real-Time GLSL Shaders.** Apply and customize shaders during playback with a built-in shader gallery
+- **Stream Anything.** Full yt-dlp integration for YouTube, Twitch, SoundCloud, and hundreds of sites
+- **HDR & EDR.** Advanced tone mapping and high dynamic range support on compatible displays
+- **200+ Settings.** Obsessively customizable playback, video, audio, subtitle, and interface options
+- **Best-in-Class Subtitles.** Auto-load, online search via OpenSubtitles, SDH support, full ASS/SSA styling
+- **Music Mode.** Dedicated UI with album art display, audio visualizer, and gapless playback
+- **Playlists & Library.** Save and load playlists, browse your media library with folder navigation
+- **Picture-in-Picture.** Compact mini player that stays on top
+- **Seekbar Thumbnails.** Hover over the seekbar to preview frames with cached thumbnails
+- **Album Art & Video Previews in Finder.** Every song and video gets real album art or a video frame as its Finder icon, including formats macOS normally shows as a generic music note or filmstrip (MKV, WebM, Opus, OGG, FLAC, DSD, and 20+ more). Quick Look preview works too.
+- **Chapter Navigation.** Full support for video chapters with quick navigation
+- **Smart Shortcuts.** Customizable keyboard shortcuts for every action
+- **mpv Under the Hood.** Built on libmpv for battle-tested, high-performance media playback
+- **Truly Native macOS.** SwiftUI interface with proper macOS integration, not an Electron wrapper
 
 ## Privacy
 
