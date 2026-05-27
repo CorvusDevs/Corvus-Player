@@ -591,7 +591,189 @@
         .lang-wrap .lang-glyph { width: 18px; height: 18px; opacity: 0.8; flex-shrink: 0; }        .lang-globe { opacity: 0.85; }
         .lang-flag { width: 20px; height: 14px; border-radius: 2px; flex-shrink: 0; object-fit: cover; }
 
-    </style>
+    
+/* page-carousel template v1 (2026-05-26) */
+.corvus-carousel {
+    max-width: 1200px;
+    margin: 80px auto 40px;
+    padding: 0 24px;
+}
+.corvus-carousel__title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+    color: var(--text, #fff);
+}
+.corvus-carousel__sub {
+    font-size: 15px;
+    color: var(--text-secondary, #9a9a9f);
+    margin: 0 0 28px;
+}
+.corvus-carousel__viewport {
+    position: relative;
+}
+.corvus-carousel__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 4px 4px 16px;
+    margin: 0 -4px;
+    scrollbar-width: thin;
+    /* Touch swipe, overflow-x: auto already enables native horizontal pan
+     * on iOS/iPadOS/Android; the following are belt-and-suspenders so the
+     * gesture isn't intercepted (e.g. by parent vertical-pan listeners) and
+     * gets iOS momentum / rubber-banding on older Safari versions. */
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    --fade-l: 0px;
+    --fade-r: 0px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black var(--fade-l), black calc(100% - var(--fade-r)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black var(--fade-l), black calc(100% - var(--fade-r)), transparent 100%);
+    transition: -webkit-mask-image 0.25s, mask-image 0.25s;
+}
+.corvus-carousel__track::-webkit-scrollbar { height: 6px; }
+.corvus-carousel__track::-webkit-scrollbar-thumb {
+    background: var(--border, #2a2a30);
+    border-radius: 3px;
+}
+.corvus-carousel__card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: var(--surface, #18181c);
+    border: 1px solid var(--border, #2a2a30);
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text, #fff);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.corvus-carousel__card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent, #2d7ff9);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.corvus-carousel__card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    object-fit: contain;
+}
+.corvus-carousel__card-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text, #fff);
+    line-height: 1.2;
+}
+.corvus-carousel__card-tagline {
+    font-size: 12px;
+    color: var(--accent, #2d7ff9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+.corvus-carousel__card-desc {
+    font-size: 13px;
+    color: var(--text-secondary, #9a9a9f);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    /* Clamp to ~3 lines so card heights stay aligned */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.corvus-carousel__card-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent, #2d7ff9);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+}
+.corvus-carousel__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface, #18181c);
+    border: 1px solid var(--border, #2a2a30);
+    color: var(--text, #fff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 2;
+}
+.corvus-carousel__nav:hover { opacity: 1; transform: translateY(-50%) scale(1.05); }
+.corvus-carousel__nav:disabled { opacity: 0.3; cursor: default; }
+.corvus-carousel__nav svg { width: 20px; height: 20px; }
+.corvus-carousel__nav--prev { left: -18px; }
+.corvus-carousel__nav--next { right: -18px; }
+.corvus-carousel__nav svg { fill: none; }
+@media (max-width: 600px) {
+    .corvus-carousel { margin-top: 48px; }
+    .corvus-carousel__title { font-size: 26px; }
+    .corvus-carousel__card { flex-basis: 240px; padding: 16px; }
+    .corvus-carousel__nav { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .corvus-carousel__track { scroll-behavior: auto; }
+    .corvus-carousel__card { transition: none; }
+}
+/* Hide carousel entirely if JS failed to populate it */
+.corvus-carousel__track:empty + * { display: none; }
+.corvus-carousel:has(.corvus-carousel__track:empty) { display: none; }
+
+        
+        /* Fade peek using mask-image on the track itself.
+         *
+         * Earlier approach used pseudo-element overlays on the viewport,
+         * but the .corvus-carousel__track is a scroll container
+         * (overflow-x: auto) that the browser composites in its own
+         * paint layer, cards rendered above sibling pseudo-elements
+         * regardless of z-index. Switching to mask-image applies the
+         * fade to the track's content directly, sidestepping any
+         * stacking-order issues.
+         *
+         * --fade-l / --fade-r set by carousel.js based on scroll
+         * position. 0 = no fade on that side; 80px = full fade.
+         */
+        .corvus-carousel__viewport { position: relative; }
+        .corvus-carousel__viewport[data-fade-left]::before { opacity: 1; }
+        .corvus-carousel__viewport[data-fade-right]::after { opacity: 1; }
+        /* Accent the nav buttons so they stand out from the page bg */
+        .corvus-carousel__nav {
+            background: var(--accent, #2d7ff9);
+            color: white;
+            border-color: var(--accent, #2d7ff9);
+            box-shadow: 0 4px 16px rgba(45,127,249,0.35);
+        }
+        .corvus-carousel__nav:hover {
+            background: var(--accent, #2d7ff9);
+            filter: brightness(1.1);
+        }
+        .corvus-carousel__nav:disabled {
+            background: var(--surface, #18181c);
+            color: var(--text-secondary, #9a9a9f);
+            border-color: var(--border, #2a2a30);
+            box-shadow: none;
+        }
+
+        </style>
 </head>
 <body>
 
@@ -877,6 +1059,28 @@
         Requires macOS 14.0 Sonoma or later &middot; Apple Silicon &amp; Intel
     </div>
 
+    <!-- page-carousel template v1 (2026-05-26), see ~/.corvus-tools/page-carousel/ -->
+<section id="corvus-carousel" class="corvus-carousel" aria-labelledby="corvus-carousel-title" data-current-slug="Corvus-Player">
+    <h2 id="corvus-carousel-title" class="corvus-carousel__title" data-i18n="carousel_title">More from CorvusDevs</h2>
+    <p class="corvus-carousel__sub" data-i18n="carousel_sub">Privacy-first apps for macOS, iOS, and Safari.</p>
+    <div class="corvus-carousel__viewport">
+        <button class="corvus-carousel__nav corvus-carousel__nav--prev" type="button" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <div class="corvus-carousel__track" role="list">
+            <!-- Cards injected at runtime by carousel.js -->
+        </div>
+        <button class="corvus-carousel__nav corvus-carousel__nav--next" type="button" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/>
+            </svg>
+        </button>
+    </div>
+</section>
+
+
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
@@ -1082,6 +1286,120 @@
     })();
     </script>
 
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "36ef79985b2045c4b271333fe4e427ab"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "36ef79985b2045c4b271333fe4e427ab"}'></script>
+<script>
+// page-carousel template v1 (2026-05-26)
+// Fetches https://corvusdevs.github.io/apps.json, filters out the current
+// project by slug, renders cards into #corvus-carousel.
+//
+// Slug detection (in order):
+//   1. data-current-slug="..." attribute on #corvus-carousel
+//   2. First non-empty path segment of location.pathname (e.g.
+//      /Corvus-Player/foo → "Corvus-Player")
+//   3. Falls back to no exclusion (renders all apps)
+//
+// Failure modes:
+//   - apps.json unreachable: track stays empty, CSS hides the section.
+//   - apps.json malformed: console.warn + empty track.
+//   - 0 apps after self-exclusion: section hides.
+
+(function() {
+    const APPS_JSON_URL = 'https://corvusdevs.github.io/apps.json';
+    const section = document.getElementById('corvus-carousel');
+    if (!section) return;
+    const track = section.querySelector('.corvus-carousel__track');
+    if (!track) return;
+
+    function getCurrentSlug() {
+        const explicit = section.getAttribute('data-current-slug');
+        if (explicit) return explicit.toLowerCase();
+        const segs = location.pathname.split('/').filter(Boolean);
+        return segs.length ? segs[0].toLowerCase() : '';
+    }
+
+    function buildCard(app) {
+        const a = document.createElement('a');
+        a.className = 'corvus-carousel__card';
+        a.href = app.url;
+        a.setAttribute('role', 'listitem');
+        if (app.accent) a.style.setProperty('--card-accent', `var(--accent-${app.accent}, var(--accent))`);
+
+        const img = document.createElement('img');
+        img.className = 'corvus-carousel__card-icon';
+        img.src = app.icon;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.width = 56;
+        img.height = 56;
+
+        const tag = document.createElement('div');
+        tag.className = 'corvus-carousel__card-tagline';
+        tag.textContent = app.tagline || '';
+
+        const name = document.createElement('div');
+        name.className = 'corvus-carousel__card-name';
+        name.textContent = app.name;
+
+        const desc = document.createElement('p');
+        desc.className = 'corvus-carousel__card-desc';
+        desc.textContent = app.description || '';
+
+        const cta = document.createElement('span');
+        cta.className = 'corvus-carousel__card-cta';
+        cta.textContent = 'Learn more →';
+
+        a.append(img, tag, name, desc, cta);
+        return a;
+    }
+
+    function wireNav() {
+        const prev = section.querySelector('.corvus-carousel__nav--prev');
+        const next = section.querySelector('.corvus-carousel__nav--next');
+        if (!prev || !next) return;
+        const stepFn = () => Math.max(track.clientWidth * 0.8, 280 + 16);
+        prev.addEventListener('click', () => track.scrollBy({ left: -stepFn(), behavior: 'smooth' }));
+        next.addEventListener('click', () => track.scrollBy({ left: stepFn(), behavior: 'smooth' }));
+        function syncDisabled() {
+            prev.disabled = track.scrollLeft <= 4;
+            next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+        }
+        const FADE_PX = 80;
+        function syncFade() {
+            const atStart = track.scrollLeft <= 4;
+            const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+            track.style.setProperty('--fade-l', atStart ? '0px' : FADE_PX + 'px');
+            track.style.setProperty('--fade-r', atEnd ? '0px' : FADE_PX + 'px');
+        }
+        function syncAll() { syncDisabled(); syncFade(); }
+        track.addEventListener('scroll', syncAll, { passive: true });
+        window.addEventListener('resize', syncAll, { passive: true });
+        syncAll();
+    }
+
+    fetch(APPS_JSON_URL, { cache: 'default' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+        .then(data => {
+            const apps = (data && Array.isArray(data.apps)) ? data.apps : [];
+            const currentSlug = getCurrentSlug();
+            const filtered = apps.filter(a => (a.slug || '').toLowerCase() !== currentSlug);
+            if (!filtered.length) {
+                section.style.display = 'none';
+                return;
+            }
+            // Featured first, then the rest
+            filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            const frag = document.createDocumentFragment();
+            for (const app of filtered) frag.appendChild(buildCard(app));
+            track.appendChild(frag);
+            wireNav();
+        })
+        .catch(err => {
+            // eslint-disable-next-line no-console
+            console.warn('[carousel] failed to load apps.json:', err);
+            section.style.display = 'none';
+        });
+})();
+
+    </script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
