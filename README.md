@@ -11,7 +11,6 @@
   <img src="https://img.shields.io/github/downloads/CorvusDevs/Corvus-Player/total?style=flat-square&color=4CAF50&label=downloads" alt="Total downloads">
   <img src="https://img.shields.io/badge/macOS-14.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS 14.0+">
   <img src="https://img.shields.io/badge/Apple%20Silicon%20%2B%20Intel-supported-444?style=flat-square" alt="Apple Silicon + Intel">
-  <img src="https://img.shields.io/github/license/CorvusDevs/Corvus-Player?style=flat-square&color=666" alt="License">
 </p>
 
 <p>
