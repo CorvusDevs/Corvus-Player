@@ -239,6 +239,46 @@
         .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
         .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
+        /* Secondary features list (single column, icon + title + desc).
+         * Sits below the 9-card grid as a denser presentation of the
+         * remaining feature inventory; less visual weight than cards.
+         */
+        .features-list {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .feature-row {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 18px;
+            align-items: start;
+            padding: 18px 20px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .feature-row:hover { background: rgba(255,255,255,0.02); }
+        .feature-row__icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: var(--accent-dim);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 16px rgba(45,127,249,0.1);
+        }
+        .feature-row__icon svg { width: 20px; height: 20px; }
+        .feature-row__body h3 {
+            font-size: 16px; font-weight: 600; margin: 0 0 4px;
+        }
+        .feature-row__body p {
+            font-size: 14px; color: var(--text-secondary);
+            line-height: 1.55; margin: 0;
+        }
+        @media (max-width: 600px) {
+            .feature-row { padding: 14px 12px; gap: 14px; grid-template-columns: 44px 1fr; }
+            .feature-row__icon { width: 36px; height: 36px; }
+        }
+
         .why {
             max-width: 960px;
             margin: 0 auto;
@@ -860,10 +900,10 @@
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M12 17v4"/><path d="M8 21h8"/><path d="M6 8h2v5H6z" fill="#2d7ff9" opacity="0.3"/><path d="M10 7h2v6h-2z" fill="#2d7ff9" opacity="0.3"/><path d="M14 9h2v4h-2z" fill="#2d7ff9" opacity="0.3"/></svg>
                 </div>
-                <h3 data-i18n="f2_t">Real-Time GLSL Shaders</h3>
-                <p data-i18n="f2_d">The only macOS player with a built-in shader gallery. Anime4K upscaling, adaptive sharpening, CAS. Browse, stack, and toggle shaders in real time.</p>
+                <h3 data-i18n="f13_t">Seekbar Thumbnails</h3>
+                <p data-i18n="f13_d">Hover over the seekbar to see thumbnail previews of any moment in the video. Jump to exactly the right scene without guessing.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
@@ -895,66 +935,17 @@
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>
                 </div>
-                <h3 data-i18n="f7_t">Best-in-Class Subtitles</h3>
-                <p data-i18n="f7_d">Full ASS/SSA styling, OpenSubtitles search, dual subtitle tracks, and frame-precise timing. Every format supported, perfectly rendered.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                </div>
-                <h3 data-i18n="f8_t">Playlists &amp; Library</h3>
-                <p data-i18n="f8_d">Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
+                <h3 data-i18n="f2_t">Real-Time GLSL Shaders</h3>
+                <p data-i18n="f2_d">The only macOS player with a built-in shader gallery. Anime4K upscaling, adaptive sharpening, CAS. Browse, stack, and toggle shaders in real time.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </div>
-                <h3 data-i18n="f9_t">28 Languages</h3>
-                <p data-i18n="f9_d">Fully localized in 28 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
-                </div>
-                <h3 data-i18n="f10_t">Picture-in-Picture</h3>
-                <p data-i18n="f10_d">Floating mini player stays on top while you work. Resize freely, control playback, and snap it to any corner of your screen.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                </div>
-                <h3 data-i18n="f11_t">Unlimited Power</h3>
-                <p data-i18n="f11_d">Full mpv.conf passthrough. Set any of mpv's hundreds of options directly. Zero artificial limits. If mpv can do it, Corvus can do it.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                </div>
-                <h3 data-i18n="f12_t">Audio Visualizer</h3>
-                <p data-i18n="f12_d">Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M12 17v4"/><path d="M8 21h8"/><path d="M6 8h2v5H6z" fill="#2d7ff9" opacity="0.3"/><path d="M10 7h2v6h-2z" fill="#2d7ff9" opacity="0.3"/><path d="M14 9h2v4h-2z" fill="#2d7ff9" opacity="0.3"/></svg>
-                </div>
-                <h3 data-i18n="f13_t">Seekbar Thumbnails</h3>
-                <p data-i18n="f13_d">Hover over the seekbar to see thumbnail previews of any moment in the video. Jump to exactly the right scene without guessing.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.5" fill="#2d7ff9"/><circle cx="14" cy="12" r="1.5" fill="#2d7ff9"/><circle cx="10" cy="18" r="1.5" fill="#2d7ff9"/></svg>
-                </div>
-                <h3 data-i18n="f14_t">Chapter Navigation</h3>
-                <p data-i18n="f14_d">Browse and jump between chapters with a visual chapter list. Embedded MKV chapters, YouTube chapters, and SponsorBlock segments, all in one place.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 8l3 2-3 2V8z" fill="#2d7ff9"/><path d="M6 16h12"/><circle cx="9" cy="16" r="1" fill="#2d7ff9"/></svg>
-                </div>
-                <h3 data-i18n="f15_t">Smart Shortcuts</h3>
-                <p data-i18n="f15_d">Fully customizable keyboard shortcuts and trackpad gestures. Pinch to zoom, swipe to seek, two-finger tap to pause, or remap everything to your liking.</p>
+                <h3 data-i18n="f9_t">36 Languages</h3>
+                <p data-i18n="f9_d">Fully localized in 36 languages including Arabic, Japanese, Korean, Hindi, Thai, and more. Searchable settings work in every language. RTL support for Arabic and Hebrew.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">
@@ -962,6 +953,72 @@
                 </div>
                 <h3 data-i18n="f16_t">Album Art &amp; Video Previews in Finder</h3>
                 <p data-i18n="f16_d">Every song and video gets real album art or a video frame as its Finder icon, including formats macOS normally shows as a generic music note or filmstrip. Covers MP3, FLAC, M4A, MKV, WebM, Opus, OGG, MP4, MOV, WAV, DSD, and more, with Quick Look preview support to match.</p>
+            </div>
+        </div>
+
+        <div class="features-list">
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f7_t">Best-in-Class Subtitles</h3>
+                    <p data-i18n="f7_d">Full ASS/SSA styling, OpenSubtitles search, dual subtitle tracks, and frame-precise timing. Every format supported, perfectly rendered.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f8_t">Playlists &amp; Library</h3>
+                    <p data-i18n="f8_d">Drag-and-drop playlist with thumbnails, media library with folder scanning, and session persistence across launches.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f10_t">Picture-in-Picture</h3>
+                    <p data-i18n="f10_d">Floating mini player stays on top while you work. Resize freely, control playback, and snap it to any corner of your screen.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f11_t">Unlimited Power</h3>
+                    <p data-i18n="f11_d">Full mpv.conf passthrough. Set any of mpv's hundreds of options directly. Zero artificial limits. If mpv can do it, Corvus can do it.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f12_t">Audio Visualizer</h3>
+                    <p data-i18n="f12_d">Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.5" fill="#2d7ff9"/><circle cx="14" cy="12" r="1.5" fill="#2d7ff9"/><circle cx="10" cy="18" r="1.5" fill="#2d7ff9"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f14_t">Chapter Navigation</h3>
+                    <p data-i18n="f14_d">Browse and jump between chapters with a visual chapter list. Embedded MKV chapters, YouTube chapters, and SponsorBlock segments, all in one place.</p>
+                </div>
+            </div>
+            <div class="feature-row fade-in">
+                <div class="feature-row__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d7ff9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 8l3 2-3 2V8z" fill="#2d7ff9"/><path d="M6 16h12"/><circle cx="9" cy="16" r="1" fill="#2d7ff9"/></svg>
+                </div>
+                <div class="feature-row__body">
+                    <h3 data-i18n="f15_t">Smart Shortcuts</h3>
+                    <p data-i18n="f15_d">Fully customizable keyboard shortcuts and trackpad gestures. Pinch to zoom, swipe to seek, two-finger tap to pause, or remap everything to your liking.</p>
+                </div>
             </div>
         </div>
     </section>
