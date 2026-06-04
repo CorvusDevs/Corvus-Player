@@ -189,5 +189,31 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.2.0</title>
+            <description><![CDATA[
+                <h3>A real audio visualizer for Music Mode</h3>
+                <ul>
+                    <li>The Music Mode visualizer now shows a true frequency spectrum, so the bars move with the actual bass, mids, and treble in your music instead of just the overall volume. No extra permissions needed.</li>
+                    <li>Four visualizer styles: Spectrum Bars, Mirrored, Waveform, and Spectrum Curve, plus an option to color the bars using your album artwork.</li>
+                    <li>Album Blur is now the default Music Mode background, with your cover's colors softly blurred behind the artwork.</li>
+                    <li>Smoother, more responsive bars that stay in sync with playback.</li>
+                </ul>
+                <h3>Fixes</h3>
+                <ul>
+                    <li>Fixed a crash that could occur while Corvus Player generated album art and video thumbnails in the background.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 04 Jun 2026 20:46:08 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.2.0/Corvus-Player-2.2.0.zip"
+                sparkle:version="11"
+                sparkle:shortVersionString="2.2.0"
+                length="53843891"
+                type="application/octet-stream"
+                sparkle:edSignature="j7/5SgubvCLYaSAH986/tEXxUooTV4mGnS5aFci1lKpmiJ6OuZoN+Ocvunu78s9hTIq76YOJJ5xnjZrOEpSlCw=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
