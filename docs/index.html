@@ -210,20 +210,25 @@
         }
         .shot-carousel__bloom.is-active { opacity: 0.5; }
 
+        /* Transparent frame; each shot floats at its own aspect, centered. */
         .shot-carousel__viewport {
             position: relative; z-index: 1;
-            aspect-ratio: 1600 / 1122;
-            background: var(--bg);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 26px 55px -20px rgba(0, 0, 0, 0.65);
+            aspect-ratio: 3 / 2;
+            display: grid;
+            place-items: center;
         }
         .shot-carousel__slide {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            object-fit: contain;
+            grid-area: 1 / 1;
+            max-width: 100%; max-height: 100%;
+            width: auto; height: auto;
+            border-radius: 12px;
+            /* faint glass edge + soft macOS-style drop shadow (no solid box) */
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.06),
+                0 2px 6px rgba(0, 0, 0, 0.4),
+                0 24px 55px -14px rgba(0, 0, 0, 0.7);
             opacity: 0;
-            transform: scale(1.018);
+            transform: scale(1.015);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .shot-carousel__slide.is-active { opacity: 1; transform: scale(1); }
@@ -967,9 +972,9 @@
                 </div>
                 <div class="shot-carousel__viewport">
                     <img class="shot-carousel__slide is-active" src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
-                    <img class="shot-carousel__slide" src="images/music-mode.jpg" alt="Corvus Player music mode showing an album-colored audio spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
-                    <img class="shot-carousel__slide" src="images/music-playlist.jpg" alt="Corvus Player music mode with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
-                    <img class="shot-carousel__slide" src="images/music-library.jpg" alt="Corvus Player playing a Drake track with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-mode.jpg" alt="Corvus Player music mode showing an album-colored audio spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-playlist.jpg" alt="Corvus Player music mode with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-library.jpg" alt="Corvus Player playing a Drake track with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
                 </div>
                 <button class="shot-carousel__arrow shot-carousel__arrow--prev" type="button" aria-label="Previous screenshot">&#8249;</button>
                 <button class="shot-carousel__arrow shot-carousel__arrow--next" type="button" aria-label="Next screenshot">&#8250;</button>
