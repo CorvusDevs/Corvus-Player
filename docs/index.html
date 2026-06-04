@@ -188,6 +188,53 @@
             height: auto;
         }
 
+        /* screenshot carousel (2026-06-03) */
+        .shot-carousel { position: relative; }
+        .shot-carousel__viewport {
+            position: relative;
+            aspect-ratio: 1600 / 1122;
+            background: var(--bg);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .shot-carousel__slide {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        .shot-carousel__slide.is-active { opacity: 1; }
+        .shot-carousel__arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 42px; height: 42px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(17, 17, 20, 0.55); border: 1px solid var(--border);
+            color: var(--text); font-size: 20px; line-height: 1; cursor: pointer;
+            -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+            opacity: 0; transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+        }
+        .shot-carousel:hover .shot-carousel__arrow,
+        .shot-carousel__arrow:focus-visible { opacity: 1; }
+        .shot-carousel__arrow:hover { background: var(--accent); border-color: var(--accent); }
+        .shot-carousel__arrow--prev { left: 14px; }
+        .shot-carousel__arrow--next { right: 14px; }
+        .shot-carousel__dots { display: flex; justify-content: center; gap: 9px; margin-top: 18px; }
+        .shot-carousel__dot {
+            width: 9px; height: 9px; border-radius: 50%; padding: 0;
+            border: none; background: var(--border); cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .shot-carousel__dot.is-active { background: var(--accent); transform: scale(1.2); }
+        .shot-carousel__dot:hover { background: var(--accent-light); }
+        @media (max-width: 768px) {
+            .shot-carousel__arrow { opacity: 1; width: 36px; height: 36px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .shot-carousel__slide { transition: none; }
+        }
+
         .section-label {
             font-size: 13px; font-weight: 600;
             text-transform: uppercase; letter-spacing: 1.5px;
@@ -885,7 +932,16 @@
         <span class="hero-free" data-i18n="hero_free">Free forever &middot; No ads, no tracking</span> <span class="hero-free">&middot; macOS 14.0+ &middot; Apple Silicon</span>
 
         <div class="hero-showcase">
-            <img src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
+            <div class="shot-carousel" data-interval="5000" tabindex="0" aria-roledescription="carousel" aria-label="Corvus Player screenshots">
+                <div class="shot-carousel__viewport">
+                    <img class="shot-carousel__slide is-active" src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-mode.jpg" alt="Corvus Player music mode showing an album-colored audio spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-playlist.jpg" alt="Corvus Player music mode with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
+                </div>
+                <button class="shot-carousel__arrow shot-carousel__arrow--prev" type="button" aria-label="Previous screenshot">&#8249;</button>
+                <button class="shot-carousel__arrow shot-carousel__arrow--next" type="button" aria-label="Next screenshot">&#8250;</button>
+                <div class="shot-carousel__dots" role="tablist" aria-label="Choose screenshot"></div>
+            </div>
         </div>
     </section>
 
@@ -1465,5 +1521,60 @@
 })();
 
     </script><!-- End Cloudflare Web Analytics -->
+    <script>
+    // Screenshot carousel: crossfade, autoplay (paused on hover/focus + reduced-motion),
+    // dots, arrows, keyboard, and touch swipe. Vanilla, no dependencies.
+    (function () {
+        var c = document.querySelector('.shot-carousel');
+        if (!c) return;
+        var slides = Array.prototype.slice.call(c.querySelectorAll('.shot-carousel__slide'));
+        if (slides.length < 2) return;
+        var dotsWrap = c.querySelector('.shot-carousel__dots');
+        var interval = parseInt(c.getAttribute('data-interval'), 10) || 5000;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var i = 0, timer = null;
+        var dots = slides.map(function (_, n) {
+            var b = document.createElement('button');
+            b.className = 'shot-carousel__dot' + (n === 0 ? ' is-active' : '');
+            b.type = 'button';
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', 'Screenshot ' + (n + 1));
+            b.addEventListener('click', function () { go(n, true); });
+            dotsWrap.appendChild(b);
+            return b;
+        });
+        function go(n, manual) {
+            i = (n + slides.length) % slides.length;
+            slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+            dots.forEach(function (d, k) {
+                d.classList.toggle('is-active', k === i);
+                d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+            });
+            if (manual) restart();
+        }
+        function start() { if (!reduce && !timer) timer = setInterval(function () { go(i + 1); }, interval); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        function restart() { stop(); start(); }
+        c.querySelector('.shot-carousel__arrow--next').addEventListener('click', function () { go(i + 1, true); });
+        c.querySelector('.shot-carousel__arrow--prev').addEventListener('click', function () { go(i - 1, true); });
+        c.addEventListener('mouseenter', stop);
+        c.addEventListener('mouseleave', start);
+        c.addEventListener('focusin', stop);
+        c.addEventListener('focusout', start);
+        c.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight') { go(i + 1, true); e.preventDefault(); }
+            else if (e.key === 'ArrowLeft') { go(i - 1, true); e.preventDefault(); }
+        });
+        var x0 = null;
+        c.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+        c.addEventListener('touchend', function (e) {
+            if (x0 === null) return;
+            var dx = e.changedTouches[0].clientX - x0;
+            if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1), true);
+            x0 = null;
+        });
+        start();
+    })();
+    </script>
 </body>
 </html>
