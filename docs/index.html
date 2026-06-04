@@ -188,51 +188,77 @@
             height: auto;
         }
 
-        /* screenshot carousel (2026-06-03) */
-        .shot-carousel { position: relative; }
+        /* screenshot carousel (2026-06-03), borderless, ambient depth */
+        .shot-carousel { position: relative; isolation: isolate; }
+
+        /* Ambient colored bloom of the active shot, bleeding out behind the
+           card. Gives depth + a soft halo, echoing the app's album-blur. */
+        .shot-carousel__glow {
+            position: absolute; inset: -8% -6% -16%;
+            z-index: 0; pointer-events: none;
+        }
+        .shot-carousel__bloom {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transform: scale(1.12);
+            filter: blur(55px) saturate(1.4);
+            opacity: 0;
+            transition: opacity 0.9s ease;
+            -webkit-mask: radial-gradient(ellipse 70% 68% at 50% 52%, #000 38%, transparent 100%);
+                    mask: radial-gradient(ellipse 70% 68% at 50% 52%, #000 38%, transparent 100%);
+        }
+        .shot-carousel__bloom.is-active { opacity: 0.5; }
+
         .shot-carousel__viewport {
-            position: relative;
+            position: relative; z-index: 1;
             aspect-ratio: 1600 / 1122;
             background: var(--bg);
-            border-radius: 14px;
+            border-radius: 18px;
             overflow: hidden;
-            border: 1px solid var(--border);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 26px 55px -20px rgba(0, 0, 0, 0.65);
         }
         .shot-carousel__slide {
             position: absolute; inset: 0;
             width: 100%; height: 100%;
             object-fit: contain;
             opacity: 0;
-            transition: opacity 0.7s ease;
+            transform: scale(1.018);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .shot-carousel__slide.is-active { opacity: 1; }
+        .shot-carousel__slide.is-active { opacity: 1; transform: scale(1); }
+
         .shot-carousel__arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
-            width: 42px; height: 42px; border-radius: 50%;
+            z-index: 2;
+            width: 44px; height: 44px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            background: rgba(17, 17, 20, 0.55); border: 1px solid var(--border);
+            background: rgba(17, 17, 20, 0.5); border: 1px solid rgba(255, 255, 255, 0.12);
             color: var(--text); font-size: 20px; line-height: 1; cursor: pointer;
-            -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-            opacity: 0; transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+            -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            opacity: 0; transition: opacity 0.25s, background 0.2s, border-color 0.2s, transform 0.2s;
         }
         .shot-carousel:hover .shot-carousel__arrow,
         .shot-carousel__arrow:focus-visible { opacity: 1; }
         .shot-carousel__arrow:hover { background: var(--accent); border-color: var(--accent); }
-        .shot-carousel__arrow--prev { left: 14px; }
-        .shot-carousel__arrow--next { right: 14px; }
-        .shot-carousel__dots { display: flex; justify-content: center; gap: 9px; margin-top: 18px; }
+        .shot-carousel__arrow--prev { left: 16px; }
+        .shot-carousel__arrow--prev:hover { transform: translateY(-50%) translateX(-2px); }
+        .shot-carousel__arrow--next { right: 16px; }
+        .shot-carousel__arrow--next:hover { transform: translateY(-50%) translateX(2px); }
+
+        .shot-carousel__dots { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
         .shot-carousel__dot {
-            width: 9px; height: 9px; border-radius: 50%; padding: 0;
-            border: none; background: var(--border); cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            width: 8px; height: 8px; border-radius: 50%; padding: 0;
+            border: none; background: rgba(255, 255, 255, 0.18); cursor: pointer;
+            transition: width 0.3s, background 0.3s, border-radius 0.3s;
         }
-        .shot-carousel__dot.is-active { background: var(--accent); transform: scale(1.2); }
-        .shot-carousel__dot:hover { background: var(--accent-light); }
+        .shot-carousel__dot.is-active { width: 22px; border-radius: 4px; background: var(--accent); }
+        .shot-carousel__dot:hover { background: rgba(255, 255, 255, 0.4); }
         @media (max-width: 768px) {
-            .shot-carousel__arrow { opacity: 1; width: 36px; height: 36px; }
+            .shot-carousel__arrow { opacity: 1; width: 38px; height: 38px; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .shot-carousel__slide { transition: none; }
+            .shot-carousel__slide, .shot-carousel__bloom { transition: opacity 0.3s ease; transform: none; }
         }
 
         .section-label {
@@ -933,10 +959,17 @@
 
         <div class="hero-showcase">
             <div class="shot-carousel" data-interval="5000" tabindex="0" aria-roledescription="carousel" aria-label="Corvus Player screenshots">
+                <div class="shot-carousel__glow" aria-hidden="true">
+                    <img class="shot-carousel__bloom is-active" src="images/hero.jpg" alt="" loading="eager" decoding="async">
+                    <img class="shot-carousel__bloom" src="images/music-mode.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="shot-carousel__bloom" src="images/music-playlist.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="shot-carousel__bloom" src="images/music-library.jpg" alt="" loading="lazy" decoding="async">
+                </div>
                 <div class="shot-carousel__viewport">
                     <img class="shot-carousel__slide is-active" src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
                     <img class="shot-carousel__slide" src="images/music-mode.jpg" alt="Corvus Player music mode showing an album-colored audio spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
                     <img class="shot-carousel__slide" src="images/music-playlist.jpg" alt="Corvus Player music mode with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-library.jpg" alt="Corvus Player playing a Drake track with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1600" height="1122" decoding="async">
                 </div>
                 <button class="shot-carousel__arrow shot-carousel__arrow--prev" type="button" aria-label="Previous screenshot">&#8249;</button>
                 <button class="shot-carousel__arrow shot-carousel__arrow--next" type="button" aria-label="Next screenshot">&#8250;</button>
@@ -1529,6 +1562,7 @@
         if (!c) return;
         var slides = Array.prototype.slice.call(c.querySelectorAll('.shot-carousel__slide'));
         if (slides.length < 2) return;
+        var blooms = Array.prototype.slice.call(c.querySelectorAll('.shot-carousel__bloom'));
         var dotsWrap = c.querySelector('.shot-carousel__dots');
         var interval = parseInt(c.getAttribute('data-interval'), 10) || 5000;
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1546,6 +1580,7 @@
         function go(n, manual) {
             i = (n + slides.length) % slides.length;
             slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+            blooms.forEach(function (b, k) { b.classList.toggle('is-active', k === i); });
             dots.forEach(function (d, k) {
                 d.classList.toggle('is-active', k === i);
                 d.setAttribute('aria-selected', k === i ? 'true' : 'false');
