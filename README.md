@@ -62,6 +62,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 - **200+ settings.** Obsessively customizable playback, video, audio, subtitle, and interface options. Searchable across every tab.
 - **Best-in-class subtitles.** Auto-load, online search via OpenSubtitles, SDH support, dual tracks, full ASS/SSA styling.
 - **Music mode.** Dedicated UI with album art display, audio visualizer, gapless playback, ReplayGain.
+- **Synced lyrics.** Karaoke-style, time-synced lyrics in music mode. Fetched automatically from LRClib or loaded from local .lrc files, with the active line highlighted and click-to-jump on any line.
 - **Playlists & library.** Drag-and-drop playlists with thumbnails, media library with folder scanning, session persistence.
 - **Picture-in-picture.** Compact floating mini player that stays on top.
 - **Seekbar thumbnails.** Hover over the seekbar to preview frames at any moment.
