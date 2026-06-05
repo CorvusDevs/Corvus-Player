@@ -963,12 +963,14 @@
                     <img class="shot-carousel__bloom" src="images/music-mode.jpg" alt="" loading="lazy" decoding="async">
                     <img class="shot-carousel__bloom" src="images/music-playlist.jpg" alt="" loading="lazy" decoding="async">
                     <img class="shot-carousel__bloom" src="images/music-library.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="shot-carousel__bloom" src="images/music-lyrics.jpg" alt="" loading="lazy" decoding="async">
                 </div>
                 <div class="shot-carousel__viewport">
                     <img class="shot-carousel__slide is-active" src="images/hero.jpg" alt="Corvus Player playing Big Buck Bunny with floating controls" loading="eager" fetchpriority="high" width="1621" height="950" decoding="async">
                     <img class="shot-carousel__slide" src="images/music-mode.jpg" alt="Corvus Player music mode showing an album-colored audio spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
                     <img class="shot-carousel__slide" src="images/music-playlist.jpg" alt="Corvus Player music mode with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
                     <img class="shot-carousel__slide" src="images/music-library.jpg" alt="Corvus Player playing a Drake track with the playlist sidebar and a cyan spectrum visualizer" loading="lazy" width="1500" height="1001" decoding="async">
+                    <img class="shot-carousel__slide" src="images/music-lyrics.jpg" alt="Corvus Player music mode showing time-synced lyrics for Under Pressure with an album-colored spectrum visualizer" loading="lazy" width="1500" height="1000" decoding="async">
                 </div>
                 <button class="shot-carousel__arrow shot-carousel__arrow--prev" type="button" aria-label="Previous screenshot">&#8249;</button>
                 <button class="shot-carousel__arrow shot-carousel__arrow--next" type="button" aria-label="Next screenshot">&#8250;</button>
@@ -1569,6 +1571,22 @@
         var slides = Array.prototype.slice.call(c.querySelectorAll('.shot-carousel__slide'));
         if (slides.length < 2) return;
         var blooms = Array.prototype.slice.call(c.querySelectorAll('.shot-carousel__bloom'));
+        // Randomize the order on each visit. Slides and their matching bloom
+        // backdrops are permuted together so each pairing stays aligned.
+        (function () {
+            var ord = slides.map(function (_, n) { return n; });
+            for (var j = ord.length - 1; j > 0; j--) {
+                var k = Math.floor(Math.random() * (j + 1));
+                var t = ord[j]; ord[j] = ord[k]; ord[k] = t;
+            }
+            slides = ord.map(function (n) { return slides[n]; });
+            blooms = ord.map(function (n) { return blooms[n]; });
+            // Whatever lands first loads eagerly so the carousel isn't blank on arrival.
+            slides[0].setAttribute('loading', 'eager');
+            slides[0].setAttribute('fetchpriority', 'high');
+            slides.forEach(function (s, k) { s.classList.toggle('is-active', k === 0); });
+            blooms.forEach(function (b, k) { b.classList.toggle('is-active', k === 0); });
+        })();
         var dotsWrap = c.querySelector('.shot-carousel__dots');
         var interval = parseInt(c.getAttribute('data-interval'), 10) || 5000;
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
