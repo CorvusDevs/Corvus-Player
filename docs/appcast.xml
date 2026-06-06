@@ -244,5 +244,30 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.4.0</title>
+            <description><![CDATA[
+                <h3>More features, now free</h3>
+                <ul>
+                    <li>The audio visualizer, mini player, screenshots, and audio passthrough are now free for everyone. Corvus Pro keeps the power-user extras: the full preset system, custom EQ and HDR presets, custom themes, the advanced visualizer styles, and the command-line tool.</li>
+                </ul>
+                <h3>Improvements</h3>
+                <ul>
+                    <li>The Dock right-click menu now puts Play, Pause, and Stop at the bottom, closest to the Dock, so they are quicker to reach.</li>
+                    <li>Corvus Player now shows release notes the first time you open it after an update.</li>
+                    <li>The Pro upgrade and license screens are cleaner; your license key is no longer shown, with simple Apply and Revoke actions.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 06 Jun 2026 01:52:59 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.4.0/Corvus-Player-2.4.0.zip"
+                sparkle:version="13"
+                sparkle:shortVersionString="2.4.0"
+                length="53577703"
+                type="application/octet-stream"
+                sparkle:edSignature="Pl5eZYNdtmNCdQZoge5IPHqvm1eQokAUbr6OVRDMdCI2wF+3oaXiRfF+AMRsovBTR23Od+++KKyPpXHI3C7GDQ=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
