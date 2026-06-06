@@ -215,5 +215,34 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.3.0</title>
+            <description><![CDATA[
+                <h3>Synced lyrics in Music Mode</h3>
+                <ul>
+                    <li>New: karaoke-style, time-synced lyrics in Music Mode. Lyrics are fetched automatically from LRClib or loaded from a local .lrc file next to your track, with the current line highlighted and click-to-jump on any line.</li>
+                    <li>New: an optional audio visualizer can sit below the album art while lyrics are showing. Toggle it in Settings.</li>
+                    <li>New: a refreshed Corvus Player app icon.</li>
+                </ul>
+                <h3>Improvements and fixes</h3>
+                <ul>
+                    <li>Play, pause, and skip from earphones and media keys now work reliably; Corvus Player no longer loses the system Now Playing controls.</li>
+                    <li>The playlist now scrolls to keep the playing track in view, with a smooth glide and room to see what plays next.</li>
+                    <li>Selecting a track from the playlist now starts it from the beginning instead of resuming where it last left off.</li>
+                    <li>Fixed a loading spinner that could get stuck while scrolling a long playlist.</li>
+                    <li>Added a Feedback link to the About page.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 05 Jun 2026 21:42:39 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.3.0/Corvus-Player-2.3.0.zip"
+                sparkle:version="12"
+                sparkle:shortVersionString="2.3.0"
+                length="53528815"
+                type="application/octet-stream"
+                sparkle:edSignature="CLJ+SQo9z+BBhhTIUGGFWj+mhmeaVDkyLFw6zXQTtYt9LBX9odM2hSONpQihaAfK+2DXpS04Sb0Hf9pZbU8fAw=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
