@@ -269,5 +269,24 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.4.1</title>
+            <description><![CDATA[
+                <h3>Fixes</h3>
+                <ul>
+                    <li>Fixed a freeze that could happen when opening several files at once.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 07 Jun 2026 13:01:09 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.4.1/Corvus-Player-2.4.1.zip"
+                sparkle:version="14"
+                sparkle:shortVersionString="2.4.1"
+                length="53579574"
+                type="application/octet-stream"
+                sparkle:edSignature="TQJzJkROajB20Be+DWVOtcWwzBg+tSws5NVM9NV0Af/cDbBgDUzVq2qxfqjFquA2emN8vHoHeMwJOD/WUuodDA=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
