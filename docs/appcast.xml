@@ -288,5 +288,24 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.4.2</title>
+            <description><![CDATA[
+                <h3>Fixes</h3>
+                <ul>
+                    <li>Fixed the player window flickering when opening several files while it was already open.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 07 Jun 2026 18:04:05 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.4.2/Corvus-Player-2.4.2.zip"
+                sparkle:version="15"
+                sparkle:shortVersionString="2.4.2"
+                length="53579798"
+                type="application/octet-stream"
+                sparkle:edSignature="cEXPn0uWkUJtf4vKM4Oc5bt8qgSzZfP05bsKgZhxOLjNklNCoQx1J2dluWpl1bkkpGPgoSt+stRcIzxCY2ELDg=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
