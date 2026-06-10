@@ -329,5 +329,28 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.6.0</title>
+            <description><![CDATA[
+                <h3>New in 2.6.0</h3>
+                <ul>
+                    <li>Night mode evens out loud and quiet parts so late-night dialog stays clear.</li>
+                    <li>Pinch to zoom and pan into the video, with an Up Next queue to line up what plays next.</li>
+                    <li>A menu bar mini player, plus Shortcuts, Spotlight, and Focus filter support.</li>
+                    <li>Find subtitles from SubDL as well as OpenSubtitles, with one-tap styling presets.</li>
+                    <li>Streams now cache to disk, so jumping back is instant.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 10 Jun 2026 20:09:06 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.6.0/Corvus-Player-2.6.0.zip"
+                sparkle:version="17"
+                sparkle:shortVersionString="2.6.0"
+                length="54459234"
+                type="application/octet-stream"
+                sparkle:edSignature="FpaZLcrKQFflds5lc4lw26U4FQ3BUHYsVIUDDmia/yGsf/pxpO7gOE092CCq6vVfBdUd3jg1ZnLNz0tTgi/DCg=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>

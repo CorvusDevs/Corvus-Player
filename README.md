@@ -60,7 +60,10 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 - **Stream anything.** Full yt-dlp integration for YouTube, Twitch, SoundCloud, and hundreds of sites. SponsorBlock, browser cookies, quality switcher.
 - **HDR & EDR.** Extended dynamic range output for HDR content; accurate tone mapping presets for SDR.
 - **200+ settings.** Obsessively customizable playback, video, audio, subtitle, and interface options. Searchable across every tab.
-- **Best-in-class subtitles.** Auto-load, online search via OpenSubtitles, SDH support, dual tracks, full ASS/SSA styling.
+- **Best-in-class subtitles.** Auto-load, online search via OpenSubtitles and SubDL, one-tap styling presets, SDH support, dual tracks, full ASS/SSA styling.
+- **Night mode.** Dynamic-range compression that evens out loud and quiet passages so late-night dialogue stays clear without sudden blasts.
+- **Up Next queue.** Line up what plays next without reordering your playlist, with pinch-to-zoom and pan, plus on-disk stream caching for instant backward seeks.
+- **Deep macOS integration.** A menu bar mini player, Shortcuts and App Intents, Spotlight library indexing, and a Focus filter, alongside Now Playing and media-key support.
 - **Music mode.** Dedicated UI with album art display, audio visualizer, gapless playback, ReplayGain.
 - **Audiophile equalizer.** A dedicated Equalizer tab with a 10-band parametric EQ, adjustable per-band width, and 18 saveable presets. Device Equalization brings AutoEQ corrections for 6,000+ headphones and earphones, matched to your output device automatically, plus crossfeed, loudness compensation, channel balance, mono, and per-device EQ memory.
 - **Synced lyrics.** Karaoke-style, time-synced lyrics in music mode. Fetched automatically from LRClib or loaded from local .lrc files, with the active line highlighted and click-to-jump on any line.
