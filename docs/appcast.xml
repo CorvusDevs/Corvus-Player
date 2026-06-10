@@ -307,5 +307,27 @@
             />
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
         </item>
+        <item>
+            <title>Version 2.5.0</title>
+            <description><![CDATA[
+                <h3>New: a dedicated Equalizer</h3>
+                <ul>
+                    <li>A new Equalizer tab with a 10-band equalizer, adjustable per-band width, and saveable presets.</li>
+                    <li>Device Equalization: AutoEQ corrections for 6,000+ headphones and earphones, matched to your output device automatically.</li>
+                    <li>Sound shaping: crossfeed, loudness compensation, channel balance, and mono.</li>
+                    <li>Import, export, and per-device EQ memory, plus an Equalizer menu with keyboard shortcuts.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 10 Jun 2026 09:51:05 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.5.0/Corvus-Player-2.5.0.zip"
+                sparkle:version="16"
+                sparkle:shortVersionString="2.5.0"
+                length="54354726"
+                type="application/octet-stream"
+                sparkle:edSignature="5GnryPe+xYwMvyLuocAxg9yTo2AfMHgUsyLwpot4KWSecWz5eoLAY88BQdwlTxH319Ru5QOsShnzWHuGpgAUCg=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>
