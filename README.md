@@ -76,6 +76,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 - **mpv under the hood.** Built on libmpv for battle-tested, high-performance media playback.
 - **Truly native macOS.** SwiftUI + AppKit, not an Electron wrapper. Quick Look extensions, Dock menus, system integration that feels Apple-built.
 - **36 languages.** Fully localized with searchable settings in every language. RTL support for Arabic and Hebrew.
+- **Built for accessibility.** Full VoiceOver labeling of the playback controls, with support for Reduce Motion, Increase Contrast, and Reduce Transparency. Optional trackpad haptics.
 
 ## What makes Corvus Player special
 

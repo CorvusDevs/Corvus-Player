@@ -6,6 +6,27 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.7.0</title>
+            <description><![CDATA[
+                <h3>New in 2.7.0</h3>
+                <ul>
+                    <li>A fresh new app icon.</li>
+                    <li>Built for accessibility: full VoiceOver labels, plus Reduce Motion, Increase Contrast, and Reduce Transparency support.</li>
+                    <li>Optional trackpad haptics.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 14 Jun 2026 01:52:55 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.7.0/Corvus-Player-2.7.0.zip"
+                sparkle:version="18"
+                sparkle:shortVersionString="2.7.0"
+                length="51996469"
+                type="application/octet-stream"
+                sparkle:edSignature="8JRjddXL/Jd/ZnpjhvxXQ0Bwkc36nPicPz6DM2+Z3ojD24db1FAYJlWpnq5UEvIMnA0gXGvG818QnxJ6XuOrCg=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.0.3</title>
             <description><![CDATA[
                 <ul>
