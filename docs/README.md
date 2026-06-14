@@ -3,7 +3,7 @@
   <h1>Corvus Player</h1>
   <p><strong>The most powerful and customizable media player for macOS</strong></p>
   <p>
-    <img src="https://img.shields.io/badge/macOS-14.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS 14.0+">
+    <img src="https://img.shields.io/badge/macOS-15.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS 15.0+">
     <img src="https://img.shields.io/badge/Languages-28-4CAF50?style=flat-square" alt="28 Languages">
   </p>
   <p>
