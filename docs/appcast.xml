@@ -6,6 +6,25 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.7.1</title>
+            <description><![CDATA[
+                <h3>New in 2.7.1</h3>
+                <ul>
+                    <li>Fixes the app failing to open on macOS 15 through 25 (a packaging issue with the bundled media engine). It now runs correctly on every supported macOS version.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 29 Jun 2026 10:29:42 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.7.1/Corvus-Player-2.7.1.zip"
+                sparkle:version="19"
+                sparkle:shortVersionString="2.7.1"
+                length="47760665"
+                type="application/octet-stream"
+                sparkle:edSignature="TkQxsRx6/5UxZV7CpcuMeY/auxLg9SfOMRAmcFEWIjzWELy2WTmEiob9x8F89bn2MMnGeaPpN/Fh7i527HrPCg=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.7.0</title>
             <description><![CDATA[
                 <h3>New in 2.7.0</h3>

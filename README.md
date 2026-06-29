@@ -104,6 +104,12 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 
 Free forever. No accounts, no analytics, no telemetry, no tracking. Corvus Player makes zero network requests unless you're streaming. License validation happens locally against a Keychain-stored key; no phone-home.
 
+## Open-source notices
+
+Corvus Player is proprietary software. It bundles several open-source libraries, including FFmpeg and mpv, used under the GNU Lesser General Public License v2.1 (LGPL-2.1) with no GPL-licensed components. These libraries are linked dynamically and ship as separate, replaceable files inside the app.
+
+The complete corresponding source for the LGPL libraries (FFmpeg n8.1.2 and mpv v0.41.0, built from their unmodified upstream releases with the configuration noted in the license file) is available on request at corvusdevs@outlook.com. Full per-library license details, including the LGPL-2.1 text, are in [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt).
+
 ## More from CorvusDevs
 
 | | App | Description |
