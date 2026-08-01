@@ -6,6 +6,26 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.7.2</title>
+            <description><![CDATA[
+                <h3>New in 2.7.2</h3>
+                <ul>
+                    <li>Fixes keyboard shortcuts that use a modifier key. Shift+I (statistics overlay), Shift+M (mini player), Shift+S (screenshot and frame step) and Shift with the arrow keys (30 second seeks) all work again.</li>
+                    <li>Playback statistics can now be toggled from the right-click menu.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 01 Aug 2026 02:58:15 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.7.2/Corvus-Player-2.7.2.zip"
+                sparkle:version="20"
+                sparkle:shortVersionString="2.7.2"
+                length="47767176"
+                type="application/octet-stream"
+                sparkle:edSignature="AOrJmdgUYsIjPqlOM630hb9l1C+k2k1sTowHzTBpc0D5JeP/CxkMWK4JL6YSWdt8P2/1iHPmh/t+SRo8CreoDw=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.7.1</title>
             <description><![CDATA[
                 <h3>New in 2.7.1</h3>
