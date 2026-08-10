@@ -4,17 +4,29 @@ compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 
 # KV namespace for storing validated licenses
+# WARNING: the id below is a PLACEHOLDER. This file is published to the
+# public repo, so the real KV namespace id is redacted here. Deploying with
+# this file as-is binds a namespace that does not exist and license
+# validation fails for every customer.
+#
+# To deploy, use a config kept OUTSIDE the repo that carries the real id:
+#   npx wrangler versions view <active-version> --name corvus-license
+#     -> shows the real env.LICENSES namespace id
+#   npx wrangler deploy --config /path/outside/repo/deploy.toml
 [[kv_namespaces]]
 binding = "LICENSES"
 id = "REDACTED_KV_ID"
 
-# Cloudflare Email Workers — send transactional emails from your domain
-[[send_email]]
-name = "EMAIL"
-
-# Environment variables (set via `wrangler secret put <NAME>`)
-# PADDLE_WEBHOOK_SECRET  — from Paddle Dashboard > Developer Tools > Notifications
-# PADDLE_API_KEY         — from Paddle Dashboard > Developer Tools > Authentication
+# Secrets (set via `wrangler secret put <NAME>`)
+# PADDLE_WEBHOOK_SECRET  — Paddle Dashboard > Developer Tools > Notifications
+# PADDLE_API_KEY         — Paddle Dashboard > Developer Tools > Authentication
+# RESEND_API_KEY         — resend.com (sender domain: shopa.pro)
+#
+# Why Resend and not Cloudflare Email Workers: the `cloudflare:email`
+# `send_email` binding only delivers to destination addresses pre-verified
+# on the same Cloudflare account. That's fine for internal alerts, but we
+# need to email arbitrary paying customers, so a real ESP (Resend) is
+# required. Full rationale: ~/.claude/skills/paddle-license-worker.md.
 
 [vars]
 FROM_EMAIL = "Corvus Player <noreply@shopa.pro>"
