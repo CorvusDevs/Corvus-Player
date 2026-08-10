@@ -43,7 +43,7 @@
 
 ---
 
-Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, real-time GLSL shaders, full streaming via yt-dlp, 200+ settings, and zero tracking. Free forever, with an optional Pro upgrade.
+Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, real-time GLSL shaders, full streaming via yt-dlp, 200+ settings, and zero tracking. Free forever, with an optional Supporter upgrade that funds development.
 
 ## Contents
 

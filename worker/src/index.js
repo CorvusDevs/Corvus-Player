@@ -1,6 +1,3 @@
-import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
-
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);
@@ -67,8 +64,10 @@ async function handleWebhook(request, env) {
             })
         );
 
-        if (email) {
-            await sendLicenseEmail(email, licenseKey, env);
+        if (email && env.RESEND_API_KEY) {
+            await sendLicenseEmail(email, licenseKey, env).catch((err) =>
+                console.error("Email send failed:", err)
+            );
         }
     }
 
@@ -129,29 +128,32 @@ async function verifyPaddleSignature(body, signatureHeader, secret) {
     return computed === h1;
 }
 
-// ─── Email (Cloudflare Email Workers) ───────────────────────────
+// ─── Email (Resend) ──────────────────────────────────────────────
+//
+// MUST use Resend (a real ESP) — NOT Cloudflare Email Workers
+// (`cloudflare:email` + `env.EMAIL.send()`). The CF binding only delivers
+// to destination addresses pre-verified on the same Cloudflare account,
+// so it silently fails for arbitrary paying customers. See
+// ~/.claude/skills/paddle-license-worker.md for the full rationale.
 
 async function sendLicenseEmail(to, licenseKey, env) {
-    try {
-        const msg = createMimeMessage();
-        msg.setSender({ name: "Corvus Player", addr: "noreply@shopa.pro" });
-        msg.setRecipient(to);
-        msg.setSubject("Your Corvus Player Pro License Key");
-
-        msg.addMessage({
-            contentType: "text/html",
-            data: buildEmailHtml(licenseKey),
-        });
-
-        const message = new EmailMessage(
-            "noreply@shopa.pro",
-            to,
-            msg.asRaw()
-        );
-
-        await env.EMAIL.send(message);
-    } catch (err) {
-        console.error("Email send failed:", err);
+    const from = env.FROM_EMAIL || "Corvus Player <noreply@shopa.pro>";
+    const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            from,
+            to: [to],
+            subject: "Your Corvus Player Supporter License Key",
+            html: buildEmailHtml(licenseKey),
+        }),
+    });
+    if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(`Resend ${res.status}: ${text}`);
     }
 }
 
@@ -165,7 +167,7 @@ function buildEmailHtml(licenseKey) {
 <table width="480" cellpadding="0" cellspacing="0" style="background:#111114;border-radius:16px;border:1px solid #252530;overflow:hidden">
     <tr><td style="padding:40px 32px 24px;text-align:center">
         <div style="font-size:40px;margin-bottom:16px">🎬</div>
-        <h1 style="color:#e8e8ed;font-size:24px;font-weight:700;margin:0 0 8px">Welcome to Corvus Pro</h1>
+        <h1 style="color:#e8e8ed;font-size:24px;font-weight:700;margin:0 0 8px">Thank you for supporting Corvus Player</h1>
         <p style="color:#7c7c84;font-size:15px;margin:0">Thank you for your purchase!</p>
     </td></tr>
     <tr><td style="padding:0 32px 32px">

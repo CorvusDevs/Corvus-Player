@@ -6,6 +6,26 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.7.3</title>
+            <description><![CDATA[
+                <h3>New in 2.7.3</h3>
+                <ul>
+                    <li>Corvus Pro is now the Supporter upgrade. Same features and same price, framed around funding development.</li>
+                    <li>Fixes custom subtitle colours being applied in the wrong channel order, which could make the text or its outline invisible. If you had picked a custom subtitle colour, set it again once.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 10 Aug 2026 18:05:44 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.7.3/Corvus-Player-2.7.3.zip"
+                sparkle:version="21"
+                sparkle:shortVersionString="2.7.3"
+                length="47783713"
+                type="application/octet-stream"
+                sparkle:edSignature="GhFKwhuiaJWRANIKcWDtIhZGe4w3dgEwnlZHjsCWMT4u+WXs0+CI1t/zUYtFKCo7GnYbIr7z01lLuiM/HmdFDw=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.7.2</title>
             <description><![CDATA[
                 <h3>New in 2.7.2</h3>
