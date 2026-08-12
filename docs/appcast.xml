@@ -6,6 +6,29 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.8.0</title>
+            <description><![CDATA[
+                <h3>New in 2.8.0</h3>
+                <ul>
+                    <li>A refreshed player and Settings design with clearer controls and richer media artwork.</li>
+                    <li>Online lyrics are now opt-in, with a clear explanation of the track details sent to LRClib.</li>
+                    <li>More reliable streams, Finder thumbnails, and media extensions for malformed or incomplete files.</li>
+                    <li>Reduced background work during audio monitoring and while Settings are hidden.</li>
+                    <li>Improved VoiceOver labels and help throughout the app.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 11 Aug 2026 23:44:53 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.8.0/Corvus-Player-2.8.0.zip"
+                sparkle:version="22"
+                sparkle:shortVersionString="2.8.0"
+                length="47847332"
+                type="application/octet-stream"
+                sparkle:edSignature="36I49Zw7aEUo56LUP1lHGBr+XIFoK80FcvlFFsG3/lDU7GQRxvyGGWNcOUK/PawLpndnDGjTulSsEZv+ztQCAQ=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.7.3</title>
             <description><![CDATA[
                 <h3>New in 2.7.3</h3>

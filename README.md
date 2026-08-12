@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/github/v/release/CorvusDevs/Corvus-Player?style=flat-square&color=2d7ff9&label=release" alt="Latest release">
   <img src="https://img.shields.io/github/downloads/CorvusDevs/Corvus-Player/total?style=flat-square&color=4CAF50&label=downloads" alt="Total downloads">
   <img src="https://img.shields.io/badge/macOS-15.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS 15.0+">
-  <img src="https://img.shields.io/badge/Apple%20Silicon%20%2B%20Intel-supported-444?style=flat-square" alt="Apple Silicon + Intel">
+  <img src="https://img.shields.io/badge/Apple%20Silicon-supported-444?style=flat-square&logo=apple&logoColor=white" alt="Apple Silicon">
 </p>
 
 <p>
@@ -66,7 +66,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 - **Deep macOS integration.** A menu bar mini player, Shortcuts and App Intents, Spotlight library indexing, and a Focus filter, alongside Now Playing and media-key support.
 - **Music mode.** Dedicated UI with album art display, audio visualizer, gapless playback, ReplayGain.
 - **Audiophile equalizer.** A dedicated Equalizer tab with a 10-band parametric EQ, adjustable per-band width, and 18 saveable presets. Device Equalization brings AutoEQ corrections for 6,000+ headphones and earphones, matched to your output device automatically, plus crossfeed, loudness compensation, channel balance, mono, and per-device EQ memory.
-- **Synced lyrics.** Karaoke-style, time-synced lyrics in music mode. Fetched automatically from LRClib or loaded from local .lrc files, with the active line highlighted and click-to-jump on any line.
+- **Synced lyrics.** Karaoke-style, time-synced lyrics in music mode. Fetch them from LRClib manually or enable automatic lookup, or load local .lrc files, with the active line highlighted and click-to-jump on any line.
 - **Playlists & library.** Drag-and-drop playlists with thumbnails, media library with folder scanning, session persistence.
 - **Picture-in-picture.** Compact floating mini player that stays on top.
 - **Seekbar thumbnails.** Hover over the seekbar to preview frames at any moment.
@@ -94,7 +94,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 
 🎬 **Streaming without the browser.** Paste any URL: YouTube, Twitch, SoundCloud, hundreds of sites via yt-dlp. SponsorBlock, browser-cookie auth, quality switcher, subtitle fetching all built in.
 
-🛡️ **Built for privacy.** Zero accounts, zero telemetry, zero analytics. License validation happens locally against a Keychain-stored key. The only network calls Corvus Player makes are the ones you ask for.
+🛡️ **Built for privacy.** Zero accounts, zero telemetry, zero analytics. Corvus Player contacts the update feed when automatic update checks are enabled. Streaming, online subtitles, optional automatic lyrics lookup, and license activation contact their named services only when those features are used.
 
 ## Built with
 
@@ -102,7 +102,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 
 ## Privacy
 
-Free forever. No accounts, no analytics, no telemetry, no tracking. Corvus Player makes zero network requests unless you're streaming. License validation happens locally against a Keychain-stored key; no phone-home.
+Free forever. No accounts, analytics, telemetry, or tracking. Automatic update checks are enabled by default and can be disabled in Settings. Streaming, online subtitles, optional automatic lyrics lookup, and one-time license activation contact their named services when used. Activated licenses are then stored in the macOS Keychain.
 
 ## Open-source notices
 

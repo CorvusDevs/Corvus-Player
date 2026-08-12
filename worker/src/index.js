@@ -16,8 +16,8 @@ export default {
 
             if (url.pathname === "/webhook" && request.method === "POST") {
                 response = await handleWebhook(request, env);
-            } else if (url.pathname === "/verify" && request.method === "GET") {
-                response = await handleVerify(url, env);
+            } else if (url.pathname === "/verify" && (request.method === "GET" || request.method === "POST")) {
+                response = await handleVerify(request, url, env);
             } else if (url.pathname === "/health") {
                 response = json({ status: "ok" });
             } else {
@@ -48,27 +48,63 @@ async function handleWebhook(request, env) {
 
     if (event.event_type === "transaction.completed") {
         const txn = event.data;
+
+        // Paddle delivers every notification to every destination; without
+        // this a purchase of any other app mints a licence here.
+        if (!isOurProduct(txn, env.PRODUCT_ID)) {
+            return json({ received: true, ignored: "different product" });
+        }
+
         const licenseKey = txn.id;
-        const email = txn.checkout?.customer_email
+
+        // Paddle's `transaction.completed` payload carries `customer_id`, NOT
+        // the buyer's email: `checkout.customer_email` is null and there is no
+        // nested `customer` object, so all three lookups below return nothing on
+        // a real webhook. Without the API lookup the licence is stored with
+        // `email: null` and silently emailed to nobody.
+        //
+        // Same defect found and fixed in the Ekual worker on 2026-08-10, where
+        // it had gone unnoticed for months and cost real customers their keys.
+        let email = txn.checkout?.customer_email
             || txn.customer?.email
             || extractEmailFromCustomData(txn);
+
+        if (!email && txn.customer_id) {
+            email = await fetchCustomerEmail(txn.customer_id, env.PADDLE_API_KEY);
+        }
+
+        // Delivery outcome is persisted so an undelivered licence is auditable
+        // instead of invisible.
+        let emailStatus;
+        if (!email) {
+            emailStatus = "no_email_resolved";
+            console.error(
+                `LICENSE EMAIL NOT SENT: no email resolved for transaction ${licenseKey} (customer ${txn.customer_id || "unknown"}). Is PADDLE_API_KEY set on this worker?`
+            );
+        } else if (!env.RESEND_API_KEY) {
+            emailStatus = "no_resend_key";
+            console.error(`LICENSE EMAIL NOT SENT: RESEND_API_KEY missing (transaction ${licenseKey})`);
+        } else {
+            try {
+                await sendLicenseEmail(email, licenseKey, env);
+                emailStatus = "sent";
+            } catch (err) {
+                emailStatus = "send_failed";
+                console.error(`LICENSE EMAIL SEND FAILED for ${licenseKey}:`, err);
+            }
+        }
 
         await env.LICENSES.put(
             licenseKey,
             JSON.stringify({
                 email: email || null,
+                emailStatus,
                 transactionId: txn.id,
                 customerId: txn.customer_id || null,
                 productId: txn.items?.[0]?.price?.product_id || null,
                 createdAt: new Date().toISOString(),
             })
         );
-
-        if (email && env.RESEND_API_KEY) {
-            await sendLicenseEmail(email, licenseKey, env).catch((err) =>
-                console.error("Email send failed:", err)
-            );
-        }
     }
 
     return json({ received: true });
@@ -76,15 +112,85 @@ async function handleWebhook(request, env) {
 
 // ─── License Verification ────────────────────────────────────────
 
-async function handleVerify(url, env) {
-    const key = url.searchParams.get("key");
-    if (!key) return json({ valid: false, error: "Missing key parameter" }, 400);
+async function handleVerify(request, url, env) {
+    // POST keeps license keys out of URLs and infrastructure access logs.
+    // GET remains temporarily supported for older app versions.
+    let key;
+    if (request.method === "POST") {
+        const contentType = request.headers.get("Content-Type") || "";
+        if (!contentType.toLowerCase().startsWith("application/json")) {
+            return json({ valid: false, error: "Expected application/json" }, 415);
+        }
+        const body = await request.json().catch(() => null);
+        key = typeof body?.key === "string" ? body.key : null;
+    } else {
+        key = url.searchParams.get("key");
+    }
+    if (!key) return json({ valid: false, error: "Missing key" }, 400);
 
     const stored = await env.LICENSES.get(key);
     if (!stored) return json({ valid: false }, 404);
 
     const data = JSON.parse(stored);
     return json({ valid: true, email: maskEmail(data.email) });
+}
+
+
+// ─── Product Scoping ─────────────────────────────────────────────
+
+/**
+ * True when this transaction is for the product THIS worker serves.
+ *
+ * Paddle delivers EVERY notification to EVERY configured destination, so without
+ * this a purchase of any CorvusDevs app mints a valid licence in every other
+ * app's store. Checks every line item, not just the first.
+ *
+ * Returns true when `expectedProductId` is unset, so a missing config var
+ * degrades to the old behaviour rather than refusing to issue licences at all.
+ */
+function isOurProduct(txn, expectedProductId) {
+    if (!expectedProductId) {
+        console.error(
+            "PRODUCT_ID is not configured on this worker, cannot scope licences to a product, so a purchase of ANY product will mint a licence here. Set it in the deploy config [vars]."
+        );
+        return true;
+    }
+    const ids = (txn.items || []).map((i) => i?.price?.product_id).filter(Boolean);
+    return ids.includes(expectedProductId);
+}
+
+// ─── Customer Lookup ─────────────────────────────────────────────
+
+/**
+ * Resolve a customer's email from their Paddle customer_id.
+ *
+ * Required because the webhook payload never carries the email itself. Returns
+ * null on any failure; the caller records that rather than throwing, so a lookup
+ * outage can never cost us the licence record itself.
+ */
+async function fetchCustomerEmail(customerId, apiKey) {
+    if (!apiKey) {
+        console.error(
+            "PADDLE_API_KEY is not configured on this worker, cannot resolve customer email. Set it with: wrangler secret put PADDLE_API_KEY"
+        );
+        return null;
+    }
+    try {
+        const res = await fetch(`https://api.paddle.com/customers/${customerId}`, {
+            headers: { Authorization: `Bearer ${apiKey}` },
+        });
+        if (!res.ok) {
+            console.error(
+                `Paddle customer lookup failed for ${customerId}: HTTP ${res.status} ${await res.text()}`
+            );
+            return null;
+        }
+        const body = await res.json();
+        return body?.data?.email || null;
+    } catch (err) {
+        console.error(`Paddle customer lookup threw for ${customerId}:`, err);
+        return null;
+    }
 }
 
 // ─── Paddle Signature Verification ──────────────────────────────
@@ -130,7 +236,7 @@ async function verifyPaddleSignature(body, signatureHeader, secret) {
 
 // ─── Email (Resend) ──────────────────────────────────────────────
 //
-// MUST use Resend (a real ESP) — NOT Cloudflare Email Workers
+// MUST use Resend (a real ESP), NOT Cloudflare Email Workers
 // (`cloudflare:email` + `env.EMAIL.send()`). The CF binding only delivers
 // to destination addresses pre-verified on the same Cloudflare account,
 // so it silently fails for arbitrary paying customers. See
