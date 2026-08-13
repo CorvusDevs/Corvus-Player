@@ -6,6 +6,26 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.8.1</title>
+            <description><![CDATA[
+                <h3>New in 2.8.1</h3>
+                <ul>
+                    <li>Settings panels now have balanced spacing and stay anchored while searching.</li>
+                    <li>Settings search is faster, with lightweight results and category filters in the sidebar.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 12 Aug 2026 23:12:14 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.8.1/Corvus-Player-2.8.1.zip"
+                sparkle:version="23"
+                sparkle:shortVersionString="2.8.1"
+                length="47754479"
+                type="application/octet-stream"
+                sparkle:edSignature="22TWANK0TAXKygkGoioSzbCpzBrpTOzYPXtbFha1e56lIQGk30E5q9IfcXsUFBUP7+sHtMdRzlDSziYuDwxzDQ=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.8.0</title>
             <description><![CDATA[
                 <h3>New in 2.8.0</h3>
