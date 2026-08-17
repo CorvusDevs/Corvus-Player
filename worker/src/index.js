@@ -14,10 +14,12 @@ export default {
         try {
             let response;
 
-            if (url.pathname === "/webhook" && request.method === "POST") {
+            if ((url.pathname === "/webhook" || url.pathname === "/") && request.method === "POST") {
                 response = await handleWebhook(request, env);
             } else if (url.pathname === "/verify" && (request.method === "GET" || request.method === "POST")) {
                 response = await handleVerify(request, url, env);
+            } else if (url.pathname === "/resend" && request.method === "POST") {
+                response = await handleResend(request, env);
             } else if (url.pathname === "/health") {
                 response = json({ status: "ok" });
             } else {
@@ -56,6 +58,10 @@ async function handleWebhook(request, env) {
         }
 
         const licenseKey = txn.id;
+        const existing = await env.LICENSES.get(licenseKey);
+        if (existing && JSON.parse(existing).emailStatus === "sent") {
+            return json({ received: true, duplicate: true });
+        }
 
         // Paddle's `transaction.completed` payload carries `customer_id`, NOT
         // the buyer's email: `checkout.customer_email` is null and there is no
@@ -86,8 +92,22 @@ async function handleWebhook(request, env) {
             console.error(`LICENSE EMAIL NOT SENT: RESEND_API_KEY missing (transaction ${licenseKey})`);
         } else {
             try {
-                await sendLicenseEmail(email, licenseKey, env);
+                const emailProviderId = await sendLicenseEmail(email, licenseKey, env);
                 emailStatus = "sent";
+                await env.LICENSES.put(
+                    licenseKey,
+                    JSON.stringify({
+                        email,
+                        emailStatus,
+                        emailProviderId,
+                        emailedAt: new Date().toISOString(),
+                        transactionId: txn.id,
+                        customerId: txn.customer_id || null,
+                        productId: env.PRODUCT_ID || txn.items?.[0]?.price?.product_id || null,
+                        createdAt: new Date().toISOString(),
+                    })
+                );
+                return json({ received: true });
             } catch (err) {
                 emailStatus = "send_failed";
                 console.error(`LICENSE EMAIL SEND FAILED for ${licenseKey}:`, err);
@@ -101,13 +121,56 @@ async function handleWebhook(request, env) {
                 emailStatus,
                 transactionId: txn.id,
                 customerId: txn.customer_id || null,
-                productId: txn.items?.[0]?.price?.product_id || null,
+                productId: env.PRODUCT_ID || txn.items?.[0]?.price?.product_id || null,
                 createdAt: new Date().toISOString(),
             })
         );
     }
 
     return json({ received: true });
+}
+
+// Customer-support recovery path. The email and key must both match the KV
+// record, and attempts are limited to one per hour.
+async function handleResend(request, env) {
+    const input = await request.json().catch(() => null);
+    const key = typeof input?.key === "string" ? input.key.trim() : "";
+    const email = typeof input?.email === "string" ? input.email.trim().toLowerCase() : "";
+    if (!/^txn_[a-z0-9]+$/.test(key) || !email || !env.RESEND_API_KEY) {
+        return json({ sent: false, error: "Unable to resend" }, 400);
+    }
+
+    const stored = await env.LICENSES.get(key);
+    if (!stored) return json({ sent: false, error: "Unable to resend" }, 404);
+
+    const data = JSON.parse(stored);
+    if (env.PRODUCT_ID && data.productId && data.productId !== env.PRODUCT_ID) {
+        return json({ sent: false, error: "Unable to resend" }, 404);
+    }
+    if (typeof data.email !== "string" || data.email.toLowerCase() !== email) {
+        return json({ sent: false, error: "Unable to resend" }, 404);
+    }
+
+    const lastAttempt = Date.parse(data.resendAttemptAt || "");
+    if (Number.isFinite(lastAttempt) && Date.now() - lastAttempt < 60 * 60 * 1000) {
+        return json({ sent: false, error: "Please wait before trying again" }, 429);
+    }
+
+    data.resendAttemptAt = new Date().toISOString();
+    await env.LICENSES.put(key, JSON.stringify(data));
+    try {
+        data.emailProviderId = await sendLicenseEmail(data.email, key, env);
+        data.emailStatus = "sent";
+        data.emailedAt = new Date().toISOString();
+        await env.LICENSES.put(key, JSON.stringify(data));
+        return json({ sent: true });
+    } catch (err) {
+        data.emailStatus = "send_failed";
+        data.emailErrorAt = new Date().toISOString();
+        await env.LICENSES.put(key, JSON.stringify(data));
+        console.error(`LICENSE EMAIL RESEND FAILED for ${key}:`, err);
+        return json({ sent: false, error: "Email delivery failed" }, 502);
+    }
 }
 
 // ─── License Verification ────────────────────────────────────────
@@ -132,7 +195,14 @@ async function handleVerify(request, url, env) {
     if (!stored) return json({ valid: false }, 404);
 
     const data = JSON.parse(stored);
-    return json({ valid: true, email: maskEmail(data.email) });
+    if (env.PRODUCT_ID && data.productId && data.productId !== env.PRODUCT_ID) {
+        return json({ valid: false }, 404);
+    }
+    return json({
+        valid: true,
+        email: maskEmail(data.email),
+        emailStatus: data.emailStatus || "unknown",
+    });
 }
 
 
@@ -257,9 +327,12 @@ async function sendLicenseEmail(to, licenseKey, env) {
             html: buildEmailHtml(licenseKey),
         }),
     });
-    if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(`Resend ${res.status}: ${text}`);
+    const text = await res.text().catch(() => "");
+    if (!res.ok) throw new Error(`Resend HTTP ${res.status}: ${text.slice(0, 500)}`);
+    try {
+        return JSON.parse(text)?.id || null;
+    } catch {
+        return null;
     }
 }
 
