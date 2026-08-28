@@ -6,6 +6,25 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.8.3</title>
+            <description><![CDATA[
+                <h3>New in 2.8.3</h3>
+                <ul>
+                    <li>Fixed an occasional stall when opening a media file for the first time.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 28 Aug 2026 13:55:36 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.8.3/Corvus-Player-2.8.3.zip"
+                sparkle:version="25"
+                sparkle:shortVersionString="2.8.3"
+                length="47761608"
+                type="application/octet-stream"
+                sparkle:edSignature="dp8capXK6CrUbj3F8PAgFAUOIA0MCvSbfumgS/O8oDnBB0TU82kLQErdVTTRa7dT1kdT4fq9BX6/VrWTxmVxAA=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.8.2</title>
             <description><![CDATA[
                 <h3>New in 2.8.2</h3>
