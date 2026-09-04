@@ -144,4 +144,7 @@
     <loc>https://corvusdevs.github.io/Corvus-Player/i18n/zh-Hant/</loc>
     <priority>0.8</priority>
   </url>
+  <!-- LOCALIZED_CHANGELOG:START -->
+  <url><loc>https://corvusdevs.github.io/Corvus-Player/changelog.html</loc></url>
+  <!-- LOCALIZED_CHANGELOG:END -->
 </urlset>
