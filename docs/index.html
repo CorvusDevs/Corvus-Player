@@ -305,6 +305,97 @@
             padding: 100px 24px 100px;
         }
 
+        .comparison {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+        .comparison-intro {
+            max-width: 720px;
+            margin: -32px auto 36px;
+            color: var(--text-secondary);
+            font-size: 17px;
+            line-height: 1.65;
+            text-align: center;
+        }
+        .comparison-table {
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface);
+        }
+        .comparison-row {
+            display: grid;
+            grid-template-columns: minmax(180px, 0.8fr) minmax(250px, 1fr) minmax(250px, 1fr);
+            align-items: stretch;
+            border-top: 1px solid var(--border);
+        }
+        .comparison-row:first-child { border-top: 0; }
+        .comparison-row > div {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            padding: 18px 20px;
+            border-left: 1px solid var(--border);
+        }
+        .comparison-row > div:first-child { border-left: 0; }
+        .comparison-head {
+            background: var(--surface-2);
+            font-weight: 700;
+        }
+        .comparison-head > div { min-height: 62px; }
+        .comparison-feature { font-weight: 650; }
+        .comparison-status {
+            flex: 0 0 auto;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .comparison-status--win {
+            color: #7df2a1;
+            background: rgba(34, 197, 94, 0.14);
+            border: 1px solid rgba(74, 222, 128, 0.38);
+            box-shadow: 0 0 22px rgba(34, 197, 94, 0.14);
+        }
+        .comparison-status--loss {
+            color: #ff818b;
+            background: rgba(239, 68, 68, 0.14);
+            border: 1px solid rgba(248, 113, 113, 0.4);
+        }
+        .comparison-copy strong { display: block; font-size: 14px; margin-bottom: 3px; }
+        .comparison-copy span { color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
+        .comparison-note {
+            margin: 22px auto 0;
+            max-width: 780px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .comparison-link {
+            display: table;
+            margin: 24px auto 0;
+            color: var(--accent);
+            font-weight: 650;
+            text-decoration: none;
+        }
+        .comparison-link:hover { text-decoration: underline; }
+        @media (max-width: 760px) {
+            .comparison-table { border-radius: 14px; }
+            .comparison-head { display: none; }
+            .comparison-row { grid-template-columns: 1fr; padding: 14px 16px; }
+            .comparison-row > div { border: 0; padding: 9px 0; }
+            .comparison-feature { font-size: 18px; padding-bottom: 12px !important; }
+            .comparison-status { width: 38px; height: 38px; font-size: 24px; }
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -970,6 +1061,7 @@
         </a>
         <!-- ac-nav-hamburger v2 --><button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=document.body.classList.toggle('nav-open');this.setAttribute('aria-expanded',o);event.stopPropagation();"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button><script>(function(){document.addEventListener("click",function(e){if(!document.body.classList.contains("nav-open"))return;var n=document.querySelector("nav");if(n&&!n.contains(e.target)){document.body.classList.remove("nav-open");var b=document.querySelector(".nav-toggle");if(b)b.setAttribute("aria-expanded","false");}});})();</script><ul class="nav-links">
             <li><a href="#features" data-i18n="nav_features">Features</a></li>
+            <li><a href="#comparison">vs IINA</a></li>
             <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
             <li><a href="#why" data-i18n="nav_why">Why Corvus</a></li>
             <li><a href="changelog.html">v2.8.3</a></li>
@@ -1164,7 +1256,7 @@
                 </div>
                 <div class="feature-row__body">
                     <h3 data-i18n="f12_t">Audio Visualizer</h3>
-                    <p data-i18n="f12_d">Real-time peak and RMS level meters per channel. Three visualization styles that respond to your music with smooth animations.</p>
+                    <p data-i18n="f12_d">Real-time peak and RMS level meters per channel. Four visualization styles that respond to your music with smooth animations.</p>
                 </div>
             </div>
             <div class="feature-row fade-in">
@@ -1233,6 +1325,68 @@
         </div>
     </section>
 
+    <section class="comparison" id="comparison" aria-labelledby="comparison-title">
+        <div class="section-label fade-in">Corvus Player vs IINA</div>
+        <h2 class="section-title gradient-text fade-in" id="comparison-title">More built in. Less left for you to assemble.</h2>
+        <p class="comparison-intro fade-in">Both are native macOS players powered by mpv. Corvus Player goes further by integrating advanced audio, streaming, library, and macOS tools directly into one coherent experience.</p>
+
+        <div class="comparison-table fade-in" role="table" aria-label="Corvus Player and IINA feature comparison">
+            <div class="comparison-row comparison-head" role="row">
+                <div role="columnheader">Capability</div>
+                <div role="columnheader">Corvus Player</div>
+                <div role="columnheader">IINA 1.4.4</div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">AutoEQ</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>6,033 profiles</strong><span>Automatic output-device matching</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>Not built in</strong><span>No dedicated AutoEQ tools found</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Night listening</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Complete toolkit</strong><span>Night mode, crossfeed, loudness, balance, mono</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>No dedicated controls</strong><span>Manual filter setup is required</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Synced lyrics</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Karaoke-style lyrics</strong><span>Local LRC, LRClib, highlighting, click-to-seek</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>Not built in</strong><span>No integrated lyrics experience found</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Audio visualizer</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Four live styles</strong><span>Spectrum, mirrored bars, waveform, and curve</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>Not built in</strong><span>No integrated audio visualizer found</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Up Next</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Flexible queue</strong><span>Choose what plays next without reordering</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>No equivalent found</strong><span>Playlist order remains the queue</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Streaming extras</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Integrated</strong><span>Quality switching, cookies, SponsorBlock</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Extra setup required">×</span><span class="comparison-copy"><strong>Plugin required</strong><span>SponsorBlock is not documented by the official plugin</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Media library</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Built in</strong><span>Folder scans, artwork, playlists, persistence</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>No equivalent built in</strong><span>A community File Viewer plugin is listed</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">macOS automation</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>Deep integration</strong><span>Shortcuts, Spotlight, App Intents, Focus filter</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>Not built in</strong><span>No equivalent integrations found</span></span></div>
+            </div>
+            <div class="comparison-row" role="row">
+                <div class="comparison-feature" role="rowheader">Finder integration</div>
+                <div role="cell"><span class="comparison-status comparison-status--win" role="img" aria-label="Included">✓</span><span class="comparison-copy"><strong>System-wide previews</strong><span>Media icons, Quick Look, Media Extensions</span></span></div>
+                <div role="cell"><span class="comparison-status comparison-status--loss" role="img" aria-label="Not included">×</span><span class="comparison-copy"><strong>No equivalent extensions</strong><span>Uses system Quick Look internally</span></span></div>
+            </div>
+        </div>
+
+        <p class="comparison-note fade-in">Compared with IINA 1.4.4 and its documented official plugins on September 7, 2026. IINA 1.5 beta was also reviewed. Some missing features may be possible through manual mpv configuration or community plugins.</p>
+        <a class="comparison-link fade-in" href="https://github.com/CorvusDevs/Corvus-Player/blob/main/docs/compare/iina.md">Read the complete sourced comparison</a>
+    </section>
+
     <section class="why" id="why">
         <div class="section-label fade-in" data-i18n="sec_why">Why Corvus</div>
         <h2 class="section-title gradient-text fade-in" data-i18n="sec_why_title">Why nothing else compares</h2>
@@ -1286,7 +1440,7 @@
                 <div class="price-sub" data-i18n="pp_sub">One-time purchase &middot; No subscription</div>
                 <ul class="pricing-features">
                     <li data-i18n="pp1">Everything in Free, plus:</li>
-                    <li data-i18n="pp2">Audio visualizer (3 styles)</li>
+                    <li data-i18n="pp2">Audio visualizer (4 styles)</li>
                     <li data-i18n="pp3">Music mode themes (6 backgrounds)</li>
                     <li data-i18n="pp4">5 custom app themes (Midnight, Nord, Sepia…)</li>
                     <li data-i18n="pp5">Advanced tone mapping presets (Film, Vivid…)</li>

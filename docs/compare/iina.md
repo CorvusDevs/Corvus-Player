@@ -4,6 +4,8 @@ Corvus Player and IINA are native macOS media players powered by mpv. Both handl
 
 The main difference is product philosophy. IINA provides an excellent open-source player and a flexible plugin system. Corvus Player focuses on delivering a broader set of media, audio, library, streaming, and macOS features as one integrated application.
 
+**Legend:** ✅ included and integrated, ❌ missing as a dedicated built-in feature or requires extra setup.
+
 ## At a glance
 
 | Capability | Corvus Player | IINA 1.4.4 |
@@ -30,52 +32,52 @@ The main difference is product philosophy. IINA provides an excellent open-sourc
 
 | Feature | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| AutoEQ database | 6,033 headphone and earphone correction profiles | No dedicated built-in AutoEQ feature found |
-| Automatic headphone matching | Applies the matching correction when the audio output changes | No equivalent built-in feature found |
-| Per-device EQ memory | Remembers a separate curve for each output device | No equivalent built-in feature found |
-| Adjustable EQ band width | Ten bands with gain and width controls plus saveable presets | Ten-band EQ uses fixed-width filters |
-| AutoEQ import | Accepts AutoEQ GraphicEQ text | No dedicated importer found |
-| Crossfeed | Dedicated adjustable control | Available only through manual mpv or filter configuration |
-| Loudness compensation | Dedicated adjustable control | No dedicated built-in control found |
-| Night mode | One control compresses loud and quiet passages for late-night viewing | No dedicated built-in mode found |
-| Channel tools | Balance and mono fold-down controls | No equivalent dedicated control group found |
-| Real-time audio visualizer | Spectrum bars, mirrored bars, waveform, and spectrum curve | No built-in audio visualizer found |
-| Synced lyrics | Local LRC files and optional LRClib lookup | No built-in lyrics experience found |
-| Interactive lyrics | Active-line highlighting and click-to-seek | No equivalent built-in feature found |
+| AutoEQ database | ✅ 6,033 headphone and earphone correction profiles | ❌ No dedicated built-in AutoEQ feature found |
+| Automatic headphone matching | ✅ Applies the matching correction when the audio output changes | ❌ No equivalent built-in feature found |
+| Per-device EQ memory | ✅ Remembers a separate curve for each output device | ❌ No equivalent built-in feature found |
+| Adjustable EQ band width | ✅ Ten bands with gain and width controls plus saveable presets | ❌ Ten-band EQ uses fixed-width filters |
+| AutoEQ import | ✅ Accepts AutoEQ GraphicEQ text | ❌ No dedicated importer found |
+| Crossfeed | ✅ Dedicated adjustable control | ❌ Requires manual mpv or filter configuration |
+| Loudness compensation | ✅ Dedicated adjustable control | ❌ No dedicated built-in control found |
+| Night mode | ✅ One control compresses loud and quiet passages for late-night viewing | ❌ No dedicated built-in mode found |
+| Channel tools | ✅ Balance and mono fold-down controls | ❌ No equivalent dedicated control group found |
+| Real-time audio visualizer | ✅ Spectrum bars, mirrored bars, waveform, and spectrum curve | ❌ No built-in audio visualizer found |
+| Synced lyrics | ✅ Local LRC files and optional LRClib lookup | ❌ No built-in lyrics experience found |
+| Interactive lyrics | ✅ Active-line highlighting and click-to-seek | ❌ No equivalent built-in feature found |
 
 ### Streaming
 
 | Feature | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| yt-dlp lifecycle | Integrated management and settings | Provided through the official Online Media plugin |
-| In-player quality switching | Integrated into the playback controls | Available through the official Online Media plugin |
-| Browser-cookie authentication | Dedicated Safari, Chrome, and Firefox setting | No equivalent feature documented by the official Online Media plugin |
-| SponsorBlock | Converts sponsored segments into chapters | Not documented by IINA or its official Online Media plugin |
-| Stream cache presets | Integrated settings and playback presets | Can be configured through mpv options |
+| yt-dlp lifecycle | ✅ Integrated management and settings | ❌ Requires the official Online Media plugin |
+| In-player quality switching | ✅ Integrated into the playback controls | ❌ Requires the official Online Media plugin |
+| Browser-cookie authentication | ✅ Dedicated Safari, Chrome, and Firefox setting | ❌ Not documented by the official Online Media plugin |
+| SponsorBlock | ✅ Converts sponsored segments into chapters | ❌ Not documented by IINA or its official Online Media plugin |
+| Stream cache presets | ✅ Integrated settings and playback presets | ❌ Requires mpv option configuration |
 
 ### Organization and macOS integration
 
 | Feature | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| Up Next | Temporary queue that leaves playlist order unchanged | No equivalent built-in queue found |
-| Media library | Folder scanning, persistent items, artwork, and playlists | No equivalent built-in library found; a community File Viewer plugin is listed |
-| Spotlight library search | Library items are indexed into macOS Spotlight | No Core Spotlight integration found |
-| Shortcuts actions | Play or Pause, Seek, Set Speed, and Open File | No App Intents integration found |
-| Focus filter | A Focus can automatically enable Night mode | No Focus filter integration found |
-| Menu bar mini player | Optional playback controls in the menu bar | No built-in menu bar player found |
-| Finder artwork icons | Writes album art or a representative video frame as the file icon | No equivalent built-in feature found |
-| Quick Look extensions | Ships preview and thumbnail extensions | Does not ship equivalent extension targets |
-| Matroska and WebM Media Extension | Optional system-level preview support for MKV and WebM | No Media Extension target found |
+| Up Next | ✅ Temporary queue that leaves playlist order unchanged | ❌ No equivalent built-in queue found |
+| Media library | ✅ Folder scanning, persistent items, artwork, and playlists | ❌ No equivalent built-in library found; a community File Viewer plugin is listed |
+| Spotlight library search | ✅ Library items are indexed into macOS Spotlight | ❌ No Core Spotlight integration found |
+| Shortcuts actions | ✅ Play or Pause, Seek, Set Speed, and Open File | ❌ No App Intents integration found |
+| Focus filter | ✅ A Focus can automatically enable Night mode | ❌ No Focus filter integration found |
+| Menu bar mini player | ✅ Optional playback controls in the menu bar | ❌ No built-in menu bar player found |
+| Finder artwork icons | ✅ Writes album art or a representative video frame as the file icon | ❌ No equivalent built-in feature found |
+| Quick Look extensions | ✅ Ships preview and thumbnail extensions | ❌ Does not ship equivalent extension targets |
+| Matroska and WebM Media Extension | ✅ Optional system-level preview support for MKV and WebM | ❌ No Media Extension target found |
 
 ### Subtitles, video, and customization
 
 | Feature | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| Subtitle providers | OpenSubtitles and SubDL | OpenSubtitles through an official plugin; no SubDL integration found |
-| Curated shader gallery | Anime4K, CAS, adaptive sharpening, and other included choices | Custom shaders are supported; Anime4K is a community plugin |
-| Shader stacking | Browse, combine, reorder, and toggle shaders during playback | Advanced shader configuration is available, without an equivalent built-in gallery |
-| Playback presets | Named presets coordinate related playback and interface settings | Profiles and mpv configuration are available for advanced users |
-| Settings depth | More than 200 options organized and searchable across the app | Searchable Settings with extensive playback options |
+| Subtitle providers | ✅ OpenSubtitles and SubDL are integrated | ❌ OpenSubtitles requires an official plugin; no SubDL integration found |
+| Curated shader gallery | ✅ Anime4K, CAS, adaptive sharpening, and other included choices | ❌ Custom shaders require setup; Anime4K is a community plugin |
+| Shader stacking | ✅ Browse, combine, reorder, and toggle shaders during playback | ❌ No equivalent built-in gallery found |
+| Playback presets | ✅ Named presets coordinate related playback and interface settings | ❌ Requires profiles or mpv configuration |
+| Settings depth | ✅ More than 200 options organized and searchable across the app | Extensive searchable playback settings |
 
 ## Why Corvus Player feels different
 
