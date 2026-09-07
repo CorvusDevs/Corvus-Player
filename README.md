@@ -85,18 +85,19 @@ Both apps are native macOS players built on mpv. Corvus Player is the stronger f
 
 | Capability | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| AutoEQ headphone correction | ✅ **Built in:** 6,033 profiles and automatic output-device matching | ❌ **Not built in** |
-| Night listening tools | ✅ **Built in:** Night mode, crossfeed, loudness compensation, balance, and mono | ❌ **No dedicated controls found** |
-| Synced lyrics | ✅ **Built in:** local LRC and optional LRClib lookup | ❌ **No built-in lyrics experience found** |
-| Audio visualization | ✅ **Built in:** four real-time spectrum and waveform styles | ❌ **No built-in visualizer found** |
-| Up Next queue | ✅ **Built in:** temporary queue that preserves playlist order | ❌ **No equivalent queue found** |
-| Streaming extras | ✅ **Integrated:** yt-dlp, quality switching, browser cookies, and SponsorBlock chapters | ❌ **Plugin required:** quality switching needs Online Media; SponsorBlock is not documented there |
+| Streaming without setup | ✅ **Integrated:** yt-dlp, quality switching, browser cookies, and SponsorBlock chapters | ❌ **Plugin required:** quality switching needs Online Media; SponsorBlock is not documented there |
 | Subtitle sources | ✅ **Two integrated sources:** OpenSubtitles and SubDL | ❌ **Plugin required:** OpenSubtitles only; no SubDL integration found |
-| Shader experience | ✅ **Built-in gallery:** Anime4K, CAS, adaptive sharpening, stacking, and presets | ❌ **Manual or plugin setup:** custom shaders and a community Anime4K plugin |
 | Media library | ✅ **Built in:** folder scanning, artwork, playlists, and session restoration | ❌ **No equivalent built-in library found** |
-| macOS automation | ✅ **Built in:** Shortcuts, App Intents, Spotlight, and a Focus filter | ❌ **No equivalent built-in integrations found** |
-| Menu bar playback | ✅ **Built-in menu bar mini player** | ❌ **No built-in menu bar player found** |
+| AutoEQ headphone correction | ✅ **Built in:** 6,033 profiles and automatic output-device matching | ❌ **Not built in** |
+| Synced lyrics | ✅ **Built in:** local LRC and optional LRClib lookup | ❌ **No built-in lyrics experience found** |
+| Night listening tools | ✅ **Built in:** Night mode, crossfeed, loudness compensation, balance, and mono | ❌ **No dedicated controls found** |
 | Finder integration | ✅ **Built in:** custom media icons plus Quick Look and Media Extensions | ❌ **No equivalent Finder extensions** |
+| Up Next queue | ✅ **Built in:** temporary queue that preserves playlist order | ❌ **No equivalent queue found** |
+| Spotlight library search | ✅ **Built in:** indexed media opens directly from macOS search | ❌ **No Core Spotlight integration found** |
+| Shortcuts and Focus | ✅ **Built in:** App Intents and a Night mode Focus filter | ❌ **No equivalent built-in integrations found** |
+| Menu bar playback | ✅ **Built-in menu bar mini player** | ❌ **No built-in menu bar player found** |
+| Shader experience | ✅ **Built-in gallery:** Anime4K, CAS, adaptive sharpening, stacking, and presets | ❌ **Manual or plugin setup:** custom shaders and a community Anime4K plugin |
+| Audio visualization | ✅ **Built in:** four real-time spectrum and waveform styles | ❌ **No built-in visualizer found** |
 
 [See the detailed, sourced comparison](docs/compare/iina.md), including areas where the players match and where IINA may be the better fit.
 
