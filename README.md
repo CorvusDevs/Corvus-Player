@@ -48,6 +48,7 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 ## Contents
 
 - [Features](#features)
+- [Corvus Player vs IINA](#corvus-player-vs-iina)
 - [What makes Corvus Player special](#what-makes-corvus-player-special)
 - [Built with](#built-with)
 - [Privacy](#privacy)
@@ -77,6 +78,27 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 - **Truly native macOS.** SwiftUI + AppKit, not an Electron wrapper. Quick Look extensions, Dock menus, system integration that feels Apple-built.
 - **36 languages.** Fully localized with searchable settings in every language. RTL support for Arabic and Hebrew.
 - **Built for accessibility.** Full VoiceOver labeling of the playback controls, with support for Reduce Motion, Increase Contrast, and Reduce Transparency. Optional trackpad haptics.
+
+## Corvus Player vs IINA
+
+Both apps are native macOS players built on mpv. Corvus Player is the stronger fit when you want advanced features already integrated, searchable, and designed as one coherent experience instead of assembled through plugins or manual mpv configuration.
+
+| Capability | Corvus Player | IINA 1.4.4 |
+|---|---|---|
+| AutoEQ headphone correction | Built in, with 6,033 profiles and automatic output-device matching | No dedicated built-in feature found |
+| Night listening tools | Night mode, crossfeed, loudness compensation, balance, and mono controls | No dedicated built-in controls found |
+| Synced lyrics | Local LRC and optional LRClib lookup, with karaoke highlighting and click-to-seek | No built-in lyrics experience found |
+| Audio visualization | Four real-time spectrum and waveform styles | No built-in audio visualizer found |
+| Up Next queue | Temporary queue that does not disturb playlist order | No equivalent built-in queue found |
+| Streaming extras | yt-dlp, quality switching, browser cookies, and SponsorBlock chapters are integrated | Quality switching is available through the official Online Media plugin; SponsorBlock is not documented there |
+| Subtitle sources | OpenSubtitles and SubDL are integrated | OpenSubtitles is available through an official plugin; no SubDL integration found |
+| Shader experience | Curated gallery with Anime4K, CAS, adaptive sharpening, stacking, and presets | Custom shaders are supported; Anime4K is available through a community plugin |
+| Media library | Folder scanning, persistent library, artwork, playlists, and session restoration | Playback history and playlists, but no equivalent built-in media library found |
+| macOS automation | Shortcuts actions, App Intents, Spotlight library results, and a Night mode Focus filter | No equivalent built-in integrations found |
+| Menu bar playback | Optional menu bar mini player | No built-in menu bar player found |
+| Finder integration | Custom artwork and video-frame icons plus bundled Quick Look and Media Extensions | Uses system Quick Look thumbnails internally but does not ship equivalent Finder extensions |
+
+[See the detailed, sourced comparison](docs/compare/iina.md), including areas where the players match and where IINA may be the better fit.
 
 ## What makes Corvus Player special
 
