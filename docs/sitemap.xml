@@ -5,6 +5,10 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://corvusdevs.github.io/Corvus-Player/changelog.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://corvusdevs.github.io/Corvus-Player/i18n/ar/</loc>
     <priority>0.8</priority>
   </url>
@@ -144,7 +148,4 @@
     <loc>https://corvusdevs.github.io/Corvus-Player/i18n/zh-Hant/</loc>
     <priority>0.8</priority>
   </url>
-  <!-- LOCALIZED_CHANGELOG:START -->
-  <url><loc>https://corvusdevs.github.io/Corvus-Player/changelog.html</loc></url>
-  <!-- LOCALIZED_CHANGELOG:END -->
 </urlset>

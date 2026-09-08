@@ -69,6 +69,20 @@ The main difference is product philosophy. IINA provides an excellent open-sourc
 | Quick Look extensions | ✅ Ships preview and thumbnail extensions | ❌ Does not ship equivalent extension targets |
 | Matroska and WebM Media Extension | ✅ Optional system-level preview support for MKV and WebM | ❌ No Media Extension target found |
 
+### The power of mpv, without editing configuration files
+
+Both players retain a direct route to `mpv.conf` for people who want it. Corvus Player's advantage is that far more of mpv's power is discoverable and configurable without learning option names or editing text files.
+
+| Feature | Corvus Player | IINA 1.4.4 |
+|---|---|---|
+| Advanced mpv options in the GUI | ✅ More than 200 settings exposed through native controls and organized by purpose | ❌ Many advanced options require manual name and value entry or configuration files |
+| Settings search depth | ✅ Searches names, descriptions, sections, synonyms, keywords, and localized text, with typo tolerance | ❌ Searches the visible labels and sections exposed by its preference panels |
+| Exact settings navigation | ✅ Search results open the precise setting and section | ❌ Search primarily navigates to matching preference labels |
+| Guided advanced configuration | ✅ Human-readable descriptions, contextual guidance, and appropriate switches, sliders, and menus | ❌ Unsurfaced options require knowing the mpv option name and entering its value manually |
+| Presets and visual configuration | ✅ Built-in presets and galleries for playback, EQ, shaders, subtitles, and tone mapping | ❌ Advanced configurations often require profiles, custom files, manual options, or plugins |
+| Recent settings searches | ✅ Recent searches remain available beneath the search field | ❌ No persistent recent-settings workflow found |
+| Full mpv configuration escape hatch | ✅ Direct `mpv.conf` passthrough remains available | ✅ Direct mpv configuration remains available |
+
 ### Subtitles, video, and customization
 
 | Feature | Corvus Player | IINA 1.4.4 |
@@ -77,7 +91,6 @@ The main difference is product philosophy. IINA provides an excellent open-sourc
 | Curated shader gallery | ✅ Anime4K, CAS, adaptive sharpening, and other included choices | ❌ Custom shaders require setup; Anime4K is a community plugin |
 | Shader stacking | ✅ Browse, combine, reorder, and toggle shaders during playback | ❌ No equivalent built-in gallery found |
 | Playback presets | ✅ Named presets coordinate related playback and interface settings | ❌ Requires profiles or mpv configuration |
-| Settings depth | ✅ More than 200 options organized and searchable across the app | Extensive searchable playback settings |
 
 ## Why Corvus Player feels different
 
@@ -95,11 +108,13 @@ Corvus Player is a stronger fit for users who want deeper audio tools, a real me
 
 ## Verification and sources
 
-This comparison was verified on September 7, 2026 against:
+This comparison was verified on September 8, 2026 against:
 
 - [IINA 1.4.4 source and feature list](https://github.com/iina/iina/tree/v1.4.4)
 - [IINA 1.4.4 release](https://github.com/iina/iina/releases/tag/v1.4.4)
 - [IINA 1.5.0 beta 1 release notes](https://github.com/iina/iina/releases/tag/v1.5.0-beta1)
+- [IINA current preference search implementation](https://github.com/iina/iina/blob/develop/iina/PreferenceWindowController.swift)
+- [IINA current advanced preference implementation](https://github.com/iina/iina/blob/develop/iina/PrefAdvancedViewController.swift)
 - [IINA official Online Media plugin](https://github.com/iina/plugin-online-media)
 - [IINA official OpenSubtitles plugin](https://github.com/iina/plugin-opensub)
 - [IINA documented plugin list](https://github.com/iina/iina/tree/v1.4.4#iina-plugins-list)

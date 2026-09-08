@@ -81,10 +81,15 @@ Built on **mpv** with a native **SwiftUI** interface. GPU-accelerated playback, 
 
 ## Corvus Player vs IINA
 
-Both apps are native macOS players built on mpv. Corvus Player is the stronger fit when you want advanced features already integrated, searchable, and designed as one coherent experience instead of assembled through plugins or manual mpv configuration.
+Both apps are native macOS players built on mpv. Corvus Player is the stronger fit when you want the power of mpv exposed through a polished interface, with advanced features already integrated, searchable, and designed as one coherent experience instead of assembled through plugins or manual configuration.
 
 | Capability | Corvus Player | IINA 1.4.4 |
 |---|---|---|
+| Advanced mpv options in the GUI | ✅ **200+ settings exposed through native controls**, organized by purpose | ❌ **Many advanced mpv options require manual name and value entry or configuration files** |
+| Settings search depth | ✅ **Searches names, descriptions, sections, synonyms, keywords, and localized text, with typo tolerance** | ❌ **Searches the labels and sections exposed by its preference panels** |
+| Exact settings navigation | ✅ **Search results open the precise setting and section** | ❌ **Search primarily navigates to matching preference labels** |
+| Guided advanced configuration | ✅ **Human-readable descriptions, contextual guidance, and appropriate switches, sliders, and menus** | ❌ **Unsurfaced options require knowing the mpv option name and entering its value manually** |
+| Presets and visual configuration | ✅ **Built-in presets and galleries for playback, EQ, shaders, subtitles, and tone mapping** | ❌ **Advanced configurations often require profiles, custom files, manual options, or plugins** |
 | Streaming without setup | ✅ **Integrated:** yt-dlp, quality switching, browser cookies, and SponsorBlock chapters | ❌ **Plugin required:** quality switching needs Online Media; SponsorBlock is not documented there |
 | Subtitle sources | ✅ **Two integrated sources:** OpenSubtitles and SubDL | ❌ **Plugin required:** OpenSubtitles only; no SubDL integration found |
 | Media library | ✅ **Built in:** folder scanning, artwork, playlists, and session restoration | ❌ **No equivalent built-in library found** |
@@ -98,6 +103,7 @@ Both apps are native macOS players built on mpv. Corvus Player is the stronger f
 | Menu bar playback | ✅ **Built-in menu bar mini player** | ❌ **No built-in menu bar player found** |
 | Shader experience | ✅ **Built-in gallery:** Anime4K, CAS, adaptive sharpening, stacking, and presets | ❌ **Manual or plugin setup:** custom shaders and a community Anime4K plugin |
 | Audio visualization | ✅ **Built in:** four real-time spectrum and waveform styles | ❌ **No built-in visualizer found** |
+| Recent settings searches | ✅ **Recent searches remain available beneath the search field** | ❌ **No persistent recent-settings workflow found** |
 
 [See the detailed, sourced comparison](docs/compare/iina.md), including areas where the players match and where IINA may be the better fit.
 
