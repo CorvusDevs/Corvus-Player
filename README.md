@@ -105,7 +105,7 @@ Both apps are native macOS players built on mpv. Corvus Player is the stronger f
 | Audio visualization | ✅ **Built in:** four real-time spectrum and waveform styles | ❌ **No built-in visualizer found** |
 | Recent settings searches | ✅ **Recent searches remain available beneath the search field** | ❌ **No persistent recent-settings workflow found** |
 
-[See the detailed, sourced comparison](docs/compare/iina.md), including areas where the players match and where IINA may be the better fit.
+[See the detailed, sourced comparison](docs/compare/iina.md) for the complete breakdown of Corvus Player's integrated advantages.
 
 ## What makes Corvus Player special
 

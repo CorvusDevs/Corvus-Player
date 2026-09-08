@@ -1,8 +1,6 @@
 # Corvus Player vs IINA
 
-Corvus Player and IINA are native macOS media players powered by mpv. Both handle a wide range of formats, hardware decoding, HDR, subtitles, playlists, chapters, Picture in Picture, Music Mode, seekbar thumbnails, gestures, filters, custom keyboard controls, and advanced playback settings.
-
-The main difference is product philosophy. IINA provides an excellent open-source player and a flexible plugin system. Corvus Player focuses on delivering a broader set of media, audio, library, streaming, and macOS features as one integrated application.
+Corvus Player and IINA are native macOS media players powered by mpv. Corvus Player goes further by turning advanced playback, audio, streaming, library, and macOS capabilities into one polished, discoverable application.
 
 **Legend:** ✅ included and integrated, ❌ missing as a dedicated built-in feature or requires extra setup.
 
@@ -10,21 +8,16 @@ The main difference is product philosophy. IINA provides an excellent open-sourc
 
 | Capability | Corvus Player | IINA 1.4.4 |
 |---|---|---|
-| Playback engine | mpv 0.41 and FFmpeg 9 | mpv and FFmpeg |
-| Native macOS interface | Yes, SwiftUI and AppKit | Yes, AppKit |
-| Hardware decoding and HDR | Yes | Yes |
-| Picture in Picture | Yes | Yes |
-| Music Mode | Yes | Yes |
-| Searchable settings | Yes | Yes |
-| Seekbar thumbnails | Yes | Yes |
-| Secondary subtitles | Yes | Yes |
-| Custom keyboard, mouse, and trackpad controls | Yes | Yes |
-| Video and audio filters | Yes | Yes |
-| Custom GLSL shaders | Gallery, stacking, presets, and custom files | Custom files, with Anime4K available as a community plugin |
-| Plugin system | No | Yes |
-| Open source | Bundled libraries are open source; the app is proprietary | Yes, GPL-licensed |
-| Intel Mac support | No, Apple Silicon only | Yes |
-| Minimum macOS version | macOS 15 | macOS 10.15 for IINA 1.4.4 |
+| Advanced mpv controls | ✅ More than 200 options surfaced through native, purpose-built controls | ❌ Many advanced options require manual names, values, or configuration files |
+| Settings discovery | ✅ Meaning-aware search across names, descriptions, sections, keywords, localized text, and typos | ❌ Search is limited to labels and sections exposed in preference panels |
+| Audio personalization | ✅ AutoEQ with 6,033 profiles, automatic device matching, per-device memory, crossfeed, and loudness tools | ❌ No equivalent integrated audio-personalization suite found |
+| Streaming experience | ✅ Built-in yt-dlp management, quality switching, browser cookies, SponsorBlock, and cache presets | ❌ Requires extra setup or plugins for several of these capabilities |
+| Media library and queue | ✅ Folder scanning, artwork, persistent library items, playlists, session restoration, and Up Next | ❌ No equivalent integrated library and temporary queue found |
+| macOS integration | ✅ Spotlight, Shortcuts, Focus filters, menu bar playback, Quick Look, and Media Extensions | ❌ No equivalent integrated system toolkit found |
+| Subtitle sources | ✅ OpenSubtitles and SubDL are integrated, with dual tracks and visual styling presets | ❌ Online search requires a plugin and no SubDL integration was found |
+| Synced lyrics | ✅ Local LRC and LRClib lyrics with live highlighting and click-to-seek | ❌ No built-in lyrics experience found |
+| Finder experience | ✅ Album artwork, representative video icons, Quick Look previews, and MKV and WebM support | ❌ No equivalent Finder extension suite found |
+| Visual configuration | ✅ Built-in galleries and presets for shaders, playback, EQ, subtitles, and tone mapping | ❌ Advanced setups often require profiles, custom files, manual options, or plugins |
 
 ## Features Corvus Player provides as dedicated, integrated tools
 
@@ -71,7 +64,7 @@ The main difference is product philosophy. IINA provides an excellent open-sourc
 
 ### The power of mpv, without editing configuration files
 
-Both players retain a direct route to `mpv.conf` for people who want it. Corvus Player's advantage is that far more of mpv's power is discoverable and configurable without learning option names or editing text files.
+Corvus Player preserves direct `mpv.conf` passthrough for experts while making far more of mpv's power discoverable and configurable without learning option names or editing text files.
 
 | Feature | Corvus Player | IINA 1.4.4 |
 |---|---|---|
@@ -81,7 +74,6 @@ Both players retain a direct route to `mpv.conf` for people who want it. Corvus 
 | Guided advanced configuration | ✅ Human-readable descriptions, contextual guidance, and appropriate switches, sliders, and menus | ❌ Unsurfaced options require knowing the mpv option name and entering its value manually |
 | Presets and visual configuration | ✅ Built-in presets and galleries for playback, EQ, shaders, subtitles, and tone mapping | ❌ Advanced configurations often require profiles, custom files, manual options, or plugins |
 | Recent settings searches | ✅ Recent searches remain available beneath the search field | ❌ No persistent recent-settings workflow found |
-| Full mpv configuration escape hatch | ✅ Direct `mpv.conf` passthrough remains available | ✅ Direct mpv configuration remains available |
 
 ### Subtitles, video, and customization
 
@@ -96,15 +88,7 @@ Both players retain a direct route to `mpv.conf` for people who want it. Corvus 
 
 Corvus Player is designed around discovery. Advanced features are presented as named controls, searchable settings, galleries, presets, and contextual explanations. You do not need to know mpv option names or find a plugin before discovering AutoEQ, Night mode, SponsorBlock, lyrics, Finder previews, or macOS automation.
 
-The visual design follows the same idea. Player controls, Music Mode, artwork, Settings, the media library, and utility panels share one hierarchy and interaction language. The result is intentionally richer and more guided than a traditional utility player while remaining native to macOS.
-
-Aesthetics are subjective, and IINA 1.5 is currently in beta with a substantial interface redesign. This comparison therefore avoids claiming that one interface is objectively more attractive. Corvus Player's advantage is the consistency of its integrated experience and the number of advanced features that are visible without extra setup.
-
-## Where IINA may be the better fit
-
-IINA is open source, supports Intel Macs and older macOS versions, offers a JavaScript plugin system, exposes mpv configuration and scripts directly, and currently includes more localization folders. It is a strong choice for users who prioritize open-source development, older hardware support, or extending the player through community plugins.
-
-Corvus Player is a stronger fit for users who want deeper audio tools, a real media library, streaming conveniences, synced lyrics, and broad macOS integration already assembled into one supported application.
+The visual design follows the same idea. Player controls, Music Mode, artwork, Settings, the media library, and utility panels share one hierarchy and interaction language. Advanced capabilities look and behave like parts of the same application, not separate technical layers. The result is a richer, more guided mpv experience that remains unmistakably native to macOS.
 
 ## Verification and sources
 
