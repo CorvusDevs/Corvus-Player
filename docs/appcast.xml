@@ -6,6 +6,28 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.8.4</title>
+            <description><![CDATA[
+                <h3>New in 2.8.4</h3>
+                <ul>
+                    <li>Added an initial network-stream buffer to reduce stalls when playback starts.</li>
+                    <li>Improved Finder and Quick Look format handling for VP9 and AV1 media.</li>
+                    <li>Fixed files sometimes remaining stuck when opened as Corvus Player launches.</li>
+                    <li>Kept playback times and controls readable in small windows.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 15 Sep 2026 02:20:26 -0300</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.8.4/Corvus-Player-2.8.4.zip"
+                sparkle:version="26"
+                sparkle:shortVersionString="2.8.4"
+                length="47792253"
+                type="application/octet-stream"
+                sparkle:edSignature="WCaLIOhnCzYDYGKErW2Ky29Q5ehM9wq6WyaVodGVah9HwBi4Q9wO6ANBBZuiOPXLRFNr4aegf+eotldgCJ0KCw=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.8.3</title>
             <description><![CDATA[
                 <h3>New in 2.8.3</h3>
