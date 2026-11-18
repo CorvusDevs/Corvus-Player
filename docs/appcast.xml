@@ -6,6 +6,27 @@
         <description>Corvus Player update feed</description>
         <language>en</language>
         <item>
+            <title>Version 2.8.5</title>
+            <description><![CDATA[
+                <h3>New in 2.8.5</h3>
+                <ul>
+                    <li>Fixed CoreAudio initialization on newer macOS while preserving the end of audio playback.</li>
+                    <li>Background library scans no longer briefly show the app in the Dock.</li>
+                    <li>Volume adjustments show an on-screen percentage.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 18 Nov 2026 00:28:00 +0000</pubDate>
+            <enclosure
+                url="https://github.com/CorvusDevs/Corvus-Player/releases/download/v2.8.5/Corvus-Player-2.8.5.zip"
+                sparkle:version="27"
+                sparkle:shortVersionString="2.8.5"
+                length="49210292"
+                type="application/octet-stream"
+                sparkle:edSignature="mf7OUouWSIZQIDZDCUYZlGJ4+ruM4CGlsT8huK351+HebcKg7vmojeFHQtJSnvkJtlA2DgX6MOK9ZHeMqfA7Ag=="
+            />
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 2.8.4</title>
             <description><![CDATA[
                 <h3>New in 2.8.4</h3>
